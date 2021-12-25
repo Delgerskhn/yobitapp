@@ -8,11 +8,10 @@ import 'package:yobit/ui/widgets/elements/text21.dart';
 import 'package:yobit/ui/widgets/static/star.background.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen();
+  const HomeScreen({required VoidCallback onLogout});
 
   @override
   Widget build(BuildContext context) {
-    UserViewModel userViewModel = Provider.of<UserViewModel>(context);
     return StarBackground(
         child: () => Container(
               padding: EdgeInsets.symmetric(horizontal: 25, vertical: 35),
@@ -21,9 +20,9 @@ class HomeScreen extends StatelessWidget {
                   Row(
                     children: [
                       Text21(
-                        text: userViewModel.getWelcomeMsg(),
+                        text: "Hello user",
                       ),
-                      Image(image: AssetImage(Paths.profile))
+                      // Image(image: AssetImage(Paths.profile))
                     ],
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   )

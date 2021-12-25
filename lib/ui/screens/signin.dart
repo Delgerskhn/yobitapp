@@ -9,11 +9,13 @@ import 'package:yobit/ui/widgets/static/earth.background.dart';
 import 'package:yobit/ui/widgets/static/star.bg.abs.dart';
 
 class SignInScreen extends StatelessWidget {
-  const SignInScreen();
+  final VoidCallback onLogin;
+
+  const SignInScreen({required this.onLogin});
 
   @override
   Widget build(BuildContext context) {
-    return EarthBackground(child: () => SignInForm());
+    return EarthBackground(child: () => SignInForm(onLogin));
   }
 
   // @override
