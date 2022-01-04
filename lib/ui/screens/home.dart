@@ -8,7 +8,7 @@ import 'package:yobit/ui/widgets/elements/text21.dart';
 import 'package:yobit/ui/widgets/static/star.background.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({required VoidCallback onLogout});
+  const HomeScreen();
 
   @override
   Widget build(BuildContext context) {

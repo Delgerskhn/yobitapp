@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yobit/router/app.router.delegate.dart';
+import 'package:yobit/router/navigation.model.dart';
 import 'package:yobit/services/auth.repository.dart';
 import 'package:yobit/services/preference.dart';
 
@@ -13,19 +14,24 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   late AppRouterDelegate delegate;
-  AuthRepository? authRepository;
+  late AuthRepository authRepository;
 
   @override
   void initState() {
     super.initState();
-    delegate = AppRouterDelegate(AuthRepository(Preference()));
+    delegate = AppRouterDelegate();
     authRepository = AuthRepository(Preference());
   }
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<AuthViewModel>(
-        create: (_) => AuthViewModel(authRepository),
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider<NavigationModel>(
+              create: (_) => NavigationModel(authRepository)),
+          ChangeNotifierProvider<AuthViewModel>(
+              create: (_) => AuthViewModel(authRepository)),
+        ],
         child: MaterialApp(
           title: 'Yobit',
           theme: Theme.of(context).copyWith(
