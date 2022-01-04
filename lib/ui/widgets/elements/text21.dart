@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Text21 extends StatelessWidget {
   final text;
-  TextStyle? style;
+  late TextStyle? style;
   Text21({this.text, this.style}) {
     if (this.style == null)
       this.style = TextStyle(color: Colors.white, fontSize: 19);

@@ -9,7 +9,7 @@ class AppRouterDelegate extends RouterDelegate
   @override
   GlobalKey<NavigatorState> get navigatorKey => _navigatorKey;
 
-  AppRouterDelegate() {}
+  AppRouterDelegate();
 
   @override
   Widget build(BuildContext context) {

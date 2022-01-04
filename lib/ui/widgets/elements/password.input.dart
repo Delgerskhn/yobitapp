@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class PasswordInput extends StatelessWidget {
-  const PasswordInput({
-    Key? key,
-    required this.hintText,
-  }) : super(key: key);
+  final void Function(String) onChanged;
+  const PasswordInput(
+      {Key? key, required this.hintText, required this.onChanged})
+      : super(key: key);
 
   final String hintText;
 
@@ -14,6 +14,7 @@ class PasswordInput extends StatelessWidget {
       style: TextStyle(color: Colors.white),
       obscureText: true,
       enableSuggestions: false,
+      onChanged: onChanged,
       autocorrect: false,
       decoration: InputDecoration(
         enabledBorder: UnderlineInputBorder(

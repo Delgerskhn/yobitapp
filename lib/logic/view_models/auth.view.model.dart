@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:yobit/services/auth.repository.dart';
 
 class AuthViewModel extends ChangeNotifier {
-  final AuthRepository? authRepository;
+  final AuthRepository authRepository;
   bool logingIn = false;
   bool logingOut = false;
 
   AuthViewModel(this.authRepository);
 
-  Future<bool> login() async {
+  Future<bool> login(email, password) async {
     logingIn = true;
     notifyListeners();
-    final result = await authRepository!.login();
+    final result = await authRepository.login(email, password);
     logingIn = false;
     notifyListeners();
     return result;
@@ -20,7 +20,7 @@ class AuthViewModel extends ChangeNotifier {
   Future<bool> logout() async {
     logingOut = true;
     notifyListeners();
-    final logoutResult = await authRepository!.logout();
+    final logoutResult = await authRepository.logout();
     logingOut = false;
     notifyListeners();
     return logoutResult;

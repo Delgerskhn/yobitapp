@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yobit/router/stacks.dart';
 import 'package:yobit/services/auth.repository.dart';
@@ -21,13 +22,16 @@ class NavigationModel extends ChangeNotifier {
   NavigationModel(this.authRepository) {
     _init();
   }
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   _init() async {
-    loggedIn = await authRepository.isUserLoggedIn();
-    if (loggedIn!)
-      onLogin();
-    else
-      onLogout();
+    FirebaseAuth.instance.authStateChanges().listen((user) {
+      loggedIn = user != null;
+      if (loggedIn!)
+        onLogin();
+      else
+        onLogout();
+    });
   }
 
   List<Page> stack = splashStack();
@@ -35,10 +39,12 @@ class NavigationModel extends ChangeNotifier {
   void onLogin() {
     loggedIn = true;
     stack = loggedInStack();
+    notifyListeners();
   }
 
   void onLogout() {
     loggedIn = false;
     stack = loggedOutStack();
+    notifyListeners();
   }
 }

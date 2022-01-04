@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:yobit/constants/infrastructure/strings.dart';
 import 'package:yobit/logic/models/user.dart';
 import 'package:flutter/cupertino.dart';

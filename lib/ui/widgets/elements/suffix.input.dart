@@ -7,11 +7,13 @@ import 'icon.box.dart';
 class SuffixInput extends StatelessWidget {
   final String suffixImg;
   final String hintText;
+  final void Function(String) onChanged;
   final Color iconBgColor;
-  SuffixInput(
+  const SuffixInput(
       {required this.suffixImg,
       required this.hintText,
-      required this.iconBgColor});
+      required this.iconBgColor,
+      required this.onChanged});
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -20,7 +22,10 @@ class SuffixInput extends StatelessWidget {
         children: [
           IconBox(suffixImg: suffixImg, iconBgColor: iconBgColor),
           Expanded(
-            child: TextInput(hintText: hintText),
+            child: TextInput(
+              hintText: hintText,
+              onChanged: onChanged,
+            ),
           ),
         ]);
   }

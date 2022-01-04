@@ -1,10 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yobit/constants/infrastructure/paths.dart';
 import 'package:yobit/constants/infrastructure/strings.dart';
 import 'package:yobit/constants/ui/styles/button.style.dart';
 import 'package:yobit/ui/widgets/elements/btn.icon.dart';
-import 'package:yobit/ui/widgets/elements/icon.box.dart';
 import 'package:yobit/ui/widgets/elements/suffix.input.dart';
 import 'package:yobit/ui/widgets/elements/suffix.password.dart';
 
@@ -22,6 +20,7 @@ class SignUpForm extends StatelessWidget {
               flex: 1,
               child: SuffixInput(
                   suffixImg: Paths.userFilledIcon,
+                  onChanged: (val) {},
                   hintText: Strings.name,
                   iconBgColor: Theme.of(context).primaryColor),
             ),
@@ -29,6 +28,7 @@ class SignUpForm extends StatelessWidget {
             Flexible(
               flex: 1,
               child: SuffixInput(
+                  onChanged: (val) {},
                   suffixImg: Paths.userFilledIcon,
                   hintText: Strings.email,
                   iconBgColor: Theme.of(context).primaryColor),
@@ -38,6 +38,7 @@ class SignUpForm extends StatelessWidget {
               flex: 1,
               child: SuffixPassword(
                   suffixImg: Paths.lockFilledIcon,
+                  onChanged: (val) {},
                   hintText: Strings.password,
                   iconBgColor: Theme.of(context).colorScheme.primaryVariant),
             ),

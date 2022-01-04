@@ -1,18 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yobit/ui/widgets/elements/password.input.dart';
-import 'package:yobit/ui/widgets/elements/text.input.dart';
 
 import 'icon.box.dart';
 
 class SuffixPassword extends StatelessWidget {
   final String suffixImg;
   final String hintText;
+  final void Function(String) onChanged;
   final Color iconBgColor;
-  SuffixPassword(
+  const SuffixPassword(
       {required this.suffixImg,
       required this.hintText,
-      required this.iconBgColor});
+      required this.iconBgColor,
+      required this.onChanged});
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -21,7 +22,10 @@ class SuffixPassword extends StatelessWidget {
         children: [
           IconBox(suffixImg: suffixImg, iconBgColor: iconBgColor),
           Expanded(
-            child: PasswordInput(hintText: hintText),
+            child: PasswordInput(
+              hintText: hintText,
+              onChanged: onChanged,
+            ),
           ),
         ]);
   }

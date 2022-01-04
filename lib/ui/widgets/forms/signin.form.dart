@@ -1,23 +1,36 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yobit/constants/infrastructure/paths.dart';
 import 'package:yobit/constants/infrastructure/strings.dart';
 import 'package:yobit/logic/view_models/auth.view.model.dart';
-import 'package:yobit/router/app.router.delegate.dart';
 import 'package:yobit/router/navigation.model.dart';
 import 'package:yobit/ui/widgets/elements/btn.flat.dart';
 import 'package:yobit/ui/widgets/elements/btn.primary.dart';
 import 'package:yobit/ui/widgets/elements/suffix.input.dart';
 import 'package:yobit/ui/widgets/elements/suffix.password.dart';
 
-class SignInForm extends StatelessWidget {
-  SignInForm();
+class SignInForm extends StatefulWidget {
+  @override
+  _SignInFormState createState() => _SignInFormState();
+}
 
+class _SignInFormState extends State<SignInForm> {
   @override
   Widget build(BuildContext context) {
     final authViewModel = Provider.of<AuthViewModel>(context);
     final navmodel = Provider.of<NavigationModel>(context);
+
+    String _email = "";
+    String _password = "";
+
+    void onEmailChanged(String email) {
+      _email = email;
+    }
+
+    void onPassChanged(String pass) {
+      _password = pass;
+    }
+
     return Container(
       alignment: Alignment.center,
       child: Container(
@@ -30,6 +43,7 @@ class SignInForm extends StatelessWidget {
               child: SuffixInput(
                   suffixImg: Paths.userFilledIcon,
                   hintText: Strings.email,
+                  onChanged: onEmailChanged,
                   iconBgColor: Theme.of(context).primaryColor),
             ),
             Padding(padding: EdgeInsets.only(top: 20), child: null),
@@ -38,6 +52,7 @@ class SignInForm extends StatelessWidget {
               child: SuffixPassword(
                   suffixImg: Paths.lockFilledIcon,
                   hintText: Strings.password,
+                  onChanged: onPassChanged,
                   iconBgColor: Theme.of(context).colorScheme.primaryVariant),
             ),
             Padding(padding: EdgeInsets.only(top: 40), child: null),
@@ -46,7 +61,7 @@ class SignInForm extends StatelessWidget {
                   child: BtnPrimary(
                 text: Strings.signIn,
                 onPressed: () async {
-                  final result = await authViewModel.login();
+                  final result = await authViewModel.login(_email, _password);
                   if (result == true) navmodel.onLogin();
                 },
               )),
