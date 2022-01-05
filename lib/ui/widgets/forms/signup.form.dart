@@ -45,7 +45,9 @@ class SignUpForm extends StatelessWidget {
             Padding(padding: EdgeInsets.only(top: 40), child: null),
             Row(children: [
               TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   child: BtnIcon(
                     iconBgColor: Theme.of(context).primaryColor,
                     suffixImg: Paths.userFilledIcon,

@@ -71,7 +71,9 @@ class _SignInFormState extends State<SignInForm> {
               Expanded(
                   child: BtnPrimary(
                 text: Strings.signUp,
-                onPressed: () {},
+                onPressed: () {
+                  navmodel.signUp();
+                },
               )),
             ]),
             Padding(
