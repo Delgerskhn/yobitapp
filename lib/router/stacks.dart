@@ -13,19 +13,7 @@ List<Page> loggedOutStack(isSigningIn) =>
 List<Page> loggedInStack() {
   return [
     HomePage(),
-    // if (selectedColorCode != null)
-    //   ColorPage(
-    //     selectedColorCode: selectedColorCode,
-    //     onShapeTap: (ShapeBorderType shapeBorderType) {
-    //       this.selectedShapeBorderType = shapeBorderType;
-    //     },
-    //     onLogout: onLogout,
-    //   ),
-    // if (selectedColorCode != null && selectedShapeBorderType != null)
-    //   ShapePage(
-    //     colorCode: selectedColorCode,
-    //     shapeBorderType: selectedShapeBorderType,
-    //     onLogout: onLogout,
-    //   )
+    //TODO:  Door page ee uusgecheed nemch ogonguut login hiisnii daraa shuud haragdah ystoi
+    //ChallengePage()
   ];
 }
