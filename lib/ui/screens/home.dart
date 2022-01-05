@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yobit/logic/view_models/auth.view.model.dart';
 import 'package:yobit/router/navigation.model.dart';
+import 'package:yobit/ui/widgets/elements/slider.dart' as AdsSlider;
 import 'package:yobit/ui/widgets/elements/text21.dart';
 import 'package:yobit/ui/widgets/static/star.background.dart';
 
@@ -26,6 +27,7 @@ class HomeScreen extends StatelessWidget {
                     ],
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   ),
+                  AdsSlider.Slider(),
                   TextButton(
                     onPressed: () async {
                       var res = await authModel.logout();
