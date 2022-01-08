@@ -17,6 +17,12 @@ class AuthViewModel extends ChangeNotifier {
     return result;
   }
 
+  Future<bool> signup(email, name, password) async {
+    final result = await authRepository.register(email, password);
+    notifyListeners();
+    return result;
+  }
+
   Future<bool> logout() async {
     logingOut = true;
     notifyListeners();
