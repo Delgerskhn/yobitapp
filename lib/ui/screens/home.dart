@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
     var navModel = Provider.of<NavigationModel>(context);
     return StarBackground(
         child: () => Container(
-              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 35),
+              padding: EdgeInsets.symmetric(vertical: 35),
               child: Column(
                 children: [
                   Row(

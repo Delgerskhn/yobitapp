@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:yobit/constants/infrastructure/paths.dart';
 
 class ChallengeContainer extends StatefulWidget {
   @override
@@ -8,17 +9,27 @@ class ChallengeContainer extends StatefulWidget {
 }
 
 class _ChallengeContainerState extends State<ChallengeContainer> {
+  var challenges = [1, 2, 3];
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
         child: GridView.extent(
-            maxCrossAxisExtent: 150,
+            maxCrossAxisExtent: 200,
             padding: const EdgeInsets.all(4),
-            mainAxisSpacing: 4,
-            crossAxisSpacing: 4,
-            children: _buildGridTileList(4)));
+            mainAxisSpacing: 15,
+            crossAxisSpacing: 15,
+            children: _buildGridTileList()));
   }
 
-  List<Container> _buildGridTileList(int count) => List.generate(
-      count, (i) => Container(child: Text("Container number $i")));
+  List<Container> _buildGridTileList() => challenges
+      .map((i) => Container(
+              child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+            child: Image.network(
+              Paths.specialChallenge,
+              fit: BoxFit.cover,
+            ),
+          )))
+      .toList();
 }
