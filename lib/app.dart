@@ -50,9 +50,11 @@ class _AppState extends State<App> {
                   error: Color(0xffFF464F), //red
                   onPrimary: Color(0xffE85937),
                   surface: Color(0xff3ED598))),
-          home: Router(
-              routerDelegate: delegate,
-              backButtonDispatcher: RootBackButtonDispatcher()),
+          home: Scaffold(
+              resizeToAvoidBottomInset: false,
+              body: Router(
+                  routerDelegate: delegate,
+                  backButtonDispatcher: RootBackButtonDispatcher())),
         ));
   }
 }

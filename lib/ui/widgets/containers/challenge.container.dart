@@ -26,7 +26,7 @@ class _ChallengeContainerState extends State<ChallengeContainer> {
       .map((i) => Container(
               child: ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(15)),
-            child: Image.network(
+            child: Image.asset(
               Paths.specialChallenge,
               fit: BoxFit.cover,
             ),

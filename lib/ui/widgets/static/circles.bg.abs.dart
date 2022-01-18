@@ -15,7 +15,7 @@ class CirclesBgAbs extends StatelessWidget {
                   Expanded(child: Container(), flex: 1),
                   Expanded(
                       child: Container(
-                        child: Image.network(
+                        child: Image.asset(
                           Paths.bgCircleLg,
                           fit: BoxFit.cover,
                         ),
@@ -27,14 +27,14 @@ class CirclesBgAbs extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: Image.network(
+                    child: Image.asset(
                       Paths.bgCircleLeftLg,
                       fit: BoxFit.cover,
                     ),
                   ),
                   Expanded(
                       child: Container(
-                          child: Image.network(
+                          child: Image.asset(
                             Paths.bgCircleMd,
                             fit: BoxFit.none,
                           ),

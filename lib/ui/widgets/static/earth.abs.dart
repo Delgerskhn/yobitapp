@@ -9,7 +9,7 @@ class EarthAbs extends StatelessWidget {
           child: FractionallySizedBox(
             child: FittedBox(
               fit: BoxFit.fill,
-              child: Image.network(
+              child: Image.asset(
                 'assets/images/Low Poly Planet Earth.H03 1.png',
               ),
             ),

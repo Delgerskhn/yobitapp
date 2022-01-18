@@ -17,7 +17,7 @@ class EarthBackground extends StatelessWidget {
           StarBgAbs(),
           EarthAbs(),
           CirclesBgAbs(),
-          Positioned(child: this.child(), top: 0, bottom: 0, right: 0, left: 0)
+          Positioned(child: this.child(), top: 0, right: 0, left: 0)
         ]),
         backgroundColor: Colors.black);
   }

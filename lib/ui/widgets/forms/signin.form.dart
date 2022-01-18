@@ -33,6 +33,8 @@ class _SignInFormState extends State<SignInForm> {
 
     return Container(
       alignment: Alignment.center,
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
       child: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yobit/logic/view_models/auth.view.model.dart';
@@ -14,6 +15,8 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var authModel = Provider.of<AuthViewModel>(context);
     var navModel = Provider.of<NavigationModel>(context);
+    FirebaseAuth auth = FirebaseAuth.instance;
+
     return StarBackground(
         child: () => Container(
               padding: EdgeInsets.symmetric(vertical: 35),
@@ -22,7 +25,7 @@ class HomeScreen extends StatelessWidget {
                   Row(
                     children: [
                       Text21(
-                        text: "Hello user",
+                        text: "Hello ${auth.currentUser!.email}",
                       ),
                       // Image(image: AssetImage(Paths.profile))
                     ],
