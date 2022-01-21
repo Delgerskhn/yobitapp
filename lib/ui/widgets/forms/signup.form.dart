@@ -39,6 +39,8 @@ class _SignUpFormState extends State<SignUpForm> {
     final navmodel = Provider.of<NavigationModel>(context);
     return Container(
       alignment: Alignment.center,
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
       child: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
