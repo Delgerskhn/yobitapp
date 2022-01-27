@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:yobit/constants/infrastructure/paths.dart';
+import 'package:yobit/logic/models/challenge.dart';
+import 'package:yobit/services/challenge.repository.dart';
 
 class Slider extends StatefulWidget {
   @override
@@ -12,6 +14,13 @@ class Slider extends StatefulWidget {
 class _Slider extends State<Slider> {
   CarouselController controller = CarouselController();
   int _current = 0;
+  late Future<Challenge> fChallenge;
+
+  @override
+  void initState() {
+    super.initState();
+    getTopChallenges().then((value) => (print(value)));
+  }
 
   @override
   Widget build(BuildContext context) {

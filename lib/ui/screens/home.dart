@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:yobit/constants/infrastructure/paths.dart';
 import 'package:yobit/logic/view_models/auth.view.model.dart';
 import 'package:yobit/router/navigation.model.dart';
 import 'package:yobit/ui/widgets/containers/challenge.container.dart';
 import 'package:yobit/ui/widgets/elements/slider.dart' as SpecialChallenge;
 import 'package:yobit/ui/widgets/elements/text21.dart';
+import 'package:yobit/ui/widgets/elements/user.gadget.dart';
 import 'package:yobit/ui/widgets/static/star.background.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -27,9 +29,9 @@ class HomeScreen extends StatelessWidget {
                       Text21(
                         text: "Hello ${auth.currentUser!.email}",
                       ),
-                      // Image(image: AssetImage(Paths.profile))
+                      UserGadget()
                     ],
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                   ),
                   SpecialChallenge.Slider(),
                   ChallengeContainer(),
