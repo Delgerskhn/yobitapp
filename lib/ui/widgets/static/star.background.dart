@@ -12,7 +12,7 @@ class StarBackground extends StatelessWidget {
     return Scaffold(
         body: Stack(children: <Widget>[
       StarBgAbs(),
-      Positioned(child: this.child(), top: 0, right: 0, bottom: 0, left: 0)
+      Positioned(child: this.child(), top: 0, right: 0, left: 0)
     ]));
   }
 }
