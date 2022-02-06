@@ -83,7 +83,11 @@ class _SignInFormState extends State<SignInForm> {
               child: null,
             ),
             Flexible(
-              child: BtnFlat(text: Strings.resetPassword),
+              child: BtnFlat(
+                  text: Strings.resetPassword,
+                  onPressed: () {
+                    navmodel.resetPass();
+                  }),
             )
           ],
         ),

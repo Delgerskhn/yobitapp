@@ -6,11 +6,13 @@ import 'package:yobit/services/auth.repository.dart';
 class NavigationModel extends ChangeNotifier {
   bool? _loggedIn;
   bool _isSigninIn = false;
+  bool _isResettingPass = false;
   bool? get loggedIn => _loggedIn;
 
   bool onPopPage(route, result) {
     if (!route.didPop(result)) return false;
     if (_isSigninIn) _isSigninIn = false;
+    if (_isResettingPass) _isResettingPass = false;
     return true;
   }
 
@@ -46,13 +48,19 @@ class NavigationModel extends ChangeNotifier {
 
   void onLogout() {
     loggedIn = false;
-    stack = loggedOutStack(_isSigninIn);
+    stack = loggedOutStack(_isSigninIn, _isResettingPass);
     notifyListeners();
   }
 
   void signUp() {
     _isSigninIn = true;
-    stack = loggedOutStack(_isSigninIn);
+    stack = loggedOutStack(_isSigninIn, _isResettingPass);
+    notifyListeners();
+  }
+
+  void resetPass() {
+    _isResettingPass = true;
+    stack = loggedOutStack(_isSigninIn, _isResettingPass);
     notifyListeners();
   }
 }
