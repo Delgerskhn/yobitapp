@@ -11,9 +11,9 @@ class StarBgAbs extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               gradient: LinearGradient(
-                  colors: [Color(0xff080712), Color(0xff201F3A)],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter)),
+              colors: [Color(0xff080712), Color(0xff201F3A)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter)),
           child: null /* add child content here */,
         ),
         left: 0,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yobit/router/pages/challenge.page.dart';
 import 'package:yobit/router/pages/home.page.dart';
 import 'package:yobit/router/pages/login.page.dart';
 import 'package:yobit/router/pages/signup.page.dart';
@@ -14,6 +15,6 @@ List<Page> loggedInStack() {
   return [
     HomePage(),
     //TODO:  Door page ee uusgecheed nemch ogonguut login hiisnii daraa shuud haragdah ystoi
-    //ChallengePage()
+    ChallengePage()
   ];
 }
