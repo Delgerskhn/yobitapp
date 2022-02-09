@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:yobit/services/preference.dart';
 
+//TODO: catch exception and show relevant error sms to client
 class AuthRepository {
   final Preference preference;
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -11,6 +12,26 @@ class AuthRepository {
     // UserCredential userCredential =
     await auth.signInWithEmailAndPassword(email: email, password: password);
 
+    return true;
+  }
+
+  Future<bool> resetPass(email) async {
+    try {
+      await auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      print(e.code);
+      return false;
+    }
+    return true;
+  }
+
+  Future<bool> confirmPassReset(code, newPass) async {
+    try {
+      await auth.confirmPasswordReset(code: code, newPassword: newPass);
+    } on FirebaseAuthException catch (e) {
+      print(e.code);
+      return false;
+    }
     return true;
   }
 

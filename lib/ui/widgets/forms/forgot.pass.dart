@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:yobit/logic/view_models/auth.view.model.dart';
 import 'package:yobit/ui/widgets/elements/btn.primary.dart';
 import 'package:yobit/ui/widgets/elements/text.input.dart';
+import 'package:yobit/ui/widgets/elements/text.input.sec.dart';
 
 class ForgotPassForm extends StatefulWidget {
   @override
@@ -16,6 +19,8 @@ class _ForgotPassForm extends State<ForgotPassForm> {
 
   @override
   Widget build(BuildContext context) {
+    final authViewModel = Provider.of<AuthViewModel>(context);
+
     return Container(
         height: MediaQuery.of(context).size.height / 3.6,
         width: MediaQuery.of(context).size.width * 14 / 16,
@@ -25,13 +30,15 @@ class _ForgotPassForm extends State<ForgotPassForm> {
           children: [
             Text(
                 "Доорх хэсэгт бүртгэлтэй мэйл хаягаа үлдээснээр та нууц үгээ сэргээх боломжтой."),
-            TextInput(
+            TextInputSecondary(
               hintText: 'И-мэйл',
               onChanged: onEmailChanged,
             ),
             BtnPrimary(
               text: 'Нууц үг сэргээх',
-              onPressed: () {},
+              onPressed: () {
+                authViewModel.resetPass(_email);
+              },
             ),
           ],
         ),

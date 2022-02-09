@@ -13,13 +13,13 @@ class _ChallengeContainerState extends State<ChallengeContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: GridView.extent(
-            maxCrossAxisExtent: 200,
-            padding: const EdgeInsets.all(4),
-            mainAxisSpacing: 15,
-            crossAxisSpacing: 15,
-            children: _buildGridTileList()));
+    return Expanded(child: Text('lkjsdf'));
+    //  GridView.extent(
+    //     maxCrossAxisExtent: 200,
+    //     padding: const EdgeInsets.all(4),
+    //     mainAxisSpacing: 15,
+    //     crossAxisSpacing: 15,
+    //     children: _buildGridTileList()));
   }
 
   List<Container> _buildGridTileList() => challenges
