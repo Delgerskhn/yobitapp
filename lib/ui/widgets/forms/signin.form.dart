@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/constants/infrastructure/paths.dart';
 import 'package:yobit/constants/infrastructure/strings.dart';
 import 'package:yobit/logic/view_models/auth.view.model.dart';
-import 'package:yobit/router/navigation.model.dart';
 import 'package:yobit/ui/widgets/elements/btn.flat.dart';
 import 'package:yobit/ui/widgets/elements/btn.primary.dart';
 import 'package:yobit/ui/widgets/elements/suffix.input.dart';
@@ -18,7 +18,6 @@ class _SignInFormState extends State<SignInForm> {
   @override
   Widget build(BuildContext context) {
     final authViewModel = Provider.of<AuthViewModel>(context);
-    final navmodel = Provider.of<NavigationModel>(context);
 
     String _email = "";
     String _password = "";
@@ -64,7 +63,9 @@ class _SignInFormState extends State<SignInForm> {
                 text: Strings.signIn,
                 onPressed: () async {
                   final result = await authViewModel.login(_email, _password);
-                  if (result == true) navmodel.onLogin();
+                  if (result) {
+                    VxNavigator.of(context).clearAndPush(Uri(path: '/'));
+                  }
                 },
               )),
             ]),
@@ -74,7 +75,7 @@ class _SignInFormState extends State<SignInForm> {
                   child: BtnPrimary(
                 text: Strings.signUp,
                 onPressed: () {
-                  navmodel.signUp();
+                  VxNavigator.of(context).clearAndPush(Uri(path: '/signup'));
                 },
               )),
             ]),
@@ -86,7 +87,8 @@ class _SignInFormState extends State<SignInForm> {
               child: BtnFlat(
                   text: Strings.resetPassword,
                   onPressed: () {
-                    navmodel.resetPass();
+                    VxNavigator.of(context)
+                        .clearAndPush(Uri(path: '/forgotpassword'));
                   }),
             )
           ],
