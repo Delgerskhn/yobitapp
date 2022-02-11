@@ -20,16 +20,17 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   late AuthRepository authRepository;
   FirebaseAuth auth = FirebaseAuth.instance;
-
+  bool loggedIn = false;
   late VxNavigator navigator;
 
   @override
   void initState() {
     super.initState();
     authRepository = AuthRepository(Preference());
+
     navigator = VxNavigator(routes: {
       '/': (uri, params) {
-        print(auth.currentUser);
+        //TODO: this currentUser check logic must use auth.userStateChanges() for user initialization
         if (auth.currentUser != null) return VxRoutePage(child: HomeScreen());
         return VxRoutePage(child: SignInScreen());
       },

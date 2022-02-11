@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yobit/logic/view_models/auth.view.model.dart';
+import 'package:yobit/ui/widgets/containers/challenge.container.dart';
 import 'package:yobit/ui/widgets/elements/slider.dart' as SpecialChallenge;
 import 'package:yobit/ui/widgets/elements/text21.dart';
 import 'package:yobit/ui/widgets/elements/user.gadget.dart';
@@ -30,7 +31,7 @@ class HomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                   ),
                   SpecialChallenge.Slider(),
-                  // ChallengeContainer(),
+                  ChallengeContainer(),
                   TextButton(
                     onPressed: () async {
                       var res = await authModel.logout();
