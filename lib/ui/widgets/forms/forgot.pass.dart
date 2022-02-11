@@ -24,16 +24,25 @@ class _ForgotPassForm extends State<ForgotPassForm> {
     return Container(
         height: MediaQuery.of(context).size.height / 3.6,
         width: MediaQuery.of(context).size.width * 14 / 16,
-        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 2),
+        margin: EdgeInsets.only(
+            top: MediaQuery.of(context).size.height / 2, right: 30, left: 30),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-                "Доорх хэсэгт бүртгэлтэй мэйл хаягаа үлдээснээр та нууц үгээ сэргээх боломжтой."),
-            TextInputSecondary(
-              hintText: 'И-мэйл',
-              onChanged: onEmailChanged,
+            Text("Доорх хэсэгт бүртгэлтэй мэйл хаягаа"),
+            SizedBox(height: 5),
+            Text("үлдээснээр та нууц үгээ сэргээх боломжтой."),
+            SizedBox(height: 23),
+            Container(
+              child: TextInputSecondary(
+                hintText: 'И-мэйл',
+                onChanged: onEmailChanged,
+              ),
+              decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.all(Radius.circular(12))),
             ),
+            SizedBox(height: 16),
             BtnPrimary(
               text: 'Нууц үг сэргээх',
               onPressed: () {

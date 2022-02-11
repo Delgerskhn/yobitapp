@@ -11,7 +11,8 @@ List<Page> splashStack() =>
 List<Page> loggedOutStack(isSigningIn, isResettingPassword) => [
       LoginPage(),
       if (isSigningIn) SignUpPage(),
-      if (isResettingPassword) ForgotPassPage()
+      // if (isResettingPassword)
+      ForgotPassPage()
     ];
 
 List<Page> loggedInStack() {

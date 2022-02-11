@@ -14,13 +14,16 @@ class TextInputSecondary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: TextStyle(color: Colors.primaries.first),
+      style: TextStyle(color: Theme.of(context).primaryColor),
       onChanged: onChange,
       decoration: InputDecoration(
-        enabledBorder: UnderlineInputBorder(
+        focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(12)),
-            borderSide: const BorderSide(color: Colors.white)),
-        fillColor: Colors.white38,
+            borderSide: const BorderSide(color: Colors.transparent)),
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(12)),
+            borderSide: const BorderSide(color: Colors.transparent)),
+        fillColor: Theme.of(context).primaryColor,
         hintStyle: TextStyle(color: Colors.primaries.last),
         hintText: this.hintText,
       ),
