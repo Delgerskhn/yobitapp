@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/logic/view_models/auth.view.model.dart';
 import 'package:yobit/ui/widgets/containers/challenge.container.dart';
 import 'package:yobit/ui/widgets/elements/slider.dart' as SpecialChallenge;
@@ -17,29 +18,24 @@ class HomeScreen extends StatelessWidget {
     FirebaseAuth auth = FirebaseAuth.instance;
 
     return StarBackground(
-        child: () => Container(
-              padding: EdgeInsets.symmetric(vertical: 35),
-              child: Column(
+        child: () => VStack([
+              Row(
                 children: [
-                  Row(
-                    children: [
-                      Text21(
-                        text: "Hello ${auth.currentUser!.email}",
-                      ),
-                      UserGadget()
-                    ],
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  Text21(
+                    text: "Hello ${auth.currentUser!.email}",
                   ),
-                  SpecialChallenge.Slider(),
-                  ChallengeContainer(),
-                  TextButton(
-                    onPressed: () async {
-                      var res = await authModel.logout();
-                    },
-                    child: Text("Sign out"),
-                  )
+                  UserGadget()
                 ],
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
               ),
-            ));
+              SpecialChallenge.Slider(),
+              ChallengeContainer(),
+              TextButton(
+                onPressed: () async {
+                  var res = await authModel.logout();
+                },
+                child: Text("Sign out"),
+              )
+            ]).p32().scrollVertical());
   }
 }

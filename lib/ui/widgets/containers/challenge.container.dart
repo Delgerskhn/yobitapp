@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/constants/infrastructure/paths.dart';
 
 class ChallengeContainer extends StatefulWidget {
@@ -13,23 +14,13 @@ class _ChallengeContainerState extends State<ChallengeContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(child: Text('lkjsdf'));
-    //  GridView.extent(
-    //     maxCrossAxisExtent: 200,
-    //     padding: const EdgeInsets.all(4),
-    //     mainAxisSpacing: 15,
-    //     crossAxisSpacing: 15,
-    //     children: _buildGridTileList()));
+    return VStack(challenges
+        .map((e) => VxBox(
+              child: Image.asset(
+                Paths.specialChallenge,
+                fit: BoxFit.cover,
+              ),
+            ).make())
+        .toList());
   }
-
-  List<Container> _buildGridTileList() => challenges
-      .map((i) => Container(
-              child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(15)),
-            child: Image.asset(
-              Paths.specialChallenge,
-              fit: BoxFit.cover,
-            ),
-          )))
-      .toList();
 }
