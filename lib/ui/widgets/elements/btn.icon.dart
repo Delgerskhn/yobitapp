@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class BtnIcon extends StatelessWidget {
-  const BtnIcon({
-    Key? key,
-    required this.suffixImg,
-    required this.iconBgColor,
-  }) : super(key: key);
+  BtnIcon(
+      {Key? key,
+      required this.suffixImg,
+      required this.iconBgColor,
+      this.onPress})
+      : super(key: key);
+  VoidCallback? onPress;
 
   final String suffixImg;
   final Color iconBgColor;
@@ -14,7 +16,7 @@ class BtnIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: IconButton(
-        onPressed: () {},
+        onPressed: onPress,
         icon: ImageIcon(AssetImage(this.suffixImg)),
       ),
       decoration: BoxDecoration(

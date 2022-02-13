@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/logic/view_models/auth.view.model.dart';
-import 'package:yobit/router/navigation.model.dart';
-import 'package:yobit/ui/widgets/elements/slider.dart' as AdsSlider;
+import 'package:yobit/ui/widgets/containers/challenge.container.dart';
+import 'package:yobit/ui/widgets/elements/slider.dart' as SpecialChallenge;
 import 'package:yobit/ui/widgets/elements/text21.dart';
+import 'package:yobit/ui/widgets/elements/user.gadget.dart';
 import 'package:yobit/ui/widgets/static/star.background.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -12,31 +15,27 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var authModel = Provider.of<AuthViewModel>(context);
-    var navModel = Provider.of<NavigationModel>(context);
+    FirebaseAuth auth = FirebaseAuth.instance;
+
     return StarBackground(
-        child: () => Container(
-              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 35),
-              child: Column(
+        child: () => VStack([
+              Row(
                 children: [
-                  Row(
-                    children: [
-                      Text21(
-                        text: "Hello user",
-                      ),
-                      // Image(image: AssetImage(Paths.profile))
-                    ],
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Text21(
+                    text: "Hello ${auth.currentUser!.email}",
                   ),
-                  AdsSlider.Slider(),
-                  TextButton(
-                    onPressed: () async {
-                      var res = await authModel.logout();
-                      if (res) navModel.onLogout();
-                    },
-                    child: Text("Sign out"),
-                  )
+                  UserGadget()
                 ],
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
               ),
-            ));
+              SpecialChallenge.Slider(),
+              ChallengeContainer(),
+              TextButton(
+                onPressed: () async {
+                  var res = await authModel.logout();
+                },
+                child: Text("Sign out"),
+              )
+            ]).py32().scrollVertical());
   }
 }
