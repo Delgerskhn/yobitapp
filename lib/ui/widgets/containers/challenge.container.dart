@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/constants/infrastructure/paths.dart';
+import 'package:yobit/ui/widgets/challenge/challenge.card.dart';
 
 class ChallengeContainer extends StatefulWidget {
   @override
@@ -10,17 +11,16 @@ class ChallengeContainer extends StatefulWidget {
 }
 
 class _ChallengeContainerState extends State<ChallengeContainer> {
-  var challenges = [1, 2, 3];
+  List<List<int>> challenges = [
+    [1, 2],
+    [3, 4],
+    [5]
+  ];
 
   @override
   Widget build(BuildContext context) {
     return VStack(challenges
-        .map((e) => VxBox(
-              child: Image.asset(
-                Paths.specialChallenge,
-                fit: BoxFit.cover,
-              ),
-            ).make())
+        .map((pair) => HStack(pair.map((c) => ChallengeCard()).toList()))
         .toList());
   }
 }
