@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:yobit/router/app.navigator.dart';
 import 'package:yobit/router/nav.observer.dart';
 import 'package:yobit/services/auth.repository.dart';
 import 'package:yobit/services/preference.dart';
@@ -19,40 +20,19 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   late AuthRepository authRepository;
-  FirebaseAuth auth = FirebaseAuth.instance;
-  bool loggedIn = false;
   late VxNavigator navigator;
 
   @override
   void initState() {
     super.initState();
     authRepository = AuthRepository(Preference());
-
-    navigator = VxNavigator(routes: {
-      '/': (uri, params) {
-        //TODO: this currentUser check logic must use auth.userStateChanges() for user initialization
-        if (auth.currentUser != null) return VxRoutePage(child: HomeScreen());
-        return VxRoutePage(child: SignInScreen());
-      },
-      '/login': (uri, params) => VxRoutePage(child: SignInScreen()),
-      '/signup': (uri, params) => VxRoutePage(child: SignUpScreen()),
-      '/forgotpassword': (uri, params) => VxRoutePage(child: ForgotPass()),
-    }, observers: [
-      NavObserver()
-    ]);
   }
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-        providers: [
-          ChangeNotifierProvider<AuthViewModel>(
-              create: (_) => AuthViewModel(authRepository)),
-        ],
-        child: MaterialApp.router(
-          routeInformationParser: VxInformationParser(),
-          routerDelegate: navigator,
-          title: "Yobit",
-        ));
+    return MultiProvider(providers: [
+      ChangeNotifierProvider<AuthViewModel>(
+          create: (_) => AuthViewModel(authRepository)),
+    ], child: AppNavigator());
   }
 }

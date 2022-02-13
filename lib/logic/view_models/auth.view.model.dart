@@ -1,12 +1,20 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yobit/services/auth.repository.dart';
 
 class AuthViewModel extends ChangeNotifier {
   final AuthRepository authRepository;
+  FirebaseAuth auth = FirebaseAuth.instance;
   bool logingIn = false;
   bool logingOut = false;
+  bool loggedIn = false;
 
-  AuthViewModel(this.authRepository);
+  AuthViewModel(this.authRepository) {
+    auth.authStateChanges().listen((user) {
+      loggedIn = user != null;
+      notifyListeners();
+    });
+  }
 
   Future<bool> login(email, password) async {
     logingIn = true;
