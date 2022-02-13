@@ -5,6 +5,7 @@ import 'package:yobit/constants/infrastructure/paths.dart';
 import 'package:yobit/constants/infrastructure/strings.dart';
 import 'package:yobit/constants/ui/styles/button.style.dart';
 import 'package:yobit/logic/view_models/auth.view.model.dart';
+import 'package:yobit/router/navigation.model.dart';
 import 'package:yobit/ui/widgets/elements/btn.icon.dart';
 import 'package:yobit/ui/widgets/elements/suffix.input.dart';
 import 'package:yobit/ui/widgets/elements/suffix.password.dart';
@@ -36,6 +37,7 @@ class _SignUpFormState extends State<SignUpForm> {
   @override
   Widget build(BuildContext context) {
     final authViewModel = Provider.of<AuthViewModel>(context);
+    final navmodel = Provider.of<NavigationModel>(context);
     return Container(
       alignment: Alignment.center,
       width: MediaQuery.of(context).size.width,
@@ -75,7 +77,7 @@ class _SignUpFormState extends State<SignUpForm> {
             Row(children: [
               BtnIcon(
                 iconBgColor: Theme.of(context).primaryColor,
-                suffixImg: Paths.userFilledIcon,
+                suffixImg: 'assets/icons/Back Icon.png',
                 onPress: () {
                   Navigator.pop(context);
                 },
@@ -86,7 +88,8 @@ class _SignUpFormState extends State<SignUpForm> {
                 onPressed: () async {
                   final result =
                       await authViewModel.signup(_email, _name, _password);
-                  if (result == true) VxNavigator.of(context).pop();
+
+                  if (result == true) Navigator.pop(context);
                 },
                 child: const Text(Strings.signUp),
               ))

@@ -7,7 +7,7 @@ class FloatingBackButton extends StatelessWidget {
     return FloatingActionButton(
         backgroundColor: Colors.transparent,
         onPressed: () {
-          VxNavigator.of(context).pop();
+          Navigator.of(context).pop();
         },
         mini: true,
         child: Image.asset('assets/icons/Back Icon.png'));
