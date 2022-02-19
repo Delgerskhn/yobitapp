@@ -2,6 +2,10 @@
 
 dart pub global activate flutterfire_cli
 
+# Generate codes from models like json annotation by running the command below
+
+flutter pub run build_runner build
+
 # Run the `configure` command, select a Firebase project and platforms
 
 flutterfire configure

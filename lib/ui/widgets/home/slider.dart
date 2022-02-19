@@ -58,6 +58,7 @@ class _Slider extends State<Slider> {
                                 Positioned(
                                   bottom: 0,
                                   left: 0,
+                                  top: 0,
                                   right: 0,
                                   child: Container(
                                       decoration: BoxDecoration(
@@ -80,25 +81,6 @@ class _Slider extends State<Slider> {
           }).toList(),
         ),
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [1, 2, 3, 4, 5].asMap().entries.map((entry) {
-          return GestureDetector(
-            onTap: () => controller.animateToPage(entry.key),
-            child: Container(
-              width: 12,
-              height: 12,
-              margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: (Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                          : Colors.black)
-                      .withOpacity(_current == entry.key ? 0.9 : 0.4)),
-            ),
-          );
-        }).toList(),
-      )
     ]);
   }
 }

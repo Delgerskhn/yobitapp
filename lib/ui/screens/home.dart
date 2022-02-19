@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/logic/view_models/auth.view.model.dart';
 import 'package:yobit/ui/widgets/containers/challenge.container.dart';
-import 'package:yobit/ui/widgets/elements/slider.dart' as SpecialChallenge;
+import 'package:yobit/ui/widgets/home/slider.dart' as SpecialChallenge;
 import 'package:yobit/ui/widgets/elements/text21.dart';
 import 'package:yobit/ui/widgets/elements/user.gadget.dart';
 import 'package:yobit/ui/widgets/static/star.background.dart';
