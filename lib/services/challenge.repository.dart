@@ -19,3 +19,18 @@ Future<List<Challenge>> getRegularChallenges() async {
   }
   throw Exception("Failed to load top challenges");
 }
+
+Future<bool> getIfUserJoinedChallenge(String challengeId) async {
+  final response = await HttpClient.get('user/challenge/$challengeId');
+
+  if (response.statusCode == 200) {
+    var res = jsonDecode(response.body);
+    return res;
+  }
+  throw Exception("Failed to load top challenges");
+}
+
+Future<bool> joinChallenge(String challengeId) async {
+  final response = await HttpClient.post('user/challenge/$challengeId', null);
+  return jsonDecode(response.body);
+}

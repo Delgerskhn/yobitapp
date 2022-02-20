@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yobit/router/navigation.model.dart';
-import 'package:yobit/router/pages/approuter.delegate.dart';
+import 'package:yobit/router/approuter.delegate.dart';
 import 'package:yobit/services/auth.repository.dart';
 import 'package:yobit/services/preference.dart';
 
