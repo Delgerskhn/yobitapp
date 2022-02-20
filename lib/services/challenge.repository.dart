@@ -10,7 +10,7 @@ Future<List<Challenge>> getFeaturedChallenges() async {
   return res.map((e) => Challenge.fromJson(e)).toList();
 }
 
-Future<List<Challenge>> getTopChallenges() async {
+Future<List<Challenge>> getRegularChallenges() async {
   final response = await HttpClient.get('challenge');
 
   if (response.statusCode == 200) {

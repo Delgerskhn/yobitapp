@@ -32,7 +32,6 @@ class _Slider extends State<Slider> {
             );
           } else if (snapshot.hasData) {
             final challenges = snapshot.data as List<Challenge>;
-            print(challenges);
             return Column(children: [
               Container(
                 child: CarouselSlider(
