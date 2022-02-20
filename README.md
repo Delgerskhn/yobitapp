@@ -13,3 +13,9 @@ flutterfire configure
 # Run command on web
 
 flutter run -d chrome --web-renderer html
+
+# Run command below to configure cors for web
+
+## Consider you have gsutil cli
+
+gsutil cors set cors.json gs://yobit-54b2a.appspot.com
