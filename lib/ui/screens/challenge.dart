@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yobit/ui/widgets/ChallengeWidgets/challengeRuby.dart';
 import 'package:yobit/ui/widgets/ChallengeWidgets/challengeSponser.dart';
 import 'package:yobit/ui/widgets/ChallengeWidgets/challengeStars.dart';
+import 'package:yobit/ui/widgets/elements/floating.back.button.dart';
 import 'package:yobit/ui/widgets/static/star.background.dart';
 import 'package:yobit/ui/widgets/static/star.bg.abs.dart';
 
@@ -14,24 +15,7 @@ class ChallengeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: BackButton(
-            color: Colors.white,
-            onPressed: () {},
-          ),
-          actions: [
-            Padding(
-                padding: const EdgeInsets.only(right: 30, top: 12),
-                child: Image.asset(
-                  "assets/images/profile.png",
-                  // scale: 2.3,
-                  width: 35,
-                  height: 25,
-                )
-                // child: const Icon(Icons.ac_unit, color: Colors.green),
-                )
-          ],
-        ),
+        floatingActionButton: FloatingBackButton(),
         body: StarBackground(
           child: () => Container(
             width: double.infinity,
