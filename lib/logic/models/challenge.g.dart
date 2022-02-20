@@ -8,6 +8,7 @@ part of 'challenge.dart';
 
 Challenge _$ChallengeFromJson(Map<String, dynamic> json) {
   return Challenge(
+    id: json['id'] as String,
     title: json['title'] as String,
     content: json['content'] as String,
     endDate: DateTime.parse(json['endDate'] as String),
@@ -16,6 +17,7 @@ Challenge _$ChallengeFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$ChallengeToJson(Challenge instance) => <String, dynamic>{
+      'id': instance.id,
       'title': instance.title,
       'content': instance.content,
       'endDate': instance.endDate.toIso8601String(),
