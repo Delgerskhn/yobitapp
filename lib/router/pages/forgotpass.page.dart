@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yobit/ui/screens/forgotpass.dart';
+import 'package:yobit/auth/ui/screens/forgotpass.dart';
 
 class ForgotPassPage extends Page {
   ForgotPassPage() : super(key: ValueKey('HomePage'));

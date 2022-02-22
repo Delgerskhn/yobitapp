@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yobit/ui/screens/home.dart';
+import 'package:yobit/home/home.dart';
 
 class HomePage extends Page {
   HomePage() : super(key: ValueKey('HomePage'));

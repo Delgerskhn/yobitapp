@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yobit/router/navigation.model.dart';
 import 'package:yobit/router/approuter.delegate.dart';
-import 'package:yobit/services/auth.repository.dart';
-import 'package:yobit/services/preference.dart';
+import 'package:yobit/auth/api/auth.repository.dart';
 
-import 'logic/view_models/auth.view.model.dart';
+import 'auth/data/auth.view.model.dart';
 
 class App extends StatefulWidget {
   @override
@@ -19,7 +18,7 @@ class _AppState extends State<App> {
   @override
   void initState() {
     super.initState();
-    authRepository = AuthRepository(Preference());
+    authRepository = AuthRepository();
     delegate = AppRouterDelegate();
   }
 
