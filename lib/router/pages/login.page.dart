@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yobit/ui/screens/signin.dart';
+import 'package:yobit/auth/ui/screens/signin.dart';
 
 class LoginPage extends Page {
   LoginPage() : super(key: ValueKey('LoginPage'));

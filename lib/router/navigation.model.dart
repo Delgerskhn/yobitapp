@@ -6,7 +6,7 @@ import 'package:yobit/router/pages/home.page.dart';
 import 'package:yobit/router/pages/login.page.dart';
 import 'package:yobit/router/pages/signup.page.dart';
 import 'package:yobit/router/pages/splash.page.dart';
-import 'package:yobit/services/auth.repository.dart';
+import 'package:yobit/auth/api/auth.repository.dart';
 
 class NavigationModel extends ChangeNotifier {
   bool? _loggedIn;
