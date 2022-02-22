@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ChallengeTasks extends StatelessWidget {
-  const ChallengeTasks({
+class ChallengeTask extends StatelessWidget {
+  const ChallengeTask({
     Key? key,
   }) : super(key: key);
 

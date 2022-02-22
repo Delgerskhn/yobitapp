@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:yobit/core/ui/elements/floating.back.button.dart';
+import 'package:yobit/task/ui/task.container.dart';
 
 import 'challenge.details.image.dart';
 import 'challenge.details.time.dart';
@@ -13,24 +15,8 @@ class ChallengeDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(
-          color: Colors.white,
-          onPressed: () {},
-        ),
-        actions: [
-          Padding(
-              padding: const EdgeInsets.only(right: 30, top: 12),
-              child: Image.asset(
-                "assets/profile.png",
-                // scale: 2.3,
-                width: 35,
-                height: 25,
-              )
-              // child: const Icon(Icons.ac_unit, color: Colors.green),
-              )
-        ],
-      ),
+      floatingActionButton: FloatingBackButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -63,8 +49,7 @@ class ChallengeDetails extends StatelessWidget {
                   ],
                 ),
               ),
-              ChallengeTasks(),
-              ChallengeTasks(),
+              TaskContainer()
             ],
           ),
         ),

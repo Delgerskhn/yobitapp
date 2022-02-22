@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:yobit/challenge/data/challenge.dart';
+import 'package:yobit/task/data/task.dart';
 import 'package:yobit/utils/httpClient.dart';
 
 Future<List<Challenge>> getFeaturedChallenges() async {
@@ -32,4 +33,10 @@ Future<bool> getIfUserJoinedChallenge(String challengeId) async {
 Future<bool> joinChallenge(String challengeId) async {
   final response = await HttpClient.post('user/challenge/$challengeId', null);
   return jsonDecode(response.body);
+}
+
+Future<List<Task>> getChallengeTasks(String challengeId) async {
+  final response = await HttpClient.get('task?id=$challengeId');
+  List<dynamic> res = jsonDecode(response.body);
+  return res.map((e) => Task.fromJson(e)).toList();
 }
