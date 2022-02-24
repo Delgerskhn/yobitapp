@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:yobit/task/data/task.dart';
 
 class ChallengeTask extends StatelessWidget {
-  const ChallengeTask({
-    Key? key,
-  }) : super(key: key);
+  final Task task;
+  const ChallengeTask({Key? key, required this.task}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class ChallengeTask extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8, left: 10),
                     child: Text(
-                      "Даалгавар 1",
+                      task.title.substring(0, 26) + '..',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 16,

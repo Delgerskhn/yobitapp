@@ -23,7 +23,7 @@ class _TaskContainer extends State<TaskContainer> {
             if (scaffold.hasData) {
               var tasks = scaffold.data as List<Task>;
               return Column(
-                children: tasks.map((e) => ChallengeTask()).toList(),
+                children: tasks.map((e) => ChallengeTask(task: e)).toList(),
               );
             }
             if (scaffold.hasError) return Text('An error occured!');

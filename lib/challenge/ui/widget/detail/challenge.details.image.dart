@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yobit/challenge/data/challenge.dart';
@@ -10,6 +11,7 @@ class ChallengeDetailsImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var challenge = Provider.of<Challenge?>(context);
+    print(challenge?.title);
     return Stack(
       children: [
         Positioned(
@@ -49,8 +51,8 @@ class ChallengeDetailsImage extends StatelessWidget {
               Container(
                 alignment: Alignment.bottomRight,
                 child: (challenge != null)
-                    ? Image.network(
-                        challenge.imgUrl,
+                    ? CachedNetworkImage(
+                        imageUrl: challenge.imgUrl,
                         width: 200,
                         height: 200,
                       )

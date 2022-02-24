@@ -22,16 +22,16 @@ class ChallengeDetails extends StatelessWidget {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        // decoration: const BoxDecoration(
-        //   image: DecorationImage(
-        //     image: AssetImage("assets/Stars.png"),
-        //     fit: BoxFit.cover,
-        //   ),
-        //   gradient: LinearGradient(
-        //       colors: [Color(0xff080712), Color(0xff201F3A)],
-        //       begin: Alignment.topCenter,
-        //       end: Alignment.bottomCenter),
-        // ),
+        decoration: const BoxDecoration(
+          // image: DecorationImage(
+          //   image: AssetImage("assets/Stars.png"),
+          //   fit: BoxFit.cover,
+          // ),
+          gradient: LinearGradient(
+              colors: [Color(0xff080712), Color(0xff201F3A)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter),
+        ),
         child: SingleChildScrollView(
           child: Column(
             children: [

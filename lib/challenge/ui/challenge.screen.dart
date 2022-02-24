@@ -20,27 +20,19 @@ class ChallengeScreen extends StatefulWidget {
 
 class _ChallengeScreen extends State<ChallengeScreen> {
   final challengeId;
-  late Challenge challenge;
 
   _ChallengeScreen({required this.challengeId});
-  @override
-  void initState() {
-    super.initState();
-    getDetails();
-  }
-
-  void getDetails() async {
-    challenge = await getChallenge(challengeId);
-    print(challenge);
-  }
 
   @override
   Widget build(BuildContext context) {
     var navmodel = Provider.of<NavigationModel>(context);
-    return FutureProvider(
+    return FutureProvider<Challenge?>(
         create: (_) => getChallenge(challengeId),
         initialData: null,
-        catchError: (_, e) => print(e),
+        catchError: (_, e) {
+          print(e);
+          return null;
+        },
         child: FutureBuilder(
             future: getIfUserJoinedChallenge(navmodel.challengeId!),
             builder: (ctx, scaffold) {
