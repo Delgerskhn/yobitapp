@@ -40,3 +40,9 @@ Future<List<Task>> getChallengeTasks(String challengeId) async {
   List<dynamic> res = jsonDecode(response.body);
   return res.map((e) => Task.fromJson(e)).toList();
 }
+
+Future<Challenge> getChallenge(String challengeID) async {
+  final response = await HttpClient.get('challenge/$challengeID');
+  dynamic res = jsonDecode(response.body);
+  return Challenge.fromJson(res);
+}

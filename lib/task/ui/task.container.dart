@@ -22,7 +22,6 @@ class _TaskContainer extends State<TaskContainer> {
           if (scaffold.connectionState == ConnectionState.done) {
             if (scaffold.hasData) {
               var tasks = scaffold.data as List<Task>;
-              print(scaffold.data);
               return Column(
                 children: tasks.map((e) => ChallengeTask()).toList(),
               );

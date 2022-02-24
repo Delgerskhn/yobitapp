@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:yobit/challenge/data/challenge.dart';
 
 class ChallengeDetailsImage extends StatelessWidget {
   const ChallengeDetailsImage({
@@ -7,6 +9,7 @@ class ChallengeDetailsImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var challenge = Provider.of<Challenge?>(context);
     return Stack(
       children: [
         Positioned(
@@ -35,7 +38,7 @@ class ChallengeDetailsImage extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 padding: EdgeInsets.only(left: 25),
                 child: Text(
-                  "Кпс-ийн гариг",
+                  challenge == null ? '' : challenge.title,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 25,
@@ -45,11 +48,13 @@ class ChallengeDetailsImage extends StatelessWidget {
               ),
               Container(
                 alignment: Alignment.bottomRight,
-                child: Image.asset(
-                  "assets/Garig4.png",
-                  width: 200,
-                  height: 200,
-                ),
+                child: (challenge != null)
+                    ? Image.network(
+                        challenge.imgUrl,
+                        width: 200,
+                        height: 200,
+                      )
+                    : Container(),
               ),
             ],
           ),
