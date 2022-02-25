@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "160751823241",
+    "project_id": "yobit-54b2a",
+    "storage_bucket": "yobit-54b2a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:160751823241:android:f1af3740cfc9aefd761958",
+        "android_client_info": {
+          "package_name": "com.example.example"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "160751823241-20vr3vm2lopaptr2b2rqsfc3bbscumqj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLiqH6qs4QKWW8zBu8PtFrDeFK2CutEB8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "160751823241-20vr3vm2lopaptr2b2rqsfc3bbscumqj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "160751823241-4rf3fieiesrpd0hq32os6u9o3qr1ri4j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "yobit.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

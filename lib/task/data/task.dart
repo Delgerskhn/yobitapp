@@ -14,6 +14,6 @@ class Task {
   Task(this.id, this.title, this.content, this.endDate, this.startDate,
       this.challengeId);
 
-  factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
+  static Task fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
   Map<String, dynamic> toJson() => _$TaskToJson(this);
 }

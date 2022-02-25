@@ -17,7 +17,7 @@ class Challenge {
       required this.endDate,
       required this.imgUrl});
 
-  factory Challenge.fromJson(Map<String, dynamic> json) =>
+  static Challenge fromJson(Map<String, dynamic> json) =>
       _$ChallengeFromJson(json);
   Map<String, dynamic> toJson() => _$ChallengeToJson(this);
 }
