@@ -7,6 +7,7 @@ import 'package:yobit/router/pages/login.page.dart';
 import 'package:yobit/router/pages/signup.page.dart';
 import 'package:yobit/router/pages/splash.page.dart';
 import 'package:yobit/auth/api/auth.repository.dart';
+import 'package:yobit/router/pages/task.page.dart';
 
 class NavigationModel extends ChangeNotifier {
   bool? _loggedIn;
@@ -58,7 +59,7 @@ class NavigationModel extends ChangeNotifier {
     stack = [
       HomePage(),
       if (challengeId != null) ChallengePage(challengeId: challengeId!),
-      // if(taskId !=null) TaskPage(),
+      if (taskId != null) TaskPage(taskId: taskId!),
     ];
     notifyListeners();
   }
@@ -76,18 +77,20 @@ class NavigationModel extends ChangeNotifier {
   void pushSignUp() {
     _isSigninIn = true;
     onLogout();
-    notifyListeners();
   }
 
   void pushResetPass() {
     _isResettingPass = true;
     onLogout();
-    notifyListeners();
   }
 
   void pushChallengePage(String id) {
     challengeId = id;
     onLogin();
-    notifyListeners();
+  }
+
+  void pushTaskPage(String id) {
+    taskId = id;
+    onLogin();
   }
 }

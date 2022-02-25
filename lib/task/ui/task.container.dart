@@ -26,7 +26,10 @@ class _TaskContainer extends State<TaskContainer> {
                 children: tasks.map((e) => ChallengeTask(task: e)).toList(),
               );
             }
-            if (scaffold.hasError) return Text('An error occured!');
+            if (scaffold.hasError) {
+              print(scaffold.error);
+              return Text('An error occured!');
+            }
           }
           return CircularProgressIndicator();
         });

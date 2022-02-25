@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:yobit/router/navigation.model.dart';
 import 'package:yobit/task/data/task.dart';
 
 class ChallengeTask extends StatelessWidget {
@@ -7,6 +9,7 @@ class ChallengeTask extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var navmodel = Provider.of<NavigationModel>(context);
     return Container(
       padding: const EdgeInsets.only(left: 20, top: 20, bottom: 20),
       margin: const EdgeInsets.only(top: 16, left: 20, right: 20),
@@ -72,7 +75,9 @@ class ChallengeTask extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  navmodel.pushTaskPage(task.id);
+                },
                 child: Icon(Icons.play_arrow, color: Colors.white, size: 30),
                 style: ButtonStyle(
                   backgroundColor:
