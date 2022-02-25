@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:yobit/challenge/data/challenge.dart';
 
 Future<List<T>> parseCollection<T>(QuerySnapshot<Map<String, dynamic>> snapshot,
     T Function(Map<String, dynamic> json) parser) async {

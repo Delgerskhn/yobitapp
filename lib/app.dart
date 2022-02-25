@@ -37,9 +37,7 @@ class _AppState extends State<App> {
               primaryColor: Color(0xffE85937),
               colorScheme: ColorScheme(
                   primary: Color(0xffE85937), //orange
-                  primaryVariant: Color(0xff623A42), //red light
                   secondary: Color(0xffFF464F), //red
-                  secondaryVariant: Color(0xff623A42), //red light
                   onSecondary: Color(0xffFFC542), //yellow
                   onSurface: Color(0xff3ED598), //green
                   onBackground: Colors.black45,

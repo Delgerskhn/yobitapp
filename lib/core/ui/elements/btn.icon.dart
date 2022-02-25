@@ -7,7 +7,7 @@ class BtnIcon extends StatelessWidget {
       required this.iconBgColor,
       this.onPress})
       : super(key: key);
-  VoidCallback? onPress;
+  final VoidCallback? onPress;
 
   final String suffixImg;
   final Color iconBgColor;

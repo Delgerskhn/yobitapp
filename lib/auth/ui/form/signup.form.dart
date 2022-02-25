@@ -5,7 +5,6 @@ import 'package:yobit/core/styles/button.style.dart';
 import 'package:yobit/core/ui/elements/btn.icon.dart';
 import 'package:yobit/core/ui/elements/suffix.input.dart';
 import 'package:yobit/core/ui/elements/suffix.password.dart';
-import 'package:yobit/router/navigation.model.dart';
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -34,7 +33,6 @@ class _SignUpFormState extends State<SignUpForm> {
   @override
   Widget build(BuildContext context) {
     final authViewModel = Provider.of<AuthViewModel>(context);
-    final navmodel = Provider.of<NavigationModel>(context);
     return Container(
       alignment: Alignment.center,
       width: MediaQuery.of(context).size.width,
@@ -68,7 +66,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   suffixImg: 'assets/icons/Lock (filled).png',
                   onChanged: onPassChanged,
                   hintText: 'Нууц үг',
-                  iconBgColor: Theme.of(context).colorScheme.primaryVariant),
+                  iconBgColor: Theme.of(context).colorScheme.primary),
             ),
             Padding(padding: EdgeInsets.only(top: 40), child: null),
             Row(children: [
