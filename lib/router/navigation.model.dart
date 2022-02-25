@@ -57,7 +57,7 @@ class NavigationModel extends ChangeNotifier {
     loggedIn = true;
     stack = [
       HomePage(),
-      if (challengeId != null) ChallengePage(),
+      if (challengeId != null) ChallengePage(challengeId: challengeId!),
       // if(taskId !=null) TaskPage(),
     ];
     notifyListeners();

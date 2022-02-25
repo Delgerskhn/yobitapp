@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:yobit/challenge/api/challenge.repository.dart';
+import 'package:yobit/challenge/data/challenge.dart';
 import 'package:yobit/core/ui/background/star.background.dart';
 import 'package:yobit/core/ui/elements/floating.back.button.dart';
+import 'package:yobit/router/navigation.model.dart';
 
 import './challenge.ruby.dart';
 import './challenge.sponser.dart';
 import './challenge.stars.dart';
 
 class ChallengeInfo extends StatelessWidget {
-  const ChallengeInfo({
-    Key? key,
-  }) : super(key: key);
+  const ChallengeInfo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var challenge = Provider.of<Challenge>(context);
+    var navmodel = Provider.of<NavigationModel>(context);
     return Scaffold(
         floatingActionButton: FloatingBackButton(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
         body: StarBackground(
           child: () => Container(
             width: double.infinity,
@@ -56,7 +61,10 @@ class ChallengeInfo extends StatelessWidget {
                             width: MediaQuery.of(context).size.width * .6,
                             height: 50,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                joinChallenge(challenge.id);
+                                navmodel.pushChallengePage(challenge.id);
+                              },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [

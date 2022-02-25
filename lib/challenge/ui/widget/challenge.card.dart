@@ -14,19 +14,21 @@ class ChallengeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var navModel = Provider.of<NavigationModel>(context);
     return GestureDetector(
-      child: ZStack([
-        VxBox(
-            child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-                child: CachedNetworkImage(
-                  imageUrl: challenge.imgUrl,
-                  fit: BoxFit.cover,
-                ))).width(162).make(),
-        VxBox(child: challenge.title.text.xl.bold.wrapWords(true).make())
-            .padding(Vx.m24)
-            .margin(Vx.mV32)
-            .make()
-      ]),
+      child: ZStack(
+        [
+          ClipRRect(
+            child: CachedNetworkImage(
+              imageUrl: challenge.imgUrl,
+              fit: BoxFit.fitWidth,
+            ),
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+          ).box.width(162).make(),
+          // VxBox(child: challenge.title.text.xl.bold.wrapWords(true).make())
+          //     .padding(Vx.m24)
+          //     .margin(Vx.mV32)
+          //     .make()
+        ],
+      ),
       onTap: () {
         navModel.pushChallengePage(challenge.id);
       },

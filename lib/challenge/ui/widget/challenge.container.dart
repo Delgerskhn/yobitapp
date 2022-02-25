@@ -33,7 +33,7 @@ class _ChallengeContainerState extends State<ChallengeContainer> {
                         ),
                         VxBox().margin(Vx.m12).padding(Vx.m2).make(),
                         if (pair.length == 1)
-                          Spacer()
+                          VxBox().width(162).make()
                         else
                           ChallengeCard(
                             challenge: pair[1],
