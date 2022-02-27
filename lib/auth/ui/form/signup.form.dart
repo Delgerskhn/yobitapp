@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yobit/auth/data/auth.view.model.dart';
@@ -5,6 +6,8 @@ import 'package:yobit/core/styles/button.style.dart';
 import 'package:yobit/core/ui/elements/btn.icon.dart';
 import 'package:yobit/core/ui/elements/suffix.input.dart';
 import 'package:yobit/core/ui/elements/suffix.password.dart';
+
+import '../../../core/data/toaster.dart';
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -33,6 +36,7 @@ class _SignUpFormState extends State<SignUpForm> {
   @override
   Widget build(BuildContext context) {
     final authViewModel = Provider.of<AuthViewModel>(context);
+    var toaster = Provider.of<ToasterModel>(context);
     return Container(
       alignment: Alignment.center,
       width: MediaQuery.of(context).size.width,
@@ -66,7 +70,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   suffixImg: 'assets/icons/Lock (filled).png',
                   onChanged: onPassChanged,
                   hintText: 'Нууц үг',
-                  iconBgColor: Theme.of(context).colorScheme.primary),
+                  iconBgColor: Color(0xff623A42)),
             ),
             Padding(padding: EdgeInsets.only(top: 40), child: null),
             Row(children: [
@@ -77,14 +81,21 @@ class _SignUpFormState extends State<SignUpForm> {
                   Navigator.pop(context);
                 },
               ),
+              SizedBox(
+                width: 12,
+              ),
               Expanded(
                   child: ElevatedButton(
                 style: primaryButtonStyle(context),
                 onPressed: () async {
-                  final result =
-                      await authViewModel.signup(_email, _name, _password);
-
-                  if (result == true) Navigator.pop(context);
+                  try {
+                    final result =
+                        await authViewModel.signup(_email, _name, _password);
+                    if (result == true) Navigator.pop(context);
+                  } on FirebaseAuthException catch (e) {
+                    print(e.message);
+                    // handleAuthError(context, e);
+                  } catch (e) {}
                 },
                 child: const Text('Бүртгэл үүсгэх'),
               ))

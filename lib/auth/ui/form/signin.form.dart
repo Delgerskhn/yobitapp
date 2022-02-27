@@ -53,7 +53,7 @@ class _SignInFormState extends State<SignInForm> {
                   suffixImg: 'assets/icons/Lock (filled).png',
                   hintText: 'Нууц үг',
                   onChanged: onPassChanged,
-                  iconBgColor: Theme.of(context).colorScheme.primary),
+                  iconBgColor: Color(0xff623A42)),
             ),
             Padding(padding: EdgeInsets.only(top: 40), child: null),
             Row(children: [
