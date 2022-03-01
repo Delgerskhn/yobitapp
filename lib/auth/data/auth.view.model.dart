@@ -1,16 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:yobit/auth/api/auth.repository.dart';
 import 'package:yobit/core/errors/autherror.dart';
 
 class AuthViewModel extends ChangeNotifier {
-  final AuthRepository authRepository;
   final BuildContext context;
   FirebaseAuth auth = FirebaseAuth.instance;
   bool loading = false;
   bool loggedIn = false;
 
-  AuthViewModel(this.authRepository, this.context) {
+  AuthViewModel(this.context) {
     auth.authStateChanges().listen((user) {
       loggedIn = user != null;
       notifyListeners();
@@ -20,7 +18,9 @@ class AuthViewModel extends ChangeNotifier {
   void login(email, password) {
     loading = true;
     notifyListeners();
-    authRepository.login(email, password).then((value) {
+    auth
+        .signInWithEmailAndPassword(email: email, password: password)
+        .then((value) {
       loggedIn = true;
     }).catchError((err) {
       handleAuthError(context, err);
@@ -30,10 +30,23 @@ class AuthViewModel extends ChangeNotifier {
     });
   }
 
-  void resetPass(email) {
+  void sendPasswordResetEmail(email) {
     loading = true;
     notifyListeners();
-    authRepository.resetPass(email).catchError((err) {
+    auth.sendPasswordResetEmail(email: email).catchError((err) {
+      handleAuthError(context, err);
+    }).whenComplete(() {
+      loading = false;
+      notifyListeners();
+    });
+  }
+
+  void confirmPasswordReset(code, newPass) {
+    loading = true;
+    notifyListeners();
+    auth
+        .confirmPasswordReset(code: code, newPassword: newPass)
+        .catchError((err) {
       handleAuthError(context, err);
     }).whenComplete(() {
       loading = false;
@@ -44,8 +57,11 @@ class AuthViewModel extends ChangeNotifier {
   void signup(email, name, password) {
     loading = true;
     notifyListeners();
-    authRepository
-        .register(email, name, password)
+    auth.authStateChanges().listen((user) {
+      if (user != null) user.updateDisplayName(name);
+    });
+    auth
+        .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {})
         .catchError((err) {
       handleAuthError(context, err);
@@ -55,12 +71,15 @@ class AuthViewModel extends ChangeNotifier {
     });
   }
 
-  Future<bool> logout() async {
+  void logout() {
     loading = true;
     notifyListeners();
-    final logoutResult = await authRepository.logout();
-    loading = false;
-    notifyListeners();
-    return logoutResult;
+    auth.signOut().catchError((err) {
+      handleAuthError(context, err);
+    }).whenComplete(() {
+      loading = false;
+      loggedIn = false;
+      notifyListeners();
+    });
   }
 }

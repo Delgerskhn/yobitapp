@@ -6,7 +6,6 @@ import 'package:yobit/router/pages/home.page.dart';
 import 'package:yobit/router/pages/login.page.dart';
 import 'package:yobit/router/pages/signup.page.dart';
 import 'package:yobit/router/pages/splash.page.dart';
-import 'package:yobit/auth/api/auth.repository.dart';
 import 'package:yobit/router/pages/task.page.dart';
 
 class NavigationModel extends ChangeNotifier {
@@ -33,9 +32,7 @@ class NavigationModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  final AuthRepository authRepository;
-
-  NavigationModel(this.authRepository) {
+  NavigationModel() {
     _init();
   }
   FirebaseAuth auth = FirebaseAuth.instance;

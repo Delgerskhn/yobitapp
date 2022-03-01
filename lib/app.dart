@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yobit/router/navigation.model.dart';
 import 'package:yobit/router/approuter.delegate.dart';
-import 'package:yobit/auth/api/auth.repository.dart';
 
 import 'auth/data/auth.view.model.dart';
 
@@ -36,16 +35,15 @@ class _AppState extends State<App> {
 }
 
 class ProviderWrapper extends StatelessWidget {
-  final AuthRepository authRepository = AuthRepository();
   final AppRouterDelegate delegate = AppRouterDelegate();
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<NavigationModel>(
-            create: (_) => NavigationModel(authRepository)),
+            create: (_) => NavigationModel()),
         ChangeNotifierProvider<AuthViewModel>(
-            create: (_) => AuthViewModel(authRepository, context)),
+            create: (_) => AuthViewModel(context)),
       ],
       child: Scaffold(
           resizeToAvoidBottomInset: false,

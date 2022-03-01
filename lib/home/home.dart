@@ -31,8 +31,8 @@ class HomeScreen extends StatelessWidget {
               SpecialChallenge.Slider(),
               ChallengeContainer(),
               TextButton(
-                onPressed: () async {
-                  await authModel.logout();
+                onPressed: () {
+                  authModel.logout();
                 },
                 child: Text("Sign out"),
               )
