@@ -2,10 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yobit/auth/data/auth.view.model.dart';
+import 'package:yobit/core/errors/autherror.dart';
 import 'package:yobit/core/styles/button.style.dart';
 import 'package:yobit/core/ui/elements/btn.icon.dart';
 import 'package:yobit/core/ui/elements/suffix.input.dart';
 import 'package:yobit/core/ui/elements/suffix.password.dart';
+import 'package:yobit/utils/toast.dart';
 
 import '../../../core/data/toaster.dart';
 
@@ -36,7 +38,6 @@ class _SignUpFormState extends State<SignUpForm> {
   @override
   Widget build(BuildContext context) {
     final authViewModel = Provider.of<AuthViewModel>(context);
-    var toaster = Provider.of<ToasterModel>(context);
     return Container(
       alignment: Alignment.center,
       width: MediaQuery.of(context).size.width,
@@ -88,14 +89,10 @@ class _SignUpFormState extends State<SignUpForm> {
                   child: ElevatedButton(
                 style: primaryButtonStyle(context),
                 onPressed: () async {
-                  try {
-                    final result =
-                        await authViewModel.signup(_email, _name, _password);
-                    if (result == true) Navigator.pop(context);
-                  } on FirebaseAuthException catch (e) {
-                    print(e.message);
-                    // handleAuthError(context, e);
-                  } catch (e) {}
+                  authViewModel
+                      .signup(_email, _name, _password)
+                      .then((value) => {if (value) Navigator.pop(context)})
+                      .catchError((err) => handleAuthError(context, err));
                 },
                 child: const Text('Бүртгэл үүсгэх'),
               ))

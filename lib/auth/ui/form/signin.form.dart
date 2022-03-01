@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yobit/auth/data/auth.view.model.dart';
+import 'package:yobit/core/errors/autherror.dart';
 import 'package:yobit/core/ui/elements/btn.flat.dart';
 import 'package:yobit/core/ui/elements/btn.primary.dart';
 import 'package:yobit/core/ui/elements/suffix.input.dart';
@@ -61,8 +63,10 @@ class _SignInFormState extends State<SignInForm> {
                   child: BtnPrimary(
                 text: 'Нэвтрэх',
                 onPressed: () async {
-                  final result = await authViewModel.login(_email, _password);
-                  if (result) navmodel.onLogin();
+                  authViewModel
+                      .login(_email, _password)
+                      .then((val) => {if (val) navmodel.onLogin()})
+                      .catchError((err) => {handleAuthError(context, err)});
                 },
               )),
             ]),

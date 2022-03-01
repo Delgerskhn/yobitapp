@@ -34,8 +34,10 @@ class AuthRepository {
   }
 
   Future<bool> register(email, name, password) async {
+    auth.authStateChanges().listen((user) {
+      user?.updateDisplayName(name);
+    });
     await auth.createUserWithEmailAndPassword(email: email, password: password);
-    await auth.currentUser!.updateDisplayName(name);
     return true;
   }
 
