@@ -9,7 +9,7 @@ class ForgotPassPage extends Page {
     return MaterialPageRoute(
       settings: this,
       builder: (BuildContext context) {
-        return ForgotPass();
+        return ForgotPassScreen();
       },
     );
   }

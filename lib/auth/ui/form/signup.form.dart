@@ -88,13 +88,15 @@ class _SignUpFormState extends State<SignUpForm> {
               Expanded(
                   child: ElevatedButton(
                 style: primaryButtonStyle(context),
-                onPressed: () async {
-                  authViewModel
-                      .signup(_email, _name, _password)
-                      .then((value) => {if (value) Navigator.pop(context)})
-                      .catchError((err) => handleAuthError(context, err));
+                onPressed: () {
+                  authViewModel.signup(_email, _name, _password);
                 },
-                child: const Text('Бүртгэл үүсгэх'),
+                child: authViewModel.loading
+                    ? SizedBox(
+                        child: CircularProgressIndicator(),
+                        height: 16,
+                        width: 16)
+                    : Text('Бүртгэл үүсгэх'),
               ))
             ]),
           ],

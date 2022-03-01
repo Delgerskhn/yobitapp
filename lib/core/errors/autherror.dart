@@ -9,13 +9,16 @@ void handleAuthError(BuildContext context, FirebaseAuthException e) {
     showError(context, "Илүү найдвартай нууц үг ашиглана уу!");
   } else if (e.code == 'email-already-in-use') {
     showError(context, "Бүртгэлтэй хаяг байна!");
-  } else if (e.code == 'invalid-email') {
+  } else if (e.code == 'invalid-email' || e.code == 'auth/invalid-email') {
     showError(context, "И-мэйл буруу байна!");
   } else if (e.code == 'user-disabled') {
     showError(context, "Хаяг идэвхгүй болсон!");
-  } else if (e.code == 'user-not-found') {
+  } else if (e.code == 'user-not-found' || e.code == 'auth/user-not-found') {
     showError(context, "Хэрэглэгч олдсонгүй!");
   } else if (e.code == 'wrong-password') {
     showError(context, "Буруу нууц үг!");
+  } else {
+    print(e.message);
+    showError(context, "Алдаа гарлаа!");
   }
 }

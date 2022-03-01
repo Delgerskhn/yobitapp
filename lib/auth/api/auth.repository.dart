@@ -14,12 +14,7 @@ class AuthRepository {
   }
 
   Future<bool> resetPass(email) async {
-    try {
-      await auth.sendPasswordResetEmail(email: email);
-    } on FirebaseAuthException catch (e) {
-      print(e.code);
-      return false;
-    }
+    await auth.sendPasswordResetEmail(email: email);
     return true;
   }
 
@@ -35,7 +30,7 @@ class AuthRepository {
 
   Future<bool> register(email, name, password) async {
     auth.authStateChanges().listen((user) {
-      user?.updateDisplayName(name);
+      if (user != null) user.updateDisplayName(name);
     });
     await auth.createUserWithEmailAndPassword(email: email, password: password);
     return true;

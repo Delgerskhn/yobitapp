@@ -1,45 +1,65 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yobit/auth/api/auth.repository.dart';
+import 'package:yobit/core/errors/autherror.dart';
 
 class AuthViewModel extends ChangeNotifier {
   final AuthRepository authRepository;
+  final BuildContext context;
   FirebaseAuth auth = FirebaseAuth.instance;
-  bool logingIn = false;
-  bool logingOut = false;
+  bool loading = false;
   bool loggedIn = false;
 
-  AuthViewModel(this.authRepository) {
+  AuthViewModel(this.authRepository, this.context) {
     auth.authStateChanges().listen((user) {
       loggedIn = user != null;
       notifyListeners();
     });
   }
 
-  Future<bool> login(email, password) async {
-    logingIn = true;
+  void login(email, password) {
+    loading = true;
     notifyListeners();
-    final result = await authRepository.login(email, password);
-    logingIn = false;
-    notifyListeners();
-    return result;
+    authRepository.login(email, password).then((value) {
+      loggedIn = true;
+    }).catchError((err) {
+      handleAuthError(context, err);
+    }).whenComplete(() {
+      loading = false;
+      notifyListeners();
+    });
   }
 
-  Future<bool> resetPass(email) async {
-    return await authRepository.resetPass(email);
+  void resetPass(email) {
+    loading = true;
+    notifyListeners();
+    authRepository.resetPass(email).catchError((err) {
+      handleAuthError(context, err);
+    }).whenComplete(() {
+      loading = false;
+      notifyListeners();
+    });
   }
 
-  Future<bool> signup(email, name, password) async {
-    final result = await authRepository.register(email, name, password);
+  void signup(email, name, password) {
+    loading = true;
     notifyListeners();
-    return result;
+    authRepository
+        .register(email, name, password)
+        .then((value) {})
+        .catchError((err) {
+      handleAuthError(context, err);
+    }).whenComplete(() {
+      loading = false;
+      notifyListeners();
+    });
   }
 
   Future<bool> logout() async {
-    logingOut = true;
+    loading = true;
     notifyListeners();
     final logoutResult = await authRepository.logout();
-    logingOut = false;
+    loading = false;
     notifyListeners();
     return logoutResult;
   }
