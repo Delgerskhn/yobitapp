@@ -4,16 +4,21 @@ import 'package:yobit/auth/data/auth.view.model.dart';
 import 'package:yobit/core/ui/elements/btn.primary.dart';
 import 'package:yobit/core/ui/elements/text.input.sec.dart';
 
-class ForgotPassForm extends StatefulWidget {
+class ResetPassForm extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _ForgotPassForm();
+  State<StatefulWidget> createState() => _ResetPassForm();
 }
 
-class _ForgotPassForm extends State<ForgotPassForm> {
-  String _email = "";
+class _ResetPassForm extends State<ResetPassForm> {
+  String _code = "";
+  String _password = "";
 
-  void onEmailChanged(String email) {
-    _email = email;
+  void onCodeChanged(String code) {
+    _code = code;
+  }
+
+  void onPassChanged(String pass) {
+    _password = pass;
   }
 
   @override
@@ -34,8 +39,18 @@ class _ForgotPassForm extends State<ForgotPassForm> {
             SizedBox(height: 23),
             Container(
               child: TextInputSecondary(
-                hintText: 'И-мэйл',
-                onChanged: onEmailChanged,
+                hintText: 'Code',
+                onChanged: onCodeChanged,
+              ),
+              decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.all(Radius.circular(12))),
+            ),
+            SizedBox(height: 23),
+            Container(
+              child: TextInputSecondary(
+                hintText: 'New password',
+                onChanged: onPassChanged,
               ),
               decoration: BoxDecoration(
                   color: Colors.grey[300],
@@ -45,7 +60,7 @@ class _ForgotPassForm extends State<ForgotPassForm> {
             BtnPrimary(
               text: 'Нууц үг сэргээх',
               onPressed: () {
-                authViewModel.sendPasswordResetEmail(_email);
+                authViewModel.confirmPasswordReset(_code, _password);
               },
             ),
           ],

@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:yobit/challenge/data/challenge.dart';
 import 'package:yobit/task/data/task.dart';
 import 'package:yobit/utils/collectionParser.dart';
-import 'package:yobit/utils/httpClient.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -43,7 +40,7 @@ Future<bool> getIfUserJoinedChallenge(String challengeId) async {
 
 Future<bool> joinChallenge(String challengeId) async {
   // throw Exception('Failed');
-  final result = await firestore.collection('UserChallenge').add({
+  await firestore.collection('UserChallenge').add({
     'userId': FirebaseAuth.instance.currentUser!.uid,
     challengeId: challengeId,
   });

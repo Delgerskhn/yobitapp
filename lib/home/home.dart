@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
               Row(
                 children: [
                   Text21(
-                    text: "Hello ${auth.currentUser!.email}",
+                    text: "Hello ${auth.currentUser!.displayName}",
                   ),
                   UserGadget()
                 ],
@@ -31,8 +31,8 @@ class HomeScreen extends StatelessWidget {
               SpecialChallenge.Slider(),
               ChallengeContainer(),
               TextButton(
-                onPressed: () async {
-                  var res = await authModel.logout();
+                onPressed: () {
+                  authModel.logout();
                 },
                 child: Text("Sign out"),
               )

@@ -16,7 +16,6 @@ class Slider extends StatefulWidget {
 
 class _Slider extends State<Slider> {
   CarouselController controller = CarouselController();
-  int _current = 0;
   final instance = firebase_storage.FirebaseStorage.instance;
   @override
   Widget build(BuildContext context) {
@@ -42,11 +41,7 @@ class _Slider extends State<Slider> {
                       height: MediaQuery.of(context).size.height / 2.4,
                       viewportFraction: 0.65,
                       enlargeCenterPage: true,
-                      onPageChanged: (index, reason) {
-                        setState(() {
-                          _current = index;
-                        });
-                      }),
+                      onPageChanged: (index, reason) {}),
                   carouselController: controller,
                   items: challenges.map((challenge) {
                     return Builder(

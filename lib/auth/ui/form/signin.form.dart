@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yobit/auth/data/auth.view.model.dart';
+import 'package:yobit/core/errors/autherror.dart';
+import 'package:yobit/core/styles/button.style.dart';
 import 'package:yobit/core/ui/elements/btn.flat.dart';
 import 'package:yobit/core/ui/elements/btn.primary.dart';
 import 'package:yobit/core/ui/elements/suffix.input.dart';
@@ -53,16 +56,22 @@ class _SignInFormState extends State<SignInForm> {
                   suffixImg: 'assets/icons/Lock (filled).png',
                   hintText: 'Нууц үг',
                   onChanged: onPassChanged,
-                  iconBgColor: Theme.of(context).colorScheme.primaryVariant),
+                  iconBgColor: Color(0xff623A42)),
             ),
             Padding(padding: EdgeInsets.only(top: 40), child: null),
             Row(children: [
               Expanded(
-                  child: BtnPrimary(
-                text: 'Нэвтрэх',
-                onPressed: () async {
-                  final result = await authViewModel.login(_email, _password);
-                  if (result) navmodel.onLogin();
+                  child: ElevatedButton(
+                style: primaryButtonStyle(context),
+                child: authViewModel.loading
+                    ? SizedBox(
+                        child: CircularProgressIndicator(),
+                        height: 16,
+                        width: 16)
+                    : Text('Нэвтрэх'),
+                onPressed: () {
+                  authViewModel.login(_email, _password);
+                  if (authViewModel.loggedIn) navmodel.onLogin();
                 },
               )),
             ]),

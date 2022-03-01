@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:yobit/challenge/api/challenge.repository.dart';
-import 'package:yobit/challenge/data/challenge.dart';
 import 'package:yobit/core/ui/elements/floating.back.button.dart';
-import 'package:yobit/router/navigation.model.dart';
 import 'package:yobit/task/ui/task.container.dart';
 
 import 'challenge.details.image.dart';
 import 'challenge.details.time.dart';
-import 'challenge.tasks.dart';
 
 class ChallengeDetails extends StatelessWidget {
   const ChallengeDetails({Key? key}) : super(key: key);

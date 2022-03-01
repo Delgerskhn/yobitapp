@@ -7,7 +7,7 @@ class BtnIcon extends StatelessWidget {
       required this.iconBgColor,
       this.onPress})
       : super(key: key);
-  VoidCallback? onPress;
+  final VoidCallback? onPress;
 
   final String suffixImg;
   final Color iconBgColor;
@@ -17,7 +17,7 @@ class BtnIcon extends StatelessWidget {
     return Container(
       child: IconButton(
         onPressed: onPress,
-        icon: ImageIcon(AssetImage(this.suffixImg)),
+        icon: Image.asset((this.suffixImg)),
       ),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0), color: iconBgColor),

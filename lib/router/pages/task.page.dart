@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:yobit/auth/ui/screens/forgotpass.dart';
+import 'package:yobit/task/ui/task.screen.dart';
 
-class ForgotPassPage extends Page {
-  ForgotPassPage() : super(key: ValueKey('HomePage'));
+class TaskPage extends Page {
+  final String taskId;
+
+  TaskPage({required this.taskId}) : super(key: ValueKey('TaskPage'));
 
   @override
   Route createRoute(BuildContext context) {
     return MaterialPageRoute(
       settings: this,
       builder: (BuildContext context) {
-        return ForgotPassScreen();
+        return TaskScreen();
       },
     );
   }
