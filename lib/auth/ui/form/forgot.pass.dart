@@ -5,6 +5,7 @@ import 'package:yobit/core/styles/button.style.dart';
 import 'package:yobit/core/ui/elements/btn.primary.dart';
 import 'package:yobit/core/ui/elements/text.input.sec.dart';
 import 'package:yobit/router/navigation.model.dart';
+import 'package:yobit/utils/toast.dart';
 
 class ForgotPassForm extends StatefulWidget {
   @override
@@ -52,9 +53,8 @@ class _ForgotPassForm extends State<ForgotPassForm> {
                   : Text('Код авах'),
               onPressed: () {
                 authViewModel.sendPasswordResetEmail(_email).then((value) {
-                  var navmodel =
-                      Provider.of<NavigationModel>(context, listen: false);
-                  navmodel.pushConfirmPass();
+                  showSuccess('Та и-мэйлээ шалгана уу!');
+                  Navigator.of(context).pop();
                 });
               },
             )

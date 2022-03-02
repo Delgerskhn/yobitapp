@@ -71,7 +71,8 @@ class NavigationModel extends ChangeNotifier {
       LoginPage(),
       if (_isSigninIn) SignUpPage(),
       if (_isResettingPass) ForgotPassPage(),
-      if (_isConfirmingPass) ConfirmPassPage()
+      // if (_isConfirmingPass)
+      // ConfirmPassPage()
     ];
     notifyListeners();
   }
