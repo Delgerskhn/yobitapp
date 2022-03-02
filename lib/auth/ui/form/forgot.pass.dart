@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yobit/auth/data/auth.view.model.dart';
+import 'package:yobit/core/styles/button.style.dart';
 import 'package:yobit/core/ui/elements/btn.primary.dart';
 import 'package:yobit/core/ui/elements/text.input.sec.dart';
+import 'package:yobit/router/navigation.model.dart';
 
 class ForgotPassForm extends StatefulWidget {
   @override
@@ -30,7 +32,7 @@ class _ForgotPassForm extends State<ForgotPassForm> {
           children: [
             Text("Доорх хэсэгт бүртгэлтэй мэйл хаягаа"),
             SizedBox(height: 5),
-            Text("үлдээснээр та нууц үгээ сэргээх боломжтой."),
+            Text("оруулж илгээсэн кодыг ашиглан нууц үгээ солих боломжтой."),
             SizedBox(height: 23),
             Container(
               child: TextInputSecondary(
@@ -42,12 +44,20 @@ class _ForgotPassForm extends State<ForgotPassForm> {
                   borderRadius: BorderRadius.all(Radius.circular(12))),
             ),
             SizedBox(height: 16),
-            BtnPrimary(
-              text: 'Нууц үг сэргээх',
+            ElevatedButton(
+              style: primaryButtonStyle(context),
+              child: authViewModel.loading
+                  ? SizedBox(
+                      child: CircularProgressIndicator(), height: 16, width: 16)
+                  : Text('Код авах'),
               onPressed: () {
-                authViewModel.sendPasswordResetEmail(_email);
+                authViewModel.sendPasswordResetEmail(_email).then((value) {
+                  var navmodel =
+                      Provider.of<NavigationModel>(context, listen: false);
+                  navmodel.pushConfirmPass();
+                });
               },
-            ),
+            )
           ],
         ),
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),

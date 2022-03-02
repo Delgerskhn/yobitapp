@@ -71,7 +71,6 @@ class _SignInFormState extends State<SignInForm> {
                     : Text('Нэвтрэх'),
                 onPressed: () {
                   authViewModel.login(_email, _password);
-                  if (authViewModel.loggedIn) navmodel.onLogin();
                 },
               )),
             ]),
