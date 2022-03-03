@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/auth/data/auth.view.model.dart';
 import 'package:yobit/core/styles/button.style.dart';
 import 'package:yobit/core/ui/elements/btn.primary.dart';
@@ -22,6 +23,42 @@ class _ForgotPassForm extends State<ForgotPassForm> {
   @override
   Widget build(BuildContext context) {
     final authViewModel = Provider.of<AuthViewModel>(context);
+
+    return VStack(
+      [
+        VStack([
+          Text("Доорх хэсэгт бүртгэлтэй мэйл хаягаа"),
+          SizedBox(height: 5),
+          Text("оруулж илгээсэн кодыг ашиглан нууц үгээ солих боломжтой."),
+          SizedBox(height: 23),
+          Container(
+            child: TextInputSecondary(
+              hintText: 'И-мэйл',
+              onChanged: onEmailChanged,
+            ),
+            decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.all(Radius.circular(12))),
+          ),
+          SizedBox(height: 16),
+          ElevatedButton(
+            style: primaryButtonStyle(context),
+            child: authViewModel.loading
+                ? SizedBox(
+                    child: CircularProgressIndicator(), height: 16, width: 16)
+                : Text('Код авах'),
+            onPressed: () {
+              authViewModel.sendPasswordResetEmail(_email).then((value) {
+                showSuccess('Та и-мэйлээ шалгана уу!');
+                Navigator.of(context).pop();
+              });
+            },
+          )
+        ]).backgroundColor(Colors.white).h32(context)
+      ],
+      alignment: MainAxisAlignment.center,
+      crossAlignment: CrossAxisAlignment.center,
+    ).backgroundColor(Colors.transparent).hFull(context);
 
     return Container(
         height: MediaQuery.of(context).size.height / 3.6,

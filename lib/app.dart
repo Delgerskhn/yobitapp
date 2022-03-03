@@ -49,7 +49,7 @@ class ProviderWrapper extends StatelessWidget {
             create: (_) => AuthViewModel(context)),
       ],
       child: Scaffold(
-          resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: true,
           body: Router(
               routerDelegate: delegate,
               backButtonDispatcher: RootBackButtonDispatcher())),

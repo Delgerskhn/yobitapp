@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/core/ui/background/circles.bg.abs.dart';
 import 'package:yobit/core/ui/background/star.bg.abs.dart';
 
@@ -21,7 +22,7 @@ class ForgotPassBackground extends StatelessWidget {
             top: 0,
             left: 0,
             right: 0),
-        Positioned(child: this.child(), top: 0, right: 0, left: 0)
+        VStack([this.child()]).scrollVertical()
       ],
     ));
   }
