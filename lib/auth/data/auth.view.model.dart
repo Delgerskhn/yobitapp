@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:yobit/core/errors/autherror.dart';
+import 'package:yobit/router/navigation.model.dart';
 
 class AuthViewModel extends ChangeNotifier {
   final BuildContext context;
@@ -21,21 +23,26 @@ class AuthViewModel extends ChangeNotifier {
     auth
         .signInWithEmailAndPassword(email: email, password: password)
         .then((value) {
+      var navmodel = Provider.of<NavigationModel>(context, listen: false);
+      print(navmodel.loggedIn);
       loggedIn = true;
     }).catchError((err) {
-      handleAuthError(context, err);
-    }).whenComplete(() {
+      handleAuthError(err);
+    }, test: (e) => e is FirebaseAuthException).whenComplete(() {
       loading = false;
       notifyListeners();
     });
   }
 
-  void sendPasswordResetEmail(email) {
+  Future<void> sendPasswordResetEmail(email) {
     loading = true;
     notifyListeners();
-    auth.sendPasswordResetEmail(email: email).catchError((err) {
-      handleAuthError(context, err);
-    }).whenComplete(() {
+    return auth
+        .sendPasswordResetEmail(email: email)
+        .then((value) {})
+        .catchError((err) {
+      handleAuthError(err);
+    }, test: (e) => e is FirebaseAuthException).whenComplete(() {
       loading = false;
       notifyListeners();
     });
@@ -44,11 +51,10 @@ class AuthViewModel extends ChangeNotifier {
   void confirmPasswordReset(code, newPass) {
     loading = true;
     notifyListeners();
-    auth
-        .confirmPasswordReset(code: code, newPassword: newPass)
-        .catchError((err) {
-      handleAuthError(context, err);
-    }).whenComplete(() {
+    auth.confirmPasswordReset(code: code, newPassword: newPass).catchError(
+        (err) {
+      handleAuthError(err);
+    }, test: (e) => e is FirebaseAuthException).whenComplete(() {
       loading = false;
       notifyListeners();
     });
@@ -64,8 +70,8 @@ class AuthViewModel extends ChangeNotifier {
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {})
         .catchError((err) {
-      handleAuthError(context, err);
-    }).whenComplete(() {
+      handleAuthError(err);
+    }, test: (e) => e is FirebaseAuthException).whenComplete(() {
       loading = false;
       notifyListeners();
     });
@@ -75,8 +81,8 @@ class AuthViewModel extends ChangeNotifier {
     loading = true;
     notifyListeners();
     auth.signOut().catchError((err) {
-      handleAuthError(context, err);
-    }).whenComplete(() {
+      handleAuthError(err);
+    }, test: (e) => e is FirebaseAuthException).whenComplete(() {
       loading = false;
       loggedIn = false;
       notifyListeners();

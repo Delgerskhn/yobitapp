@@ -4,23 +4,14 @@ import 'package:flutter/material.dart';
 class EarthAbs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new Positioned(
-        child: Container(
-          child: FractionallySizedBox(
-            child: FittedBox(
-              fit: BoxFit.fill,
-              child: Image.asset(
-                'assets/images/Low Poly Planet Earth.H03 1.png',
-              ),
-            ),
-            heightFactor: 0.42,
-            widthFactor: 1,
-          ),
-          alignment: Alignment.topCenter,
+    return Container(
+      child: FittedBox(
+        fit: BoxFit.fill,
+        child: Image.asset(
+          'assets/images/Low Poly Planet Earth.H03 1.png',
         ),
-        left: 0,
-        top: 0,
-        right: 0,
-        bottom: 0);
+      ),
+      alignment: Alignment.topCenter,
+    );
   }
 }

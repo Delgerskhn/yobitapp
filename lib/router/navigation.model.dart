@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yobit/router/pages/challenge.page.dart';
+import 'package:yobit/router/pages/confirm.pass.page.dart';
 import 'package:yobit/router/pages/forgotpass.page.dart';
 import 'package:yobit/router/pages/home.page.dart';
 import 'package:yobit/router/pages/login.page.dart';
@@ -16,12 +17,15 @@ class NavigationModel extends ChangeNotifier {
   String? challengeId;
   String? taskId;
 
+  bool _isConfirmingPass = false;
+
   bool? get loggedIn => _loggedIn;
 
   bool onPopPage(route, result) {
     if (!route.didPop(result)) return false;
     if (_isSigninIn) _isSigninIn = false;
     if (_isResettingPass) _isResettingPass = false;
+    if (_isConfirmingPass) _isConfirmingPass = false;
     if (challengeId != null && taskId == null) challengeId = null;
     if (challengeId != null && taskId != null) taskId = null;
     return true;
@@ -66,7 +70,9 @@ class NavigationModel extends ChangeNotifier {
     stack = [
       LoginPage(),
       if (_isSigninIn) SignUpPage(),
-      if (_isResettingPass) ForgotPassPage()
+      if (_isResettingPass) ForgotPassPage(),
+      // if (_isConfirmingPass)
+      // ConfirmPassPage()
     ];
     notifyListeners();
   }
@@ -89,5 +95,10 @@ class NavigationModel extends ChangeNotifier {
   void pushTaskPage(String id) {
     taskId = id;
     onLogin();
+  }
+
+  void pushConfirmPass() {
+    _isConfirmingPass = true;
+    onLogout();
   }
 }

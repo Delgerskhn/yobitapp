@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
               Row(
                 children: [
                   Text21(
-                    text: "Hello ${auth.currentUser!.displayName}",
+                    text: "Hello ${auth.currentUser?.displayName}",
                   ),
                   UserGadget()
                 ],

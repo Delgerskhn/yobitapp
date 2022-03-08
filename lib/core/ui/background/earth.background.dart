@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/core/ui/background/star.bg.abs.dart';
 
 import 'circles.bg.abs.dart';
@@ -13,11 +14,11 @@ class EarthBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(children: <Widget>[
+        body: ZStack([
           StarBgAbs(),
           EarthAbs(),
           CirclesBgAbs(),
-          Positioned(child: this.child(), top: 0, right: 0, left: 0)
+          VStack([this.child()]).scrollVertical()
         ]),
         backgroundColor: Colors.black);
   }
