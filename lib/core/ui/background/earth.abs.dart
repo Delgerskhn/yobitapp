@@ -5,12 +5,12 @@ class EarthAbs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: FittedBox(
-        fit: BoxFit.fill,
-        child: Image.asset(
-          'assets/images/Low Poly Planet Earth.H03 1.png',
-        ),
-      ),
+      decoration: BoxDecoration(
+          image: DecorationImage(
+        alignment: Alignment.topCenter,
+        image: AssetImage('assets/images/Low Poly Planet Earth.H03 1.png'),
+        fit: BoxFit.fitWidth,
+      )),
       alignment: Alignment.topCenter,
     );
   }

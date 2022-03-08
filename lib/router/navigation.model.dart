@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:yobit/router/pages/advantage.page.dart';
 import 'package:yobit/router/pages/challenge.page.dart';
 import 'package:yobit/router/pages/confirm.pass.page.dart';
 import 'package:yobit/router/pages/forgotpass.page.dart';
@@ -71,6 +72,7 @@ class NavigationModel extends ChangeNotifier {
       LoginPage(),
       if (_isSigninIn) SignUpPage(),
       if (_isResettingPass) ForgotPassPage(),
+      AdvantagePage()
       // if (_isConfirmingPass)
       // ConfirmPassPage()
     ];

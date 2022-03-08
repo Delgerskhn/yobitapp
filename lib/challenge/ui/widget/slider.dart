@@ -25,10 +25,11 @@ class _Slider extends State<Slider> {
         builder: (ctx, snapshot) {
           if (snapshot.connectionState == ConnectionState.done &&
               snapshot.hasError) {
+            print(snapshot.error);
             return Center(
               child: Text(
                 'Some error occured! Try refresh the page.',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18, color: Colors.white),
               ),
             );
           } else if (snapshot.hasData) {
@@ -59,15 +60,21 @@ class _Slider extends State<Slider> {
                                           Radius.circular(25.0)),
                                       child: Stack(
                                         children: [
-                                          CachedNetworkImage(
-                                            imageUrl: challenge.imgUrl,
-                                            fit: BoxFit.cover,
-                                            errorWidget:
-                                                (context, url, error) =>
-                                                    Text('Error!'),
-                                            placeholder: (context, url) =>
-                                                CircularProgressIndicator(),
-                                            width: 1000,
+                                          Positioned(
+                                            bottom: 0,
+                                            left: 0,
+                                            top: 0,
+                                            right: 0,
+                                            child: CachedNetworkImage(
+                                              imageUrl: challenge.imgUrl,
+                                              fit: BoxFit.cover,
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      Text('Error!'),
+                                              placeholder: (context, url) =>
+                                                  CircularProgressIndicator(),
+                                              width: 1000,
+                                            ),
                                           ),
                                           Positioned(
                                             bottom: 0,
