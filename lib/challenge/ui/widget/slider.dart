@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:yobit/auth/ui/widget/advantage.slider.dart';
 import 'package:yobit/challenge/data/challenge.dart';
 import 'package:yobit/router/navigation.model.dart';
 import 'package:yobit/challenge/api/challenge.repository.dart';
@@ -25,10 +26,11 @@ class _Slider extends State<Slider> {
         builder: (ctx, snapshot) {
           if (snapshot.connectionState == ConnectionState.done &&
               snapshot.hasError) {
+            print(snapshot.error);
             return Center(
               child: Text(
                 'Some error occured! Try refresh the page.',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18, color: Colors.white),
               ),
             );
           } else if (snapshot.hasData) {
@@ -59,15 +61,21 @@ class _Slider extends State<Slider> {
                                           Radius.circular(25.0)),
                                       child: Stack(
                                         children: [
-                                          CachedNetworkImage(
-                                            imageUrl: challenge.imgUrl,
-                                            fit: BoxFit.cover,
-                                            errorWidget:
-                                                (context, url, error) =>
-                                                    Text('Error!'),
-                                            placeholder: (context, url) =>
-                                                CircularProgressIndicator(),
-                                            width: 1000,
+                                          Positioned(
+                                            bottom: 0,
+                                            left: 0,
+                                            top: 0,
+                                            right: 0,
+                                            child: CachedNetworkImage(
+                                              imageUrl: challenge.imgUrl,
+                                              fit: BoxFit.cover,
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      Text('Error!'),
+                                              placeholder: (context, url) =>
+                                                  CircularProgressIndicator(),
+                                              width: 1000,
+                                            ),
                                           ),
                                           Positioned(
                                             bottom: 0,
@@ -102,9 +110,7 @@ class _Slider extends State<Slider> {
               ),
             ]);
           }
-          return Center(
-            child: CircularProgressIndicator(),
-          );
+          return CarouselLoader();
         });
   }
 }

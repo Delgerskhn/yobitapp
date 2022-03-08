@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:yobit/core/data/preferences.dart';
+import 'package:yobit/router/pages/advantage.page.dart';
 import 'package:yobit/router/pages/challenge.page.dart';
 import 'package:yobit/router/pages/confirm.pass.page.dart';
 import 'package:yobit/router/pages/forgotpass.page.dart';
@@ -13,7 +15,7 @@ class NavigationModel extends ChangeNotifier {
   bool? _loggedIn;
   bool _isSigninIn = false;
   bool _isResettingPass = false;
-
+  bool _firstTime = false;
   String? challengeId;
   String? taskId;
 
@@ -42,12 +44,15 @@ class NavigationModel extends ChangeNotifier {
   FirebaseAuth auth = FirebaseAuth.instance;
 
   _init() async {
-    FirebaseAuth.instance.authStateChanges().listen((user) {
-      loggedIn = user != null;
-      if (loggedIn!)
-        onLogin();
-      else
-        onLogout();
+    getIfAppInitializedFirstTime().then((value) {
+      _firstTime = value;
+      FirebaseAuth.instance.authStateChanges().listen((user) {
+        loggedIn = user != null;
+        if (loggedIn!)
+          onLogin();
+        else
+          onLogout();
+      });
     });
   }
 
@@ -71,6 +76,7 @@ class NavigationModel extends ChangeNotifier {
       LoginPage(),
       if (_isSigninIn) SignUpPage(),
       if (_isResettingPass) ForgotPassPage(),
+      if (_firstTime) AdvantagePage()
       // if (_isConfirmingPass)
       // ConfirmPassPage()
     ];
