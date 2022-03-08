@@ -72,7 +72,9 @@ class _AdvantageScreenState extends State<AdvantageScreen> {
                   ),
                   ElevatedButton(
                     style: primaryButtonStyle(context),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     child: Text('Үргэлжлүүлэх'),
                   ).box.width(250).height(59).make()
                 ])

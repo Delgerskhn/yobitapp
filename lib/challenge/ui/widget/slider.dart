@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:yobit/auth/ui/widget/advantage.slider.dart';
 import 'package:yobit/challenge/data/challenge.dart';
 import 'package:yobit/router/navigation.model.dart';
 import 'package:yobit/challenge/api/challenge.repository.dart';
@@ -109,9 +110,7 @@ class _Slider extends State<Slider> {
               ),
             ]);
           }
-          return Center(
-            child: CircularProgressIndicator(),
-          );
+          return CarouselLoader();
         });
   }
 }
