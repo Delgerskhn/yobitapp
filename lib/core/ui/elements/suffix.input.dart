@@ -22,9 +22,15 @@ class SuffixInput extends StatelessWidget {
         children: [
           IconBox(suffixImg: suffixImg, iconBgColor: iconBgColor),
           Expanded(
-            child: TextInput(
-              hintText: hintText,
-              onChanged: onChanged,
+            child: TextFormField(
+              style: TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                hintText: hintText,
+                hintStyle: TextStyle(color: Colors.white54),
+              ),
+              onSaved: (value) {
+                onChanged(value!);
+              },
             ),
           ),
         ]);

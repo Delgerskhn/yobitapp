@@ -14,7 +14,9 @@ class PasswordInput extends StatelessWidget {
       style: TextStyle(color: Colors.white),
       obscureText: true,
       enableSuggestions: false,
-      onChanged: onChanged,
+      onSaved: (val) {
+        onChanged(val!);
+      },
       autocorrect: false,
       decoration: InputDecoration(
         enabledBorder: UnderlineInputBorder(
