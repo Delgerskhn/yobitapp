@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
                 ],
                 alignment: MainAxisAlignment.spaceBetween,
                 axisSize: MainAxisSize.max,
-              ).px24().pOnly(top: 48),
+              ).px24().pOnly(top: 38, bottom: 21),
               SpecialChallenge.Slider(),
               ChallengeContainer(),
               TextButton(
