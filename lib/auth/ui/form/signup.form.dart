@@ -35,73 +35,80 @@ void onNameChanged(String name) {
 }
 
 class _SignUpFormState extends State<SignUpForm> {
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final authViewModel = Provider.of<AuthViewModel>(context);
-    return Container(
-      alignment: Alignment.center,
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height,
+    return Form(
+      key: _formKey,
       child: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Padding(padding: EdgeInsets.only(top: 400), child: null),
-            Flexible(
-              flex: 1,
-              child: SuffixInput(
-                  suffixImg: 'assets/icons/User (filled).png',
-                  onChanged: onNameChanged,
-                  hintText: 'Нэр',
-                  iconBgColor: Theme.of(context).primaryColor),
-            ),
-            Padding(padding: EdgeInsets.only(top: 20), child: null),
-            Flexible(
-              flex: 1,
-              child: SuffixInput(
-                  onChanged: onEmailChanged,
-                  suffixImg: 'assets/icons/User (filled).png',
-                  hintText: 'И-мэйл',
-                  iconBgColor: Theme.of(context).primaryColor),
-            ),
-            Padding(padding: EdgeInsets.only(top: 20), child: null),
-            Flexible(
-              flex: 1,
-              child: SuffixPassword(
-                  suffixImg: 'assets/icons/Lock (filled).png',
-                  onChanged: onPassChanged,
-                  hintText: 'Нууц үг',
-                  iconBgColor: Color(0xff623A42)),
-            ),
-            Padding(padding: EdgeInsets.only(top: 40), child: null),
-            Row(children: [
-              BtnIcon(
-                iconBgColor: Theme.of(context).primaryColor,
-                suffixImg: 'assets/icons/Back Icon.png',
-                onPress: () {
-                  Navigator.pop(context);
-                },
+        alignment: Alignment.center,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(padding: EdgeInsets.only(top: 400), child: null),
+              Flexible(
+                flex: 1,
+                child: SuffixInput(
+                    suffixImg: 'assets/icons/User (filled).png',
+                    onChanged: onNameChanged,
+                    hintText: 'Нэр',
+                    iconBgColor: Theme.of(context).primaryColor),
               ),
-              SizedBox(
-                width: 12,
+              Padding(padding: EdgeInsets.only(top: 20), child: null),
+              Flexible(
+                flex: 1,
+                child: SuffixInput(
+                    onChanged: onEmailChanged,
+                    suffixImg: 'assets/icons/User (filled).png',
+                    hintText: 'И-мэйл',
+                    iconBgColor: Theme.of(context).primaryColor),
               ),
-              Expanded(
-                  child: ElevatedButton(
-                style: primaryButtonStyle(context),
-                onPressed: () {
-                  authViewModel.signup(_email, _name, _password);
-                },
-                child: authViewModel.loading
-                    ? SizedBox(
-                        child: CircularProgressIndicator(),
-                        height: 16,
-                        width: 16)
-                    : Text('Бүртгэл үүсгэх'),
-              ))
-            ]),
-          ],
+              Padding(padding: EdgeInsets.only(top: 20), child: null),
+              Flexible(
+                flex: 1,
+                child: SuffixPassword(
+                    suffixImg: 'assets/icons/Lock (filled).png',
+                    onChanged: onPassChanged,
+                    hintText: 'Нууц үг',
+                    iconBgColor: Color(0xff623A42)),
+              ),
+              Padding(padding: EdgeInsets.only(top: 40), child: null),
+              Row(children: [
+                BtnIcon(
+                  iconBgColor: Theme.of(context).primaryColor,
+                  suffixImg: 'assets/icons/Back Icon.png',
+                  onPress: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                SizedBox(
+                  width: 12,
+                ),
+                Expanded(
+                    child: ElevatedButton(
+                  style: primaryButtonStyle(context),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                      authViewModel.signup(_email, _name, _password);
+                    }
+                  },
+                  child: authViewModel.loading
+                      ? SizedBox(
+                          child: CircularProgressIndicator(),
+                          height: 16,
+                          width: 16)
+                      : Text('Бүртгэл үүсгэх'),
+                ))
+              ]),
+            ],
+          ),
+          width: 300,
         ),
-        width: 300,
       ),
     );
   }

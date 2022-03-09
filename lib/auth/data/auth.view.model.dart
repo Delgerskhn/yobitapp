@@ -19,7 +19,6 @@ class AuthViewModel extends ChangeNotifier {
 
   void login(email, password) {
     loading = true;
-    print(email + " " + password);
     notifyListeners();
     auth
         .signInWithEmailAndPassword(email: email, password: password)
