@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class UserGadget extends StatefulWidget {
   @override
@@ -8,25 +9,34 @@ class UserGadget extends StatefulWidget {
 class _UserGadget extends State<UserGadget> {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.centerRight,
-      children: [
-        Positioned(
-          child: Container(
-              width: 90,
-              height: 20,
-              decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.all(Radius.circular(5))),
-              child: Text("1700")),
-        ),
-        Positioned(
-          child: Image(
-              image: AssetImage('assets/images/profile.png'),
-              width: 90,
-              height: 90),
-          right: 0,
-        )
+    return HStack(
+      [
+        Container(
+            width: 57,
+            height: 20,
+            decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.all(Radius.circular(5))),
+            child: HStack(
+              [
+                '1700'
+                    .text
+                    .fontWeight(FontWeight.bold)
+                    .size(9)
+                    .color(Colors.white)
+                    .make(),
+                Image.asset('assets/icons/coin 1.png')
+                    .box
+                    .margin(EdgeInsets.only(left: 2))
+                    .size(14, 19)
+                    .make()
+              ],
+              crossAlignment: CrossAxisAlignment.center,
+            ).p(4)),
+        Image.asset('assets/images/profile.png')
+            .box
+            .transform(Matrix4.translationValues(-10, 0, 0))
+            .make(),
       ],
     );
   }

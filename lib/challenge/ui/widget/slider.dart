@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/auth/ui/widget/advantage.slider.dart';
 import 'package:yobit/challenge/data/challenge.dart';
 import 'package:yobit/router/navigation.model.dart';
@@ -24,24 +25,15 @@ class _Slider extends State<Slider> {
     return FutureBuilder(
         future: getFeaturedChallenges(),
         builder: (ctx, snapshot) {
+          if (snapshot.hasError) print(snapshot.error);
           if (snapshot.connectionState == ConnectionState.done &&
-              snapshot.hasError) {
-            print(snapshot.error);
-            return Center(
-              child: Text(
-                'Some error occured! Try refresh the page.',
-                style: TextStyle(fontSize: 18, color: Colors.white),
-              ),
-            );
-          } else if (snapshot.hasData) {
+              snapshot.hasData) {
             final challenges = snapshot.data as List<Challenge>;
             return Column(children: [
               Container(
                 child: CarouselSlider(
                   options: CarouselOptions(
-                      aspectRatio: 16 / 9,
-                      height: MediaQuery.of(context).size.height / 2.4,
-                      viewportFraction: 0.65,
+                      height: 413,
                       enlargeCenterPage: true,
                       onPageChanged: (index, reason) {}),
                   carouselController: controller,
@@ -72,8 +64,11 @@ class _Slider extends State<Slider> {
                                               errorWidget:
                                                   (context, url, error) =>
                                                       Text('Error!'),
-                                              placeholder: (context, url) =>
-                                                  CircularProgressIndicator(),
+                                              placeholder: (context, url) => VxBox(
+                                                      child:
+                                                          CircularProgressIndicator())
+                                                  .alignCenter
+                                                  .make(),
                                               width: 1000,
                                             ),
                                           ),
@@ -110,7 +105,10 @@ class _Slider extends State<Slider> {
               ),
             ]);
           }
-          return CarouselLoader();
+
+          return CarouselLoader(
+            height: 413,
+          );
         });
   }
 }

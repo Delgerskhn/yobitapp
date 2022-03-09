@@ -1,5 +1,4 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/auth/api/advantages.dart';
@@ -30,12 +29,16 @@ class _AdvantageSliderState extends State<AdvantageSlider> {
               callback: callback,
               images: snapshot.data as List<String>,
             );
-          return CarouselLoader();
+          return CarouselLoader(height: 440);
         });
   }
 }
 
 class CarouselLoader extends StatelessWidget {
+  final height;
+
+  const CarouselLoader({Key? key, this.height}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
@@ -73,7 +76,7 @@ class CarouselLoader extends StatelessWidget {
                 ))
             .toList(),
         options: CarouselOptions(
-          height: 440,
+          height: height,
           enlargeCenterPage: true,
         ));
   }

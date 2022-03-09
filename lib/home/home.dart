@@ -19,15 +19,16 @@ class HomeScreen extends StatelessWidget {
 
     return StarBackground(
         child: () => VStack([
-              Row(
-                children: [
+              HStack(
+                [
                   Text21(
                     text: "Hello ${auth.currentUser?.displayName}",
                   ),
                   UserGadget()
                 ],
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-              ),
+                alignment: MainAxisAlignment.spaceBetween,
+                axisSize: MainAxisSize.max,
+              ).px24().pOnly(top: 48),
               SpecialChallenge.Slider(),
               ChallengeContainer(),
               TextButton(
@@ -36,6 +37,6 @@ class HomeScreen extends StatelessWidget {
                 },
                 child: Text("Sign out"),
               )
-            ]).py32().scrollVertical());
+            ]).scrollVertical());
   }
 }
