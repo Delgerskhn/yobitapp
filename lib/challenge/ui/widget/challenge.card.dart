@@ -19,7 +19,7 @@ class ChallengeCard extends StatelessWidget {
           ClipRRect(
             child: CachedNetworkImage(
               imageUrl: challenge.imgUrl,
-              fit: BoxFit.fitWidth,
+              fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.all(Radius.circular(15)),
           ).box.width(162).make(),
