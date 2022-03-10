@@ -7,6 +7,7 @@ import 'package:yobit/router/pages/confirm.pass.page.dart';
 import 'package:yobit/router/pages/forgotpass.page.dart';
 import 'package:yobit/router/pages/home.page.dart';
 import 'package:yobit/router/pages/login.page.dart';
+import 'package:yobit/router/pages/profile.page.dart';
 import 'package:yobit/router/pages/signup.page.dart';
 import 'package:yobit/router/pages/splash.page.dart';
 import 'package:yobit/router/pages/task.page.dart';
@@ -54,9 +55,7 @@ class NavigationModel extends ChangeNotifier {
 
   void onLogin() {
     loggedIn = true;
-    stack = [
-      HomePage(),
-    ];
+    stack = [HomePage(), ProfilePage()];
     notifyListeners();
   }
 
@@ -91,6 +90,11 @@ class NavigationModel extends ChangeNotifier {
 
   void pushConfirmPass() {
     stack = [...stack, ConfirmPassPage()];
+    notifyListeners();
+  }
+
+  void pushProfile() {
+    stack = [...stack, ProfilePage()];
     notifyListeners();
   }
 }
