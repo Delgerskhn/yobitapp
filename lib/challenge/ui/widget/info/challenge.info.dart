@@ -15,7 +15,7 @@ class ChallengeInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var challenge = Provider.of<Challenge>(context);
+    var challenge = Provider.of<Challenge?>(context);
     var navmodel = Provider.of<NavigationModel>(context);
     return Scaffold(
         floatingActionButton: FloatingBackButton(),
@@ -62,7 +62,7 @@ class ChallengeInfo extends StatelessWidget {
                             height: 50,
                             child: ElevatedButton(
                               onPressed: () {
-                                joinChallenge(challenge.id);
+                                joinChallenge(challenge!.id);
                                 navmodel.pushChallengePage(challenge.id);
                               },
                               child: Row(

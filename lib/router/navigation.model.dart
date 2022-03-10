@@ -55,7 +55,9 @@ class NavigationModel extends ChangeNotifier {
 
   void onLogin() {
     loggedIn = true;
-    stack = [HomePage(), ProfilePage()];
+    stack = [
+      HomePage(),
+    ];
     notifyListeners();
   }
 
