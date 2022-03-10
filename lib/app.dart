@@ -48,11 +48,9 @@ class ProviderWrapper extends StatelessWidget {
         ChangeNotifierProvider<AuthViewModel>(
             create: (_) => AuthViewModel(context)),
       ],
-      child: Scaffold(
-          resizeToAvoidBottomInset: true,
-          body: Router(
-              routerDelegate: delegate,
-              backButtonDispatcher: RootBackButtonDispatcher())),
+      child: Router(
+          routerDelegate: delegate,
+          backButtonDispatcher: RootBackButtonDispatcher()),
     );
   }
 }

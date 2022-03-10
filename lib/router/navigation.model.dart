@@ -13,23 +13,15 @@ import 'package:yobit/router/pages/task.page.dart';
 
 class NavigationModel extends ChangeNotifier {
   bool? _loggedIn;
-  bool _isSigninIn = false;
-  bool _isResettingPass = false;
   bool _firstTime = false;
   String? challengeId;
   String? taskId;
 
-  bool _isConfirmingPass = false;
-
   bool? get loggedIn => _loggedIn;
 
-  bool onPopPage(route, result) {
+  bool onPopPage(Route<dynamic> route, result) {
     if (!route.didPop(result)) return false;
-    if (_isSigninIn) _isSigninIn = false;
-    if (_isResettingPass) _isResettingPass = false;
-    if (_isConfirmingPass) _isConfirmingPass = false;
-    if (challengeId != null && taskId == null) challengeId = null;
-    if (challengeId != null && taskId != null) taskId = null;
+    stack.removeLast();
     return true;
   }
 
@@ -64,47 +56,41 @@ class NavigationModel extends ChangeNotifier {
     loggedIn = true;
     stack = [
       HomePage(),
-      if (challengeId != null) ChallengePage(challengeId: challengeId!),
-      if (taskId != null) TaskPage(taskId: taskId!),
     ];
     notifyListeners();
   }
 
   void onLogout() {
     loggedIn = false;
-    stack = [
-      LoginPage(),
-      if (_isSigninIn) SignUpPage(),
-      if (_isResettingPass) ForgotPassPage(),
-      if (_firstTime) AdvantagePage()
-      // if (_isConfirmingPass)
-      // ConfirmPassPage()
-    ];
+    stack = [LoginPage(), if (_firstTime) AdvantagePage()];
     notifyListeners();
   }
 
   void pushSignUp() {
-    _isSigninIn = true;
-    onLogout();
+    print(stack);
+    stack = [...stack, SignUpPage()];
+    notifyListeners();
   }
 
   void pushResetPass() {
-    _isResettingPass = true;
-    onLogout();
+    stack = [...stack, ForgotPassPage()];
+    notifyListeners();
   }
 
   void pushChallengePage(String id) {
     challengeId = id;
-    onLogin();
+    stack = [...stack, ChallengePage(challengeId: id)];
+    notifyListeners();
   }
 
   void pushTaskPage(String id) {
     taskId = id;
-    onLogin();
+    stack = [...stack, TaskPage(taskId: id)];
+    notifyListeners();
   }
 
   void pushConfirmPass() {
-    _isConfirmingPass = true;
-    onLogout();
+    stack = [...stack, ConfirmPassPage()];
+    notifyListeners();
   }
 }
