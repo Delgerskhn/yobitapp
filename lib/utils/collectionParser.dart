@@ -2,25 +2,29 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 Future<List<T>> parseCollection<T>(QuerySnapshot<Map<String, dynamic>> snapshot,
-    T Function(Map<String, dynamic> json) parser) async {
+    Future<T> Function(Map<String, dynamic> json) parser) async {
   List<T> collection = [];
   for (var doc in snapshot.docs) {
     var c = doc.data();
-    if (c['imgUrl'] != null)
-      c['imgUrl'] =
-          await FirebaseStorage.instance.ref(c['imgUrl']).getDownloadURL();
     c['id'] = doc.id;
-    collection.add(parser(c));
+    collection.add(await parser(c));
+  }
+  return collection;
+}
+
+Future<List<T>> parseCollectionFromDoc<T>(
+    QuerySnapshot<Map<String, dynamic>> snapshot,
+    Future<T> Function(DocumentSnapshot doc) parser) async {
+  List<T> collection = [];
+  for (var doc in snapshot.docs) {
+    collection.add(await parser(doc));
   }
   return collection;
 }
 
 Future<T> parseDocument<T>(DocumentSnapshot<Map<String, dynamic>> snapshot,
-    T Function(Map<String, dynamic> json) parser) async {
+    Future<T> Function(Map<String, dynamic> json) parser) async {
   dynamic c = snapshot.data();
   c['id'] = snapshot.id;
-  if (c['imgUrl'] != null)
-    c['imgUrl'] =
-        await FirebaseStorage.instance.ref(c['imgUrl']).getDownloadURL();
-  return parser(c);
+  return await parser(c);
 }
