@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:velocity_x/velocity_x.dart';
+import 'package:yobit/challenge/data/challenge.dart';
 
 class ChallengeSponser extends StatelessWidget {
   const ChallengeSponser({
@@ -7,45 +10,31 @@ class ChallengeSponser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(left: 20, top: 35, bottom: 35),
-      margin: const EdgeInsets.only(top: 30, left: 20, right: 20),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Image.asset(
-                "assets/images/kfc.png",
-                width: 80,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Шагнал",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    "50.000 төгрөгт багтах бүтээгдэхүүний урамшуулал",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
-        ],
-      ),
-      decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor, // #E85937
-          borderRadius: BorderRadius.circular(10)),
-    );
+    var challenge = context.watch<Challenge?>();
+    return VxContinuousRectangle(
+      radius: 16,
+      backgroundColor: Theme.of(context).primaryColor,
+      child: HStack([
+        Image.asset(
+          "assets/images/ruby.png",
+          width: 90,
+        ),
+        SizedBox(
+          height: 8,
+        ),
+        VStack([
+          'Шагнал'.text.white.size(16).make(),
+          '${challenge?.reward ?? ''}'
+              .text
+              .white
+              .wrapWords(true)
+              .size(14)
+              .make()
+              .box
+              .width(200)
+              .make()
+        ])
+      ]),
+    ).w(345);
   }
 }

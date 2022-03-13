@@ -59,7 +59,7 @@ class _Slider extends State<Slider> {
                                             top: 0,
                                             right: 0,
                                             child: CachedNetworkImage(
-                                              imageUrl: challenge.imgUrl,
+                                              imageUrl: challenge.featureImg,
                                               fit: BoxFit.cover,
                                               errorWidget:
                                                   (context, url, error) =>
