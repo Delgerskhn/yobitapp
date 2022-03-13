@@ -15,7 +15,7 @@ import 'package:yobit/router/pages/task.page.dart';
 class NavigationModel extends ChangeNotifier {
   bool? _loggedIn;
   bool _firstTime = false;
-  String? challengeId = 'ygdJpKZvXzPpiapjOtPg';
+  String? challengeId;
   String? taskId;
 
   bool? get loggedIn => _loggedIn;
@@ -55,7 +55,7 @@ class NavigationModel extends ChangeNotifier {
 
   void onLogin() {
     loggedIn = true;
-    stack = [HomePage(), ChallengePage(challengeId: "ygdJpKZvXzPpiapjOtPg")];
+    stack = [HomePage()];
     notifyListeners();
   }
 

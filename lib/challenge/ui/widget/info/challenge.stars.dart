@@ -17,7 +17,7 @@ class ChallengeStars extends StatelessWidget {
               child: challenge != null
                   ? CachedNetworkImage(
                       imageUrl: challenge.imgUrl,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                     )
                   : CircularProgressIndicator())
           .height(195)

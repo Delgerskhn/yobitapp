@@ -25,7 +25,16 @@ class ChallengeRuby extends StatelessWidget {
             SizedBox(
               height: 8,
             ),
-            '${challenge?.content ?? ''}'.text.white.bold.size(14).make()
+            '${challenge?.content ?? ''}'
+                .text
+                .wrapWords(true)
+                .white
+                .bold
+                .size(14)
+                .make()
+                .box
+                .width(220)
+                .make()
           ])
         ]),
       ),
