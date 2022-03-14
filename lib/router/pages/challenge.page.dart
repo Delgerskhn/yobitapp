@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yobit/challenge/api/challenge.repository.dart';
 import 'package:yobit/challenge/ui/challenge.screen.dart';
 
 class ChallengePage extends Page {
@@ -14,6 +15,7 @@ class ChallengePage extends Page {
       builder: (BuildContext context) {
         return ChallengeScreen(
           challengeId: challengeId,
+          challengeRepo: ChallengeRepository(),
         );
       },
     );
