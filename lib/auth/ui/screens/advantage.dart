@@ -59,25 +59,27 @@ class _AdvantageScreenState extends State<AdvantageScreen> {
                     .box
                     .margin(EdgeInsets.symmetric(vertical: 20, horizontal: 0))
                     .make(),
-                HStack([
-                  BtnIcon(
-                    iconBgColor: Theme.of(context).primaryColor,
-                    suffixImg: 'assets/icons/Back Icon.png',
-                    onPress: () {
-                      // Navigator.pop(context);
-                    },
-                  ).box.width(59).height(59).make(),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  ElevatedButton(
-                    style: primaryButtonStyle(context),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text('Үргэлжлүүлэх'),
-                  ).box.width(250).height(59).make()
-                ])
+                HStack(
+                  [
+                    BtnIcon(
+                      iconBgColor: Theme.of(context).primaryColor,
+                      suffixImg: 'assets/icons/Back Icon.png',
+                      onPress: () {
+                        // Navigator.pop(context);
+                      },
+                    ).box.width(59).height(59).make(),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    ElevatedButton(
+                      style: primaryButtonStyle(context),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text('Үргэлжлүүлэх'),
+                    ).box.width(250).height(59).make()
+                  ],
+                )
               ],
               crossAlignment: CrossAxisAlignment.center,
             ).py64());

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yobit/task/api/task.repo.dart';
 import 'package:yobit/task/ui/task.screen.dart';
 
 class TaskPage extends Page {
@@ -11,7 +12,9 @@ class TaskPage extends Page {
     return MaterialPageRoute(
       settings: this,
       builder: (BuildContext context) {
-        return TaskScreen();
+        return TaskScreen(
+          taskRepository: TaskRepository(),
+        );
       },
     );
   }
