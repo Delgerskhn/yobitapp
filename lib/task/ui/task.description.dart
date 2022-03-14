@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:yobit/task/data/task.dart';
 
 class TaskDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var task = context.watch<Task?>();
     return VStack([
       HStack(
         [
@@ -16,18 +19,14 @@ class TaskDescription extends StatelessWidget {
           SizedBox(
             width: 20,
           ),
-          'Найзтайгаа зураг авхуулах'.text.wrapWords(true).white.bold.make()
+          '${task?.title ?? ''}'.text.wrapWords(true).white.bold.make()
         ],
         axisSize: MainAxisSize.max,
       ),
       SizedBox(
         height: 15,
       ),
-      'Өнөөдрийн даалгаварт та найзтайгаа цуг зурагаа авхуулах юм.Өнөөдрийн даалгаварт та найзтайгаа цуг зурагаа авхуулах юм.Өнөөдрийн даалгаварт та найзтайгаа цуг зурагаа авхуулах юм.'
-          .text
-          .wrapWords(true)
-          .white
-          .make()
+      '${task?.content ?? ''}'.text.wrapWords(true).white.make()
     ])
         .box
         .margin(Vx.mH32)

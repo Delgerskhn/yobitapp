@@ -48,7 +48,12 @@ class ChallengeTask extends StatelessWidget {
               VStack(
                 [
                   "00:32:10".text.color(Colors.white54).make(),
-                  Icon(Icons.play_arrow, color: Colors.white, size: 30)
+                  IconButton(
+                      onPressed: () {
+                        navmodel.pushTaskPage(task.id);
+                      },
+                      icon:
+                          Icon(Icons.play_arrow, color: Colors.white, size: 30))
                 ],
                 alignment: MainAxisAlignment.spaceBetween,
                 crossAlignment: CrossAxisAlignment.end,

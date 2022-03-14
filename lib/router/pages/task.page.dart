@@ -13,6 +13,7 @@ class TaskPage extends Page {
       settings: this,
       builder: (BuildContext context) {
         return TaskScreen(
+          taskId: taskId,
           taskRepository: TaskRepository(),
         );
       },

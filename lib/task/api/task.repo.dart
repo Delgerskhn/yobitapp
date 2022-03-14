@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:yobit/task/data/task.dart';
 import 'package:yobit/utils/imgProvider.dart';
 
 class TaskRepository {
@@ -11,5 +12,10 @@ class TaskRepository {
       ads.add(await getImgUrl(doc.data()['img']));
     }
     return ads;
+  }
+
+  Future<Task> getTask(String taskId) async {
+    var doc = await store.collection('tasks').doc(taskId).get();
+    return Task.fromStore(doc);
   }
 }
