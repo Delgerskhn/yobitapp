@@ -6,9 +6,6 @@ import 'package:yobit/core/ui/elements/floating.back.button.dart';
 class ForgotPassScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
-        floatingActionButton: FloatingBackButton(),
-        body: ForgotPassBackground(child: () => ForgotPassForm()));
+    return ForgotPassBackground(child: () => ForgotPassForm());
   }
 }

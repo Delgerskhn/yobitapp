@@ -33,14 +33,12 @@ class _ChallengeScreen extends State<ChallengeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingBackButton(),
-        floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
         body: StarBackground(
             child: () => VStack(
                   [
                     HStack(
-                      [UserGadget()],
-                      alignment: MainAxisAlignment.end,
+                      [FloatingBackButton(), UserGadget()],
+                      alignment: MainAxisAlignment.spaceBetween,
                       axisSize: MainAxisSize.max,
                     ).px24().pOnly(top: 38, bottom: 41),
                     FutureProvider<Challenge?>(
