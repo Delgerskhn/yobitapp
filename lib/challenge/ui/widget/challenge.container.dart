@@ -5,6 +5,10 @@ import 'package:yobit/challenge/data/challenge.dart';
 import 'package:yobit/challenge/ui/widget/challenge.card.dart';
 
 class ChallengeContainer extends StatefulWidget {
+  final ChallengeRepository challengeRepo;
+
+  const ChallengeContainer({Key? key, required this.challengeRepo})
+      : super(key: key);
   @override
   State<StatefulWidget> createState() {
     return _ChallengeContainerState();
@@ -38,7 +42,7 @@ class _ChallengeContainerState extends State<ChallengeContainer> {
             .alignCenter
             .make();
       },
-      future: getRegularChallenges(),
+      future: this.widget.challengeRepo.getRegularChallenges(),
     );
   }
 }

@@ -10,6 +10,9 @@ import 'package:yobit/challenge/api/challenge.repository.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class Slider extends StatefulWidget {
+  final ChallengeRepository challengeRepo;
+
+  const Slider({Key? key, required this.challengeRepo}) : super(key: key);
   @override
   State<Slider> createState() {
     return _Slider();
@@ -23,7 +26,7 @@ class _Slider extends State<Slider> {
   Widget build(BuildContext context) {
     var navmodel = Provider.of<NavigationModel>(context);
     return FutureBuilder(
-        future: getFeaturedChallenges(),
+        future: this.widget.challengeRepo.getFeaturedChallenges(),
         builder: (ctx, snapshot) {
           if (snapshot.hasError) print(snapshot.error);
           if (snapshot.connectionState == ConnectionState.done &&

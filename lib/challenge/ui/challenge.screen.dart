@@ -14,8 +14,10 @@ import 'package:yobit/challenge/api/challenge.repository.dart';
 
 class ChallengeScreen extends StatefulWidget {
   final challengeId;
+  final ChallengeRepository challengeRepo;
 
-  ChallengeScreen({Key? key, this.challengeId}) : super(key: key);
+  ChallengeScreen({Key? key, this.challengeId, required this.challengeRepo})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -42,21 +44,26 @@ class _ChallengeScreen extends State<ChallengeScreen> {
                       axisSize: MainAxisSize.max,
                     ).px24().pOnly(top: 38, bottom: 41),
                     FutureProvider<Challenge?>(
-                      create: (_) => getChallenge(challengeId),
+                      create: (_) =>
+                          this.widget.challengeRepo.getChallenge(challengeId),
                       initialData: null,
                       catchError: (_, e) {
                         print(e);
                         return null;
                       },
                       child: StreamBuilder(
-                        stream: getIfUserJoinedChallenge(challengeId),
+                        stream: this
+                            .widget
+                            .challengeRepo
+                            .getIfUserJoinedChallenge(challengeId),
                         initialData: null,
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             var data = snapshot.data
                                 as QuerySnapshot<Map<String, dynamic>>;
                             if (data.size != 0) return ChallengeDetails();
-                            return ChallengeInfo();
+                            return ChallengeInfo(
+                                challengeRepo: this.widget.challengeRepo);
                           }
                           return CircularProgressIndicator()
                               .box

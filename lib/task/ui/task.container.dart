@@ -8,6 +8,10 @@ import 'package:yobit/router/navigation.model.dart';
 import 'package:yobit/task/data/task.dart';
 
 class TaskContainer extends StatefulWidget {
+  final ChallengeRepository challengeRepo;
+
+  const TaskContainer({Key? key, required this.challengeRepo})
+      : super(key: key);
   @override
   State<StatefulWidget> createState() {
     return _TaskContainer();
@@ -20,7 +24,8 @@ class _TaskContainer extends State<TaskContainer> {
     var navmodel = Provider.of<NavigationModel>(context);
     var challenge = context.watch<Challenge?>();
     return FutureBuilder(
-        future: getChallengeTasks(navmodel.challengeId!),
+        future:
+            this.widget.challengeRepo.getChallengeTasks(navmodel.challengeId!),
         builder: (ctx, scaffold) {
           if (scaffold.connectionState == ConnectionState.done) {
             if (scaffold.hasData) {
