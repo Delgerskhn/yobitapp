@@ -55,7 +55,10 @@ class NavigationModel extends ChangeNotifier {
 
   void onLogin() {
     loggedIn = true;
-    stack = [HomePage()];
+    stack = [
+      HomePage(),
+      // TaskPage(taskId: 'yNj6o1zx2j0XDKzbCcqk')
+    ];
     notifyListeners();
   }
 

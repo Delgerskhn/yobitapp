@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/challenge/api/challenge.repository.dart';
+import 'package:yobit/challenge/data/challenge.dart';
 import 'package:yobit/challenge/ui/widget/info/challenge.stars.dart';
 import 'package:yobit/core/ui/elements/floating.back.button.dart';
 import 'package:yobit/task/ui/task.container.dart';
@@ -13,9 +16,14 @@ class ChallengeDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var challenge = context.watch<Challenge?>();
     return VStack(
       [
-        ChallengeDetailsTime(),
+        if (challenge != null)
+          ChallengeDetailsTime(
+            endDate: challenge.endDate,
+            type: TimerType.inMinutes,
+          ),
         ChallengeStars().box.py24.make(),
         Container(
           child: Row(

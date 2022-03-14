@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -54,7 +55,11 @@ class _TaskScreen extends State<TaskScreen> {
                   ],
                   alignment: MainAxisAlignment.spaceBetween,
                 ).px32().pOnly(top: 56, bottom: 46),
-                ChallengeDetailsTime().box.px32.make(),
+                if (task != null)
+                  ChallengeDetailsTime(
+                    endDate: task!.endDate,
+                    type: TimerType.inSeconds,
+                  ).box.px32.make(),
                 VxBox().height(48).make(),
                 FutureBuilder(
                     future: this.widget.taskRepository.getAds(),
