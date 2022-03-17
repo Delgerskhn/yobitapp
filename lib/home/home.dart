@@ -37,12 +37,6 @@ class HomeScreen extends StatelessWidget {
         ChallengeContainer(
           challengeRepo: challengeRepository,
         ),
-        TextButton(
-          onPressed: () {
-            authModel.logout();
-          },
-          child: Text("Sign out"),
-        )
       ]).scrollVertical();
     });
   }

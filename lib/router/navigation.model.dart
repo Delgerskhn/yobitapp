@@ -58,6 +58,7 @@ class NavigationModel extends ChangeNotifier {
     stack = [
       HomePage(),
       // TaskPage(taskId: 'yNj6o1zx2j0XDKzbCcqk')
+      ProfilePage()
     ];
     notifyListeners();
   }
