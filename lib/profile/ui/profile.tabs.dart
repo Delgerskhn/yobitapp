@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:yobit/badge/api/badgeRepository.dart';
 import 'package:yobit/profile/ui/badges.dart';
 import 'package:yobit/profile/ui/stats.dart';
 import 'package:yobit/profile/ui/upcomings.dart';
@@ -43,7 +44,10 @@ class _ProfileTabsState extends State<ProfileTabs>
       VStack([
         if (_index == 0) Stats(),
         if (_index == 1) UpcomingTasks().box.width(327).make(),
-        if (_index == 2) Badges().box.width(320).make(),
+        if (_index == 2)
+          Badges(
+            badgeRepository: BadgeRepository(),
+          ).box.width(320).make(),
       ])
     ]);
   }
