@@ -8,7 +8,6 @@ class Badge {
   Badge(this.imgUrl, this.name);
 
   static Future<Badge> fromStore(DocumentSnapshot snapshot) async {
-    return Badge(
-        await getImgUrl(snapshot['imgUrl']) ?? '', snapshot['name'] ?? '');
+    return Badge(await getImgUrl(snapshot['imgUrl']), snapshot['name'] ?? '');
   }
 }

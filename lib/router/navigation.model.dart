@@ -11,6 +11,7 @@ import 'package:yobit/router/pages/profile.page.dart';
 import 'package:yobit/router/pages/signup.page.dart';
 import 'package:yobit/router/pages/splash.page.dart';
 import 'package:yobit/router/pages/task.page.dart';
+import 'package:yobit/router/pages/upload.page.dart';
 
 class NavigationModel extends ChangeNotifier {
   bool? _loggedIn;
@@ -58,7 +59,8 @@ class NavigationModel extends ChangeNotifier {
     stack = [
       HomePage(),
       // TaskPage(taskId: 'yNj6o1zx2j0XDKzbCcqk')
-      ProfilePage()
+      UploadPage()
+      // ProfilePage()
     ];
     notifyListeners();
   }
