@@ -8,7 +8,7 @@ import 'package:yobit/core/ui/elements/btn.icon.dart';
 
 import './challenge.ruby.dart';
 import './challenge.sponser.dart';
-import './challenge.stars.dart';
+import 'hchallenge.card.dart';
 
 class ChallengeInfo extends StatelessWidget {
   final ChallengeRepository challengeRepo;
@@ -21,7 +21,7 @@ class ChallengeInfo extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          ChallengeStars(),
+          HChallengeCard(),
           ChallengeRuby().box.py32.make(),
           ChallengeSponser(),
           HStack([

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -11,6 +12,51 @@ import 'package:yobit/upload/ui/task.description.dart';
 class UploadScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // return StarBackground(
+    //   child: () => ZStack(
+    //     [
+    //       HStack(
+    //         [
+    //           'CU гараг'
+    //               .text
+    //               .white
+    //               .size(24)
+    //               .bold
+    //               .make()
+    //               .box
+    //               .width(167)
+    //               .px16
+    //               .make()
+    //               .box
+    //               .py24
+    //               .make(),
+    //           VxBox(child: SizedBox())
+    //               .size(180, 180)
+    //               .bgImage(DecorationImage(
+    //                   fit: BoxFit.contain,
+    //                   image: NetworkImage(
+    //                       'https://firebasestorage.googleapis.com/v0/b/yobit-54b2a.appspot.com/o/planets%2Fred%201.png?alt=media&token=17af4b23-1a57-4e89-8671-a26cea35fc2f')))
+    //               .make(),
+    //         ],
+    //         crossAlignment: CrossAxisAlignment.start,
+    //       ),
+    //       VxBox(child: SizedBox())
+    //           .color(Color.fromRGBO(0, 0, 0, 0.13))
+    //           .size(90, 95)
+    //           .transform(Matrix4.translationValues(0, 85, 0))
+    //           .customRounded(BorderRadius.only(
+    //               topRight: Radius.circular(25),
+    //               bottomLeft: Radius.circular(25)))
+    //           .make()
+    //     ],
+    //   )
+    //       .box
+    //       .width(347)
+    //       .customRounded(BorderRadius.circular(25))
+    //       .color(Color(0xffFF565E))
+    //       .make(),
+    // );
+
     return StarBackground(
         child: () => VStack(
               [

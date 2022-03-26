@@ -25,8 +25,10 @@ class ChallengeTask extends StatelessWidget {
               VStack(
                 [
                   task.title.text.white.ellipsis
+                      .wrapWords(true)
                       .make()
                       .box
+                      .width(184)
                       .margin(EdgeInsets.only(bottom: 6))
                       .make(),
 

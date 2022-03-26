@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/challenge/api/challenge.repository.dart';
 import 'package:yobit/challenge/data/challenge.dart';
-import 'package:yobit/challenge/ui/widget/challenge.card.dart';
+import 'package:yobit/challenge/ui/widget/vchallenge.card.dart';
 
 class ChallengeContainer extends StatefulWidget {
   final ChallengeRepository challengeRepo;
@@ -20,6 +20,7 @@ class _ChallengeContainerState extends State<ChallengeContainer> {
   Widget build(BuildContext context) {
     return FutureBuilder(
       builder: (ctx, snapshot) {
+        if (snapshot.hasError) print(snapshot.error);
         if (snapshot.connectionState == ConnectionState.done &&
             snapshot.hasData) {
           var source = snapshot.data as List<Challenge>;
@@ -28,9 +29,9 @@ class _ChallengeContainerState extends State<ChallengeContainer> {
           List<Challenge> col2 = source.sublist(mid, source.length);
           return HStack(
             [
-              VStack(col1.map((r) => ChallengeCard(challenge: r)).toList()),
+              VStack(col1.map((r) => VChallengeCard(challenge: r)).toList()),
               VxBox().margin(Vx.m12).make(),
-              VStack(col2.map((r) => ChallengeCard(challenge: r)).toList())
+              VStack(col2.map((r) => VChallengeCard(challenge: r)).toList())
             ],
             alignment: MainAxisAlignment.center,
             crossAlignment: CrossAxisAlignment.start,

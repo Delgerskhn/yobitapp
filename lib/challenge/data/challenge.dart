@@ -10,8 +10,10 @@ class Challenge {
   final String imgUrl;
   final String featureImg;
   final String reward;
+  final String planet;
+  final String color;
 
-  const Challenge(
+  Challenge(
       {required this.id,
       required this.featureImg,
       required this.reward,
@@ -19,18 +21,21 @@ class Challenge {
       required this.title,
       required this.content,
       required this.endDate,
-      required this.imgUrl});
+      required this.imgUrl,
+      required this.color,
+      required this.planet});
 
   static Future<Challenge> fromStore(DocumentSnapshot doc) async {
     return Challenge(
-      id: doc.id,
-      title: doc['title'] ?? "",
-      content: doc['content'] ?? "",
-      endDate: doc['endDate'] ?? Timestamp.fromDate(DateTime.now()),
-      imgUrl: await getImgUrl(doc['imgUrl'] ?? ""),
-      startDate: doc['startDate'] ?? Timestamp.fromDate(DateTime.now()),
-      featureImg: await getImgUrl(doc['featureImg'] ?? ""),
-      reward: doc['reward'] ?? "",
-    );
+        id: doc.id,
+        title: doc['title'] ?? "",
+        content: doc['content'] ?? "",
+        endDate: doc['endDate'] ?? Timestamp.fromDate(DateTime.now()),
+        imgUrl: await getImgUrl(doc['imgUrl'] ?? ""),
+        startDate: doc['startDate'] ?? Timestamp.fromDate(DateTime.now()),
+        featureImg: await getImgUrl(doc['featureImg'] ?? ""),
+        reward: doc['reward'] ?? "",
+        planet: await getImgUrl(doc['planet'] ?? ""),
+        color: doc['color'] ?? "");
   }
 }
