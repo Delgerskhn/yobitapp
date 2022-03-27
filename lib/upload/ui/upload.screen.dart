@@ -21,7 +21,7 @@ class UploadScreen extends StatelessWidget {
               [
                 HStack(
                   [
-                    'Даалгавар 2'.text.headline5(context).white.make(),
+                    'Даалгавар 1'.text.headline5(context).white.make(),
                     UserGadget()
                   ],
                   alignment: MainAxisAlignment.spaceBetween,
@@ -62,7 +62,7 @@ class UploadScreen extends StatelessWidget {
                     ElevatedButton(
                       style: primaryButtonStyle(context),
                       onPressed: () {
-                        // Navigator.pop(context);
+                        // TODO: save file to firebase storage
                       },
                       child: Text('Илгээх'),
                     ).box.width(250).height(59).make()

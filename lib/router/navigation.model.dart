@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:yobit/core/data/preferences.dart';
 import 'package:yobit/router/pages/advantage.page.dart';
 import 'package:yobit/router/pages/challenge.page.dart';
 import 'package:yobit/router/pages/confirm.pass.page.dart';
+import 'package:yobit/router/pages/file.preview.page.dart';
 import 'package:yobit/router/pages/forgotpass.page.dart';
 import 'package:yobit/router/pages/home.page.dart';
 import 'package:yobit/router/pages/login.page.dart';
@@ -61,14 +63,14 @@ class NavigationModel extends ChangeNotifier {
     stack = [
       HomePage(),
       // TaskPage(taskId: 'yNj6o1zx2j0XDKzbCcqk')
-      UploadPage(Task(
-          'yNj6o1zx2j0XDKzbCcqk',
-          "als jflsakdj falsdkjf ",
-          'slkdjfaldskf jas;ldkf jasdf ',
-          Timestamp.fromDate(DateTime.now()),
-          Timestamp.fromDate(DateTime.now()),
-          'ygdJpKZvXzPpiapjOtPg',
-          1))
+      // UploadPage(Task(
+      //     'yNj6o1zx2j0XDKzbCcqk',
+      //     "als jflsakdj falsdkjf ",
+      //     'slkdjfaldskf jas;ldkf jasdf ',
+      //     Timestamp.fromDate(DateTime.now()),
+      //     Timestamp.fromDate(DateTime.now()),
+      //     'ygdJpKZvXzPpiapjOtPg',
+      //     1))
       // ProfilePage()
     ];
     notifyListeners();
@@ -77,6 +79,11 @@ class NavigationModel extends ChangeNotifier {
   void onLogout() {
     loggedIn = false;
     stack = [LoginPage(), if (_firstTime) AdvantagePage()];
+    notifyListeners();
+  }
+
+  void pushFilePreview(XFile imageFile) {
+    stack = [...stack, FilePreviewPage(imageFile)];
     notifyListeners();
   }
 
@@ -100,6 +107,11 @@ class NavigationModel extends ChangeNotifier {
     challengeId = id;
     stack = [...stack, ChallengePage(challengeId: id)];
     notifyListeners();
+  }
+
+  void pushChallengeFromUpload(String challengeId) {
+    stack = [HomePage()];
+    pushChallengePage(challengeId);
   }
 
   void pushTaskPage(String id) {

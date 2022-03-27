@@ -29,7 +29,7 @@ class _AdvantageSliderState extends State<AdvantageSlider> {
               callback: callback,
               images: snapshot.data as List<String>,
             );
-          return CarouselLoader(height: 440);
+          return CarouselLoader(height: 440.0);
         });
   }
 }

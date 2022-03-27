@@ -36,7 +36,7 @@ class _Slider extends State<Slider> {
               Container(
                 child: CarouselSlider(
                   options: CarouselOptions(
-                      height: 413,
+                      height: 413.0,
                       enlargeCenterPage: true,
                       onPageChanged: (index, reason) {}),
                   carouselController: controller,
@@ -110,7 +110,7 @@ class _Slider extends State<Slider> {
           }
 
           return CarouselLoader(
-            height: 413,
+            height: 413.0,
           );
         });
   }

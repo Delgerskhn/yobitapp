@@ -1,11 +1,12 @@
-import 'dart:html';
-import 'dart:typed_data';
+import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker_web/image_picker_web.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/core/ui/text.dart';
+import 'package:yobit/router/navigation.model.dart';
 
 class FileSelector extends StatefulWidget {
   const FileSelector({
@@ -17,7 +18,9 @@ class FileSelector extends StatefulWidget {
 }
 
 class _FileSelectorState extends State<FileSelector> {
-  final _pickedImages = <Image>[];
+  final ImagePicker _picker = ImagePicker();
+  XFile? image;
+
   @override
   Widget build(BuildContext context) {
     return VStack([
@@ -40,28 +43,27 @@ class _FileSelectorState extends State<FileSelector> {
         radius: const Radius.circular(12),
         strokeWidth: 1,
         child: VxBox(
-                child: _pickedImages.isNotEmpty
-                    ? _pickedImages[0]
-                    : IconButton(
-                        icon: Icon(
-                          Icons.upload,
-                          color: Color.fromRGBO(255, 86, 94, 1),
-                        ),
-                        onPressed: () async {
-                          final fromPicker =
-                              await ImagePickerWeb.getImageAsWidget();
-                          setState(() {
-                            _pickedImages.clear();
-                            if (fromPicker != null)
-                              _pickedImages.add(fromPicker);
-                          });
-                        },
-                      ).box.size(80, 80).roundedFull.white.make())
+                child: IconButton(
+          icon: Icon(
+            Icons.upload,
+            color: Color.fromRGBO(255, 86, 94, 1),
+          ),
+          onPressed: () async {
+            var _image = await _picker.pickImage(source: ImageSource.gallery);
+            if (_image != null)
+              Provider.of<NavigationModel>(context, listen: false)
+                  .pushFilePreview(_image);
+            setState(() {
+              image = _image;
+            });
+          },
+        ).box.size(80, 80).roundedFull.white.make())
             .alignCenter
             .width(290)
             .height(156)
             .make(),
       )
+      // Image.file(File(image!.path))
     ]);
   }
 }
