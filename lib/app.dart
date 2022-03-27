@@ -19,7 +19,8 @@ class _AppState extends State<App> {
       child: MaterialApp(
         scaffoldMessengerKey: snackbarKey,
         title: 'Yobit',
-        theme: Theme.of(context).copyWith(
+        theme: ThemeData(
+            fontFamily: 'Rubik',
             primaryColor: Color(0xffE85937),
             colorScheme: ColorScheme(
                 primary: Color(0xffE85937), //orange

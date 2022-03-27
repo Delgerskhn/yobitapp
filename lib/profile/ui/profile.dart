@@ -32,11 +32,12 @@ class ProfileScreen extends StatelessWidget {
                       .make(),
                   ProfileSummary()
                       .box
+                      .width(345)
                       .customRounded(BorderRadius.circular(20))
                       .color(Theme.of(context).primaryColor)
                       .margin(EdgeInsets.only(top: 12))
                       .make(),
-                  ProfileTabs().box.width(327).py16.make(),
+                  ProfileTabs().box.width(345).py16.make(),
                   ElevatedButton(
                       style: ButtonStyle(
                           shape:
@@ -60,7 +61,7 @@ class ProfileScreen extends StatelessWidget {
                               .color(Theme.of(context).primaryColor)
                               .make()
                         ],
-                      )).box.size(327, 68).make()
+                      )).box.size(345, 68).make()
                 ],
                 crossAlignment: CrossAxisAlignment.center,
               ).wFull(context).scrollVertical()),
