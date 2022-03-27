@@ -9,6 +9,7 @@ import 'package:yobit/core/styles/button.style.dart';
 import 'package:yobit/core/ui/background/star.background.dart';
 import 'package:yobit/core/ui/elements/btn.icon.dart';
 import 'package:yobit/core/ui/elements/user.gadget.dart';
+import 'package:yobit/router/navigation.model.dart';
 import 'package:yobit/task/api/task.repo.dart';
 import 'package:yobit/task/data/task.dart';
 import 'package:yobit/task/ui/ads.slider.dart';
@@ -88,6 +89,9 @@ class _TaskScreen extends State<TaskScreen> {
                       style: primaryButtonStyle(context),
                       onPressed: () {
                         // Navigator.pop(context);
+                        var navmodel = Provider.of<NavigationModel>(context,
+                            listen: false);
+                        navmodel.pushUpload(task!);
                       },
                       child: Text('Биелүүлэх'),
                     ).box.width(250).height(59).make()

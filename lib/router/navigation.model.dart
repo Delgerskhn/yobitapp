@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yobit/core/data/preferences.dart';
@@ -12,6 +13,7 @@ import 'package:yobit/router/pages/signup.page.dart';
 import 'package:yobit/router/pages/splash.page.dart';
 import 'package:yobit/router/pages/task.page.dart';
 import 'package:yobit/router/pages/upload.page.dart';
+import 'package:yobit/task/data/task.dart';
 
 class NavigationModel extends ChangeNotifier {
   bool? _loggedIn;
@@ -59,7 +61,14 @@ class NavigationModel extends ChangeNotifier {
     stack = [
       HomePage(),
       // TaskPage(taskId: 'yNj6o1zx2j0XDKzbCcqk')
-      // UploadPage()
+      UploadPage(Task(
+          'yNj6o1zx2j0XDKzbCcqk',
+          "als jflsakdj falsdkjf ",
+          'slkdjfaldskf jas;ldkf jasdf ',
+          Timestamp.fromDate(DateTime.now()),
+          Timestamp.fromDate(DateTime.now()),
+          'ygdJpKZvXzPpiapjOtPg',
+          1))
       // ProfilePage()
     ];
     notifyListeners();
@@ -74,6 +83,11 @@ class NavigationModel extends ChangeNotifier {
   void pushSignUp() {
     print(stack);
     stack = [...stack, SignUpPage()];
+    notifyListeners();
+  }
+
+  void pushUpload(Task task) {
+    stack = [...stack, UploadPage(task)];
     notifyListeners();
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:yobit/core/ui/text.dart';
 
 class TaskDescription extends StatelessWidget {
   const TaskDescription({
@@ -23,7 +24,7 @@ class TaskDescription extends StatelessWidget {
         'Танилцуулга'.text.white.make()
       ]),
       'Өнөөдрийн даалгаварт та найзтайгаа цуг зурагаа авхуулах юм.'
-          .text
+          .dText
           .white
           .make()
     ]);

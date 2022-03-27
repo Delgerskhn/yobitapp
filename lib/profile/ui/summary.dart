@@ -51,6 +51,6 @@ class ProfileSummary extends StatelessWidget {
         ),
       ],
       alignment: MainAxisAlignment.spaceAround,
-    ).p16().w(327);
+    ).p16();
   }
 }
