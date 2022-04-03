@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/auth/ui/widget/advantage.slider.dart';
 import 'package:yobit/challenge/data/challenge.dart';
+import 'package:yobit/core/ui/text.dart';
 import 'package:yobit/router/navigation.model.dart';
 import 'package:yobit/challenge/api/challenge.repository.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -97,7 +98,37 @@ class _SliderTaskFile extends State<SliderTaskFile> {
                                                 padding: EdgeInsets.symmetric(
                                                     vertical: 10,
                                                     horizontal: 20)),
-                                          )
+                                          ),
+                                          Positioned(
+                                              bottom: 0,
+                                              left: 0,
+                                              top: 0,
+                                              right: 0,
+                                              child: HStack([
+                                                CircleAvatar(
+                                                    radius: 25,
+                                                    foregroundImage:
+                                                        NetworkImage(
+                                                      task.user.photoURL,
+                                                    )),
+                                                SizedBox(
+                                                  width: 8,
+                                                ),
+                                                task.user.userName.dText
+                                                    .size(21)
+                                                    .make()
+                                              ],
+                                                      crossAlignment:
+                                                          CrossAxisAlignment
+                                                              .start)
+                                                  .box
+                                                  .bottomLeftRounded(value: 12)
+                                                  .color(Color.fromRGBO(
+                                                      0, 0, 0, 0.3))
+                                                  .make()
+                                                  .box
+                                                  .alignTopRight
+                                                  .make())
                                         ],
                                       ))),
                             ),

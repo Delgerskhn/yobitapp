@@ -23,6 +23,6 @@ class UserTask {
         taskId: doc['taskId'],
         taskTitle: doc['taskTitle'],
         taskEndDate: doc['taskEndDate'],
-        user: doc['user']);
+        user: await User.fromMap(doc['user'] as Map<String, dynamic>));
   }
 }
