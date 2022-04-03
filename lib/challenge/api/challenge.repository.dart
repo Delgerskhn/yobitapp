@@ -12,6 +12,7 @@ class ChallengeRepository {
     var result = await firestore
         .collection("challenges")
         .where("isFeatured", isEqualTo: true)
+        .where('endDate', isGreaterThan: Timestamp.now())
         .get();
     List<Challenge> challenges =
         await parseCollectionFromDoc<Challenge>(result, Challenge.fromStore);
@@ -23,6 +24,7 @@ class ChallengeRepository {
     var result = await firestore
         .collection("challenges")
         .where("isFeatured", isEqualTo: false)
+        .where('endDate', isGreaterThan: Timestamp.now())
         .get();
     List<Challenge> challenges =
         await parseCollectionFromDoc<Challenge>(result, Challenge.fromStore);

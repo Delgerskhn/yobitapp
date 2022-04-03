@@ -5,9 +5,12 @@ import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/auth/data/auth.view.model.dart';
 import 'package:yobit/core/ui/background/star.background.dart';
 import 'package:yobit/core/ui/elements/floating.back.button.dart';
+import 'package:yobit/image/data/image.adapter.dart';
 import 'package:yobit/profile/ui/profile.tabs.dart';
 import 'package:yobit/profile/ui/summary.dart';
 import 'package:yobit/profile/ui/upcomings.dart';
+import 'package:yobit/user/api/user.repository.dart';
+import 'package:yobit/utils/imgProvider.dart';
 
 class ProfileScreen extends StatelessWidget {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -18,10 +21,7 @@ class ProfileScreen extends StatelessWidget {
       body: StarBackground(
           child: () => VStack(
                 [
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundImage: AssetImage('assets/images/profile.png'),
-                  ).box.margin(EdgeInsets.only(top: 94)).make(),
+                  Avatar(),
                   '${auth.currentUser?.displayName}'
                       .text
                       .white
@@ -68,5 +68,50 @@ class ProfileScreen extends StatelessWidget {
       floatingActionButton: FloatingBackButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
     );
+  }
+}
+
+class Avatar extends StatelessWidget {
+  Avatar({
+    Key? key,
+  }) : super(key: key);
+
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () async {
+        var imgInfo = await ImageAdapter().getImage();
+        if (imgInfo != null)
+          UserRepository().updateUserPhoto(imgInfo.data, imgInfo.filename);
+      },
+      style: ButtonStyle(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(50.0),
+        // side: BorderSide(color: Colors.red)
+      ))),
+      child: VxBox(
+              child: auth.currentUser!.photoURL != null
+                  ? FutureBuilder(
+                      builder: (ctx, snapshot) {
+                        if (snapshot.hasError) print(snapshot.error);
+                        if (snapshot.hasData)
+                          return CircleAvatar(
+                              radius: 50,
+                              foregroundImage: NetworkImage(
+                                snapshot.data as String,
+                              ));
+
+                        return CircularProgressIndicator();
+                      },
+                      future: getImgUrl(auth.currentUser!.photoURL!),
+                    )
+                  : CircleAvatar(
+                      radius: 50,
+                      backgroundImage: AssetImage('assets/images/profile.png'),
+                    ))
+          .make(),
+    ).box.margin(EdgeInsets.only(top: 94)).size(100, 100).alignCenter.make();
   }
 }

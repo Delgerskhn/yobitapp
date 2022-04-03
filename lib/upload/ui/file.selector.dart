@@ -11,6 +11,7 @@ import 'package:image_picker_web/image_picker_web.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/core/ui/text.dart';
+import 'package:yobit/image/data/image.adapter.dart';
 import 'package:yobit/router/navigation.model.dart';
 import 'package:image_picker_for_web/image_picker_for_web.dart';
 
@@ -56,20 +57,10 @@ class _FileSelectorState extends State<FileSelector> {
             color: Color.fromRGBO(255, 86, 94, 1),
           ),
           onPressed: () async {
-            Uint8List? _img;
-            String? fileName;
-            if (kIsWeb) {
-              var a = await ImagePickerWeb.getImageInfo;
-              if (a != null) _img = base64Decode(a.base64!);
-              fileName = a?.fileName;
-            } else {
-              var a = await _picker.pickImage(source: ImageSource.gallery);
-              fileName = a?.name;
-              _img = await a?.readAsBytes();
-            }
-            if (_img != null && fileName != null)
+            var imgInfo = await ImageAdapter().getImage();
+            if (imgInfo != null)
               Provider.of<NavigationModel>(context, listen: false)
-                  .pushFilePreview(fileName, _img);
+                  .pushFilePreview(imgInfo.filename, imgInfo.data);
           },
         ).box.size(80, 80).roundedFull.white.make())
             .alignCenter
