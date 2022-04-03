@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,10 +14,14 @@ import 'package:yobit/upload/data/upload.repository.dart';
 
 class FilePreviewScreen extends StatefulWidget {
   final UploadRepository uploadRepository;
-  final XFile imageFile;
+  final Uint8List imageFile;
+  final String filePath;
 
   FilePreviewScreen(
-      {Key? key, required this.imageFile, required this.uploadRepository})
+      {Key? key,
+      required this.imageFile,
+      required this.uploadRepository,
+      required this.filePath})
       : super(key: key);
 
   @override
@@ -50,7 +55,7 @@ class _FilePreviewScreenState extends State<FilePreviewScreen> {
                 ),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(25),
-                  child: Image.file(File(widget.imageFile.path))
+                  child: Image.memory(this.widget.imageFile)
                       .box
                       .width(340)
                       .height(489)
@@ -81,7 +86,9 @@ class _FilePreviewScreenState extends State<FilePreviewScreen> {
                           _isUploading = true;
                         });
                         await widget.uploadRepository.uploadTaskFile(
-                            widget.imageFile.path, navmodel.taskId!);
+                            this.widget.filePath,
+                            widget.imageFile,
+                            navmodel.taskId!);
                         setState(() {
                           _isUploading = false;
                         });
@@ -89,7 +96,9 @@ class _FilePreviewScreenState extends State<FilePreviewScreen> {
                         navmodel.pushChallengeFromUpload(navmodel.challengeId!);
                       },
                       child: _isUploading
-                          ? CircularProgressIndicator()
+                          ? CircularProgressIndicator(
+                              color: Colors.white,
+                            )
                           : Text('Баталгаажуулах'),
                     ).box.width(250).height(59).make()
                   ],

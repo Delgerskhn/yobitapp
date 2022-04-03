@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -78,12 +80,16 @@ class NavigationModel extends ChangeNotifier {
 
   void onLogout() {
     loggedIn = false;
-    stack = [LoginPage(), if (_firstTime) AdvantagePage()];
+    stack = [
+      LoginPage(),
+
+      //  if (_firstTime) AdvantagePage()
+    ];
     notifyListeners();
   }
 
-  void pushFilePreview(XFile imageFile) {
-    stack = [...stack, FilePreviewPage(imageFile)];
+  void pushFilePreview(String filepath, Uint8List imgData) {
+    stack = [...stack, FilePreviewPage(imgData, filepath)];
     notifyListeners();
   }
 

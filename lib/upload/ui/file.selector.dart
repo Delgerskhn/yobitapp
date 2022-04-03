@@ -1,12 +1,18 @@
-import 'dart:io';
+import 'dart:convert';
+import 'dart:html';
+import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'dart:io' as IO;
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:image_picker_web/image_picker_web.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/core/ui/text.dart';
 import 'package:yobit/router/navigation.model.dart';
+import 'package:image_picker_for_web/image_picker_for_web.dart';
 
 class FileSelector extends StatefulWidget {
   const FileSelector({
@@ -19,7 +25,7 @@ class FileSelector extends StatefulWidget {
 
 class _FileSelectorState extends State<FileSelector> {
   final ImagePicker _picker = ImagePicker();
-  XFile? image;
+  Uint8List? image;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +42,7 @@ class _FileSelectorState extends State<FileSelector> {
       SizedBox(
         height: 30,
       ),
+      if (image != null) Image.memory(image!),
       DottedBorder(
         dashPattern: [6, 3, 2, 3],
         borderType: BorderType.RRect,
@@ -49,13 +56,20 @@ class _FileSelectorState extends State<FileSelector> {
             color: Color.fromRGBO(255, 86, 94, 1),
           ),
           onPressed: () async {
-            var _image = await _picker.pickImage(source: ImageSource.gallery);
-            if (_image != null)
+            Uint8List? _img;
+            String? fileName;
+            if (kIsWeb) {
+              var a = await ImagePickerWeb.getImageInfo;
+              if (a != null) _img = base64Decode(a.base64!);
+              fileName = a?.fileName;
+            } else {
+              var a = await _picker.pickImage(source: ImageSource.gallery);
+              fileName = a?.name;
+              _img = await a?.readAsBytes();
+            }
+            if (_img != null && fileName != null)
               Provider.of<NavigationModel>(context, listen: false)
-                  .pushFilePreview(_image);
-            setState(() {
-              image = _image;
-            });
+                  .pushFilePreview(fileName, _img);
           },
         ).box.size(80, 80).roundedFull.white.make())
             .alignCenter

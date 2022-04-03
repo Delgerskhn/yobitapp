@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,13 +10,13 @@ class UploadRepository {
   FirebaseStorage storage = FirebaseStorage.instance;
   FirebaseFirestore store = FirebaseFirestore.instance;
   FirebaseAuth auth = FirebaseAuth.instance;
-  Future<void> uploadTaskFile(String filePath, String taskId) async {
-    File file = File(filePath);
+  Future<void> uploadTaskFile(
+      String filePath, Uint8List file, String taskId) async {
     final extension = p.extension(filePath);
     final storagePath =
         'taskUploads/${auth.currentUser!.uid}-$taskId$extension';
 
-    await storage.ref(storagePath).putFile(file);
+    await storage.ref(storagePath).putData(file);
 
     await store.collection('userTasks').add({
       "taskId": taskId,
