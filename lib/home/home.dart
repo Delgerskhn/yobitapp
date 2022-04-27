@@ -32,9 +32,10 @@ class HomeScreen extends StatelessWidget {
           alignment: MainAxisAlignment.spaceBetween,
           axisSize: MainAxisSize.max,
         ).px24().pOnly(top: 38, bottom: 21),
-        SliderTaskFile(
-          challengeRepo: challengeRepository,
-        ),
+        // SliderTaskFile(
+        //   challengeRepo: challengeRepository,
+        // ),
+        SpecialChallenge.Slider(challengeRepo: challengeRepository),
         ChallengeContainer(
           challengeRepo: challengeRepository,
         ),
