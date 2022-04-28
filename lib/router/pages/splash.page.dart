@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class SplashPage extends Page {
   final String process;
@@ -11,7 +12,13 @@ class SplashPage extends Page {
     return MaterialPageRoute(
       settings: this,
       builder: (BuildContext context) {
-        return Text("Loading");
+        return VxBox()
+            .bgImage(DecorationImage(
+                image: AssetImage('assets/images/Start.png'),
+                fit: BoxFit.cover))
+            .height(MediaQuery.of(context).size.height)
+            .width(MediaQuery.of(context).size.width)
+            .make();
       },
     );
   }
