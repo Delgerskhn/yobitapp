@@ -1,87 +1,126 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:yobit/auth/ui/widget/advantage.slider.dart';
-import 'package:yobit/challenge/ui/widget/slider.dart' as SpecialChallenge;
-import 'package:yobit/core/styles/button.style.dart';
-import 'package:yobit/core/ui/background/star.background.dart';
-import 'package:yobit/core/ui/elements/btn.icon.dart';
+import 'package:yobit/auth/data/content.model.dart';
 
 class AdvantageScreen extends StatefulWidget {
   @override
-  State<AdvantageScreen> createState() => _AdvantageScreenState();
+  _AdvantageScreen createState() => _AdvantageScreen();
 }
 
-class _AdvantageScreenState extends State<AdvantageScreen> {
-  int _current = 0;
+class _AdvantageScreen extends State<AdvantageScreen> {
+  int currentIndex = 0;
+  final PageController _controller = PageController(initialPage: 0);
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return StarBackground(
-        child: () => VStack(
-              [
-                AdvantageSlider(
-                  callback: (index) {
-                    setState(() {
-                      _current = index;
-                    });
-                  },
-                ),
-                VStack(
-                  [
-                    'Бидний давуу тал'.text.bold.white.size(22).make(),
-                    'It looks like you are on track. Please continue to follow your daily plan'
-                        .text
-                        .size(16)
-                        .white
-                        .wrapWords(true)
-                        .make()
-                        .box
-                        .margin(EdgeInsets.only(top: 9))
-                        .make(),
-                  ],
-                  crossAlignment: CrossAxisAlignment.center,
-                ).box.width(265).margin(EdgeInsets.only(top: 38)).make(),
-                HStack([0, 1, 2]
-                        .map(
-                          (r) => Container(
-                            width: 9,
-                            height: 9,
-                            margin: EdgeInsets.symmetric(
-                                vertical: 0, horizontal: 16.0),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Theme.of(context)
-                                    .primaryColor
-                                    .withOpacity(_current == r ? 0.9 : 0.4)),
-                          ),
-                        )
-                        .toList())
-                    .box
-                    .margin(EdgeInsets.symmetric(vertical: 20, horizontal: 0))
-                    .make(),
-                HStack(
-                  [
-                    BtnIcon(
-                      iconBgColor: Theme.of(context).primaryColor,
-                      suffixImg: 'assets/icons/Back Icon.png',
-                      onPress: () {
-                        // Navigator.pop(context);
-                      },
-                    ).box.width(59).height(59).make(),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    ElevatedButton(
-                      style: primaryButtonStyle(context),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text('Үргэлжлүүлэх'),
-                    ).box.width(250).height(59).make()
-                  ],
-                )
-              ],
-              crossAlignment: CrossAxisAlignment.center,
-            ).py64());
+    return Scaffold(
+      body: VStack(
+        [
+          Expanded(
+            child: PageView.builder(
+              controller: _controller,
+              itemCount: contents.length,
+              onPageChanged: (int index) {
+                setState(() {
+                  currentIndex = index;
+                });
+              },
+              itemBuilder: (_, i) {
+                return Padding(
+                  padding: const EdgeInsets.all(40),
+                  child: Column(
+                    children: [
+                      SvgPicture.asset(
+                        contents[i].image,
+                        height: 300,
+                      ),
+                      Text(
+                        contents[i].title,
+                        style: TextStyle(
+                          fontSize: 35,
+                          color: Colors.grey[600],
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Text(
+                        contents[i].discription,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.grey,
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                contents.length,
+                (index) => buildDot(index, context),
+              ),
+            ),
+          ),
+          Container(
+            height: 60,
+            margin: EdgeInsets.all(40),
+            width: double.infinity,
+            child: FlatButton(
+              child: Text(
+                  currentIndex == contents.length - 1 ? "Continue" : "Next"),
+              onPressed: () {
+                if (currentIndex == contents.length - 1) {
+                  Navigator.pop(context);
+                  // Navigator.pushReplacement(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (_) => Home(),
+                  //   ),
+                  // );
+                }
+                _controller.nextPage(
+                  duration: Duration(milliseconds: 100),
+                  curve: Curves.bounceIn,
+                );
+              },
+              color: Theme.of(context).primaryColor,
+              textColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+          )
+        ],
+      ).backgroundColor(Colors.white),
+    );
+  }
+
+  Container buildDot(int index, BuildContext context) {
+    return Container(
+      height: 10,
+      width: currentIndex == index ? 25 : 10,
+      margin: EdgeInsets.only(right: 5),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: Theme.of(context).primaryColor,
+      ),
+    );
   }
 }

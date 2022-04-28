@@ -26,6 +26,7 @@ dependencies:
   velocity_x: ^3.3.0
   http: ^0.13.4
   firebase_auth: ^3.3.4
+  flutter_svg: ^1.0.3
   carousel_slider: ^4.0.0
   firebase_storage: ^10.2.7
   fluttertoast: ^8.0.9
