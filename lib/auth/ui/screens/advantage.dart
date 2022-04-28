@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/auth/data/content.model.dart';
+import 'package:yobit/auth/ui/widget/advantage.bg.dart';
 
 class AdvantageScreen extends StatefulWidget {
   @override
@@ -25,50 +26,48 @@ class _AdvantageScreen extends State<AdvantageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: VStack(
+    return AdvantageBackground(
+      child: () => VStack(
         [
-          Expanded(
-            child: PageView.builder(
-              controller: _controller,
-              itemCount: contents.length,
-              onPageChanged: (int index) {
-                setState(() {
-                  currentIndex = index;
-                });
-              },
-              itemBuilder: (_, i) {
-                return Padding(
-                  padding: const EdgeInsets.all(40),
-                  child: Column(
-                    children: [
-                      SvgPicture.asset(
-                        contents[i].image,
-                        height: 300,
+          PageView.builder(
+            controller: _controller,
+            itemCount: contents.length,
+            onPageChanged: (int index) {
+              setState(() {
+                currentIndex = index;
+              });
+            },
+            itemBuilder: (_, i) {
+              return Padding(
+                padding: const EdgeInsets.all(40),
+                child: VStack(
+                  [
+                    SvgPicture.asset(
+                      contents[i].image,
+                      height: 300,
+                    ),
+                    Text(
+                      contents[i].title,
+                      style: TextStyle(
+                        fontSize: 35,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Text(
-                        contents[i].title,
-                        style: TextStyle(
-                          fontSize: 35,
-                          color: Colors.grey[600],
-                          fontWeight: FontWeight.bold,
-                        ),
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      contents[i].discription,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white70,
                       ),
-                      SizedBox(height: 20),
-                      Text(
-                        contents[i].discription,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.grey,
-                        ),
-                      )
-                    ],
-                  ),
-                );
-              },
-            ),
-          ),
+                    )
+                  ],
+                ),
+              );
+            },
+          ).box.alignCenter.width(300).height(650).make(),
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -108,7 +107,8 @@ class _AdvantageScreen extends State<AdvantageScreen> {
             ),
           )
         ],
-      ).backgroundColor(Colors.white),
+        crossAlignment: CrossAxisAlignment.center,
+      ),
     );
   }
 

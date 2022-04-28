@@ -80,7 +80,11 @@ class NavigationModel extends ChangeNotifier {
 
   void onLogout() {
     loggedIn = false;
-    stack = [LoginPage(), if (_firstTime) AdvantagePage()];
+    stack = [
+      LoginPage(),
+      // if (_firstTime)
+      AdvantagePage()
+    ];
     notifyListeners();
   }
 
