@@ -38,36 +38,33 @@ class _AdvantageScreen extends State<AdvantageScreen> {
               });
             },
             itemBuilder: (_, i) {
-              return Padding(
-                padding: const EdgeInsets.all(40),
-                child: VStack(
-                  [
-                    SvgPicture.asset(
-                      contents[i].image,
-                      height: 300,
+              return VStack(
+                [
+                  SvgPicture.asset(
+                    contents[i].image,
+                    height: 300,
+                  ),
+                  Text(
+                    contents[i].title,
+                    style: TextStyle(
+                      fontSize: 35,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
-                    Text(
-                      contents[i].title,
-                      style: TextStyle(
-                        fontSize: 35,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    contents[i].discription,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white70,
                     ),
-                    SizedBox(height: 20),
-                    Text(
-                      contents[i].discription,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white70,
-                      ),
-                    )
-                  ],
-                ),
+                  )
+                ],
               );
             },
-          ).box.alignCenter.width(300).height(650).make(),
+          ).box.alignCenter.width(300).height(520).make(),
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
