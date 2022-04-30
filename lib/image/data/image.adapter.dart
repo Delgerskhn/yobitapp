@@ -3,7 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image_picker_web/image_picker_web.dart';
+// import 'package:image_picker_web/image_picker_web.dart';
 
 class ImageInfo {
   final Uint8List data;
@@ -18,9 +18,9 @@ class ImageAdapter {
     Uint8List? _img;
     String? fileName;
     if (kIsWeb) {
-      var a = await ImagePickerWeb.getImageInfo;
-      if (a != null) _img = base64Decode(a.base64!);
-      fileName = a?.fileName;
+      // var a = await ImagePickerWeb.getImageInfo;
+      // if (a != null) _img = base64Decode(a.base64!);
+      // fileName = a?.fileName;
     } else {
       var a = await _picker.pickImage(source: ImageSource.gallery);
       fileName = a?.name;

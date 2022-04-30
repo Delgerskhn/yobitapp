@@ -1,19 +1,13 @@
-import 'dart:convert';
-import 'dart:html';
 import 'dart:typed_data';
 
-import 'package:flutter/foundation.dart' show kIsWeb;
-import 'dart:io' as IO;
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image_picker_web/image_picker_web.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/core/ui/text.dart';
 import 'package:yobit/image/data/image.adapter.dart';
 import 'package:yobit/router/navigation.model.dart';
-import 'package:image_picker_for_web/image_picker_for_web.dart';
 
 class FileSelector extends StatefulWidget {
   const FileSelector({
