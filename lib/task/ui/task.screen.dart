@@ -55,7 +55,7 @@ class _TaskScreen extends State<TaskScreen> {
                     UserGadget()
                   ],
                   alignment: MainAxisAlignment.spaceBetween,
-                ).px32().pOnly(top: 56, bottom: 46),
+                ).px32().wFull(context).pOnly(top: 56, bottom: 46),
                 if (task != null)
                   ChallengeDetailsTime(
                     endDate: task!.endDate,
