@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
@@ -15,13 +16,19 @@ import 'package:yobit/task/data/task.dart';
 import 'package:yobit/task/ui/ads.slider.dart';
 import 'package:yobit/task/ui/ads.slider.loader.dart';
 import 'package:yobit/task/ui/task.description.dart';
+import 'package:yobit/userTask/api/user.task.repo.dart';
+import 'package:yobit/userTask/data/user.task.dart';
 
 class TaskScreen extends StatefulWidget {
   final String taskId;
   final TaskRepository taskRepository;
+  final UserTaskRepository userTaskRepo;
 
   const TaskScreen(
-      {Key? key, required this.taskRepository, required this.taskId})
+      {Key? key,
+      required this.taskRepository,
+      required this.taskId,
+      required this.userTaskRepo})
       : super(key: key);
   @override
   State<StatefulWidget> createState() {
@@ -32,8 +39,12 @@ class TaskScreen extends StatefulWidget {
 class _TaskScreen extends State<TaskScreen> {
   File? imageFile;
   Task? task;
+  UserTask? userTask;
+  bool isLoading = true;
+
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     this.widget.taskRepository.getTask(this.widget.taskId).then((val) {
       this.setState(() {
         task = val;
@@ -41,6 +52,18 @@ class _TaskScreen extends State<TaskScreen> {
     }).catchError((err) {
       print(err);
     });
+    this.widget.userTaskRepo.getUserTask(this.widget.taskId).then((val) {
+      this.setState(() {
+        if (val.isNotEmpty) userTask = val[0];
+        isLoading = false;
+      });
+    }).catchError((err) {
+      print(err);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return StarBackground(
         child: () => Provider.value(
               value: task,
@@ -73,6 +96,20 @@ class _TaskScreen extends State<TaskScreen> {
                 VxBox().height(48).make(),
                 TaskDescription(),
                 VxBox().height(27).make(),
+                if (userTask != null)
+                  VStack(
+                    [
+                      Text('Илгээсэн даалгавар'),
+                      VxBox().height(12).make(),
+                      CachedNetworkImage(
+                        imageUrl: userTask!.file,
+                        width: 250,
+                      )
+                    ],
+                    alignment: MainAxisAlignment.center,
+                    crossAlignment: CrossAxisAlignment.center,
+                  ).wFull(context),
+                VxBox().height(27).make(),
                 HStack(
                   [
                     BtnIcon(
@@ -86,15 +123,24 @@ class _TaskScreen extends State<TaskScreen> {
                       width: 20,
                     ),
                     ElevatedButton(
-                      style: primaryButtonStyle(context),
-                      onPressed: () {
-                        // Navigator.pop(context);
-                        var navmodel = Provider.of<NavigationModel>(context,
-                            listen: false);
-                        navmodel.pushUpload(task!);
-                      },
-                      child: Text('Биелүүлэх'),
-                    ).box.width(250).height(59).make()
+                            style: primaryButtonStyle(context),
+                            onPressed: () {
+                              // Navigator.pop(context);
+                              if (userTask != null) return;
+                              var navmodel = Provider.of<NavigationModel>(
+                                  context,
+                                  listen: false);
+                              navmodel.pushUpload(task!);
+                            },
+                            child: isLoading
+                                ? CircularProgressIndicator()
+                                : userTask == null
+                                    ? Text('Биелүүлэх')
+                                    : Text('Даалгавар илгээсэн байна'))
+                        .box
+                        .width(250)
+                        .height(59)
+                        .make()
                   ],
                   alignment: MainAxisAlignment.center,
                   axisSize: MainAxisSize.max,
