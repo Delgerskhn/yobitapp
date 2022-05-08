@@ -88,21 +88,32 @@ class _SignInFormState extends State<SignInForm> {
                 [
                   ElevatedButton(
                     onPressed: () {},
-                    child: Text('Facebook'),
+                    child: Icon(
+                      Icons.facebook,
+                      color: Color.fromARGB(255, 23, 114, 234),
+                      size: 25,
+                    ),
                     style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.white)),
-                  ),
+                  ).box.width(137).make(),
                   ElevatedButton(
-                      onPressed: () {
-                        authViewModel.googleSignup();
-                      },
-                      child: Text('Google'),
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.white))),
+                          onPressed: () {
+                            authViewModel.googleSignup();
+                          },
+                          child: Image.asset(
+                            'assets/icons/google_icon.png',
+                            height: 30,
+                          ).box.margin(EdgeInsets.only(top: 4)).make(),
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.white)))
+                      .box
+                      .width(137)
+                      .make(),
                 ],
                 axisSize: MainAxisSize.max,
+                alignment: MainAxisAlignment.spaceBetween,
               ),
               SizedBox(
                 height: 20,
