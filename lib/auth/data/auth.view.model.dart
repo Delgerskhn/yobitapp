@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:yobit/core/errors/autherror.dart';
 import 'package:yobit/router/navigation.model.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class AuthViewModel extends ChangeNotifier {
   final BuildContext context;
@@ -59,6 +60,18 @@ class AuthViewModel extends ChangeNotifier {
       loading = false;
       notifyListeners();
     });
+  }
+
+  Future<UserCredential> signInWithFacebook() async {
+    // Trigger the sign-in flow
+    final LoginResult loginResult = await FacebookAuth.instance.login();
+
+    // Create a credential from the access token
+    final OAuthCredential facebookAuthCredential =
+        FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+    // Once signed in, return the UserCredential
+    return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
   }
 
   Future<void> googleSignup() async {

@@ -42,9 +42,8 @@ class _SignInFormState extends State<SignInForm> {
         height: MediaQuery.of(context).size.height,
         child: Container(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Padding(padding: EdgeInsets.only(top: 400), child: null),
               Flexible(
                 flex: 1,
                 child: SuffixInput(
@@ -87,7 +86,9 @@ class _SignInFormState extends State<SignInForm> {
               HStack(
                 [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      authViewModel.signInWithFacebook();
+                    },
                     child: Icon(
                       Icons.facebook,
                       color: Color.fromARGB(255, 23, 114, 234),

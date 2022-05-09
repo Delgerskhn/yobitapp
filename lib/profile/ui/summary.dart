@@ -1,10 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:yobit/badge/api/badgeRepository.dart';
 
-class ProfileSummary extends StatelessWidget {
+class ProfileSummary extends StatefulWidget {
+  final BadgeRepository badgeRepository;
   const ProfileSummary({
     Key? key,
+    required this.badgeRepository,
   }) : super(key: key);
+
+  @override
+  State<ProfileSummary> createState() => _ProfileSummaryState();
+}
+
+class _ProfileSummaryState extends State<ProfileSummary> {
+  int challenges = 0;
+  int points = 0;
+  int rank = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    this.widget.badgeRepository.getUserBadges().then((val) {
+      setState(() {
+        challenges = val.first.challenges;
+        points = val.first.points;
+        rank = val.first.rank;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,39 +36,33 @@ class ProfileSummary extends StatelessWidget {
       [
         VStack(
           [
-            VxCircle(
-              radius: 12,
-            ),
+            Icon(Icons.star_border, color: Colors.white),
             SizedBox(height: 6),
             'Оноо'.text.white.size(12).make(),
             SizedBox(height: 6),
-            '1900'.text.white.size(16).make(),
+            '$points'.text.white.size(16).make(),
           ],
           alignment: MainAxisAlignment.spaceBetween,
           crossAlignment: CrossAxisAlignment.center,
         ),
         VStack(
           [
-            VxCircle(
-              radius: 12,
-            ),
+            Icon(Icons.numbers_outlined, color: Colors.white),
             SizedBox(height: 6),
-            'Оноо'.text.white.size(12).make(),
+            'Ранк'.text.white.size(12).make(),
             SizedBox(height: 6),
-            '1900'.text.white.size(16).make(),
+            '$rank'.text.white.size(16).make(),
           ],
           alignment: MainAxisAlignment.spaceBetween,
           crossAlignment: CrossAxisAlignment.center,
         ),
         VStack(
           [
-            VxCircle(
-              radius: 12,
-            ),
+            Icon(Icons.flag_circle_outlined, color: Colors.white),
             SizedBox(height: 6),
-            'Оноо'.text.white.size(12).make(),
+            'Уралдаан'.text.white.size(12).make(),
             SizedBox(height: 6),
-            '1900'.text.white.size(16).make(),
+            '$challenges'.text.white.size(16).make(),
           ],
           alignment: MainAxisAlignment.spaceBetween,
           crossAlignment: CrossAxisAlignment.center,

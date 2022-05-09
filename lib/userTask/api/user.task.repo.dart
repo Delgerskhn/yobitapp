@@ -25,4 +25,13 @@ class UserTaskRepository {
 
     return parseCollectionFromDoc(doc, UserTask.fromStore);
   }
+
+  Future<List<UserTask>> getUserTasks() async {
+    var doc = await store
+        .collection('userTasks')
+        .where('userId', isEqualTo: auth.currentUser!.uid)
+        .get();
+
+    return parseCollectionFromDoc(doc, UserTask.fromStore);
+  }
 }
