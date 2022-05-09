@@ -34,4 +34,25 @@ class UserTaskRepository {
 
     return parseCollectionFromDoc(doc, UserTask.fromStore);
   }
+
+  Future<List<Task>> getAllChallengeTasks() async {
+    var userId = FirebaseAuth.instance.currentUser!.uid;
+    var instance = FirebaseFirestore.instance;
+    Iterable<String> userChallenges = (await instance
+            .collection('UserChallenge')
+            .where(
+              'userId',
+              isEqualTo: userId,
+            )
+            .get())
+        .docs
+        .map((e) => (e['challengeId']));
+    var tasks = parseCollectionFromDoc(
+        (await instance
+            .collection('tasks')
+            .where('challengeId', whereIn: userChallenges.toList())
+            .get()),
+        Task.fromStore);
+    return tasks;
+  }
 }

@@ -18,7 +18,7 @@ class _StatsState extends State<Stats> {
   @override
   void initState() {
     super.initState();
-    getUpcomingTasks().then((value) {
+    this.widget.userTaskRepository.getAllChallengeTasks().then((value) {
       if (value.isNotEmpty) {
         setState(() {
           totalTasks = value.length;
