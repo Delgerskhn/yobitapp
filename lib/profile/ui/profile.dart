@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/auth/data/auth.view.model.dart';
+import 'package:yobit/badge/api/badgeRepository.dart';
 import 'package:yobit/core/ui/background/star.background.dart';
 import 'package:yobit/core/ui/elements/floating.back.button.dart';
 import 'package:yobit/image/data/image.adapter.dart';
@@ -30,7 +31,9 @@ class ProfileScreen extends StatelessWidget {
                       .box
                       .py12
                       .make(),
-                  ProfileSummary()
+                  ProfileSummary(
+                    badgeRepository: BadgeRepository(),
+                  )
                       .box
                       .width(345)
                       .customRounded(BorderRadius.circular(20))
@@ -81,9 +84,9 @@ class Avatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () async {
-        var imgInfo = await ImageAdapter().getImage();
-        if (imgInfo != null)
-          UserRepository().updateUserPhoto(imgInfo.data, imgInfo.filename);
+        // var imgInfo = await ImageAdapter().getImage();
+        // if (imgInfo != null)
+        //   UserRepository().updateUserPhoto(imgInfo.data, imgInfo.filename);
       },
       style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -92,26 +95,27 @@ class Avatar extends StatelessWidget {
         // side: BorderSide(color: Colors.red)
       ))),
       child: VxBox(
-              child: auth.currentUser!.photoURL != null
-                  ? FutureBuilder(
-                      builder: (ctx, snapshot) {
-                        if (snapshot.hasError) print(snapshot.error);
-                        if (snapshot.hasData)
-                          return CircleAvatar(
-                              radius: 50,
-                              foregroundImage: NetworkImage(
-                                snapshot.data as String,
-                              ));
+          child:
+              // auth.currentUser!.photoURL != null
+              //     ? FutureBuilder(
+              //         builder: (ctx, snapshot) {
+              //           if (snapshot.hasError) print(snapshot.error);
+              //           if (snapshot.hasData)
+              //             return CircleAvatar(
+              //                 radius: 50,
+              //                 foregroundImage: NetworkImage(
+              //                   snapshot.data as String,
+              //                 ));
 
-                        return CircularProgressIndicator();
-                      },
-                      future: getImgUrl(auth.currentUser!.photoURL!),
-                    )
-                  : CircleAvatar(
-                      radius: 50,
-                      backgroundImage: AssetImage('assets/images/profile.png'),
-                    ))
-          .make(),
+              //           return CircularProgressIndicator();
+              //         },
+              //         future: getImgUrl(auth.currentUser!.photoURL!),
+              //       )
+              //     :
+              CircleAvatar(
+        radius: 50,
+        backgroundImage: AssetImage('assets/images/profile.png'),
+      )).make(),
     ).box.margin(EdgeInsets.only(top: 94)).size(100, 100).alignCenter.make();
   }
 }

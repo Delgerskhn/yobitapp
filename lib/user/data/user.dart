@@ -12,6 +12,6 @@ class User {
   }
 
   static Future<User> fromMap(Map<String, dynamic> doc) async {
-    return User(doc['userName'], await getImgUrl(doc['photoUrl']));
+    return User(doc['userName'] ?? "", await getImgUrl(doc['photoUrl'] ?? ""));
   }
 }

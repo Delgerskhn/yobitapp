@@ -12,19 +12,18 @@ class _UserGadget extends State<UserGadget> {
   @override
   Widget build(BuildContext context) {
     var navmodel = Provider.of<NavigationModel>(context, listen: false);
-    return ElevatedButton(
-        style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.transparent)),
-        onPressed: () {
-          navmodel.pushProfile();
-        },
-        child: HStack(
-          [
-            Image.asset('assets/images/profile.png')
-                .box
-                .transform(Matrix4.translationValues(-10, 0, 0))
-                .make(),
-          ],
-        ));
+    return GestureDetector(
+      onTap: () {
+        navmodel.pushProfile();
+      },
+      child: HStack(
+        [
+          Image.asset('assets/images/profile.png')
+              .box
+              .transform(Matrix4.translationValues(-10, 0, 0))
+              .make(),
+        ],
+      ),
+    );
   }
 }

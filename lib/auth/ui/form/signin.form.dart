@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/auth/data/auth.view.model.dart';
 import 'package:yobit/core/errors/autherror.dart';
 import 'package:yobit/core/styles/button.style.dart';
@@ -41,9 +42,8 @@ class _SignInFormState extends State<SignInForm> {
         height: MediaQuery.of(context).size.height,
         child: Container(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Padding(padding: EdgeInsets.only(top: 400), child: null),
               Flexible(
                 flex: 1,
                 child: SuffixInput(
@@ -80,7 +80,45 @@ class _SignInFormState extends State<SignInForm> {
                   },
                 )),
               ]),
-              Padding(padding: EdgeInsets.only(top: 20), child: null),
+              SizedBox(
+                height: 20,
+              ),
+              HStack(
+                [
+                  ElevatedButton(
+                    onPressed: () {
+                      authViewModel.signInWithFacebook();
+                    },
+                    child: Icon(
+                      Icons.facebook,
+                      color: Color.fromARGB(255, 23, 114, 234),
+                      size: 25,
+                    ),
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.white)),
+                  ).box.width(137).make(),
+                  ElevatedButton(
+                          onPressed: () {
+                            authViewModel.googleSignup();
+                          },
+                          child: Image.asset(
+                            'assets/icons/google_icon.png',
+                            height: 30,
+                          ).box.margin(EdgeInsets.only(top: 4)).make(),
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.white)))
+                      .box
+                      .width(137)
+                      .make(),
+                ],
+                axisSize: MainAxisSize.max,
+                alignment: MainAxisAlignment.spaceBetween,
+              ),
+              SizedBox(
+                height: 20,
+              ),
               Row(children: [
                 Expanded(
                     child: BtnPrimary(
@@ -90,9 +128,8 @@ class _SignInFormState extends State<SignInForm> {
                   },
                 )),
               ]),
-              Padding(
-                padding: EdgeInsets.only(top: 10),
-                child: null,
+              SizedBox(
+                height: 10,
               ),
               Flexible(
                 child: BtnFlat(

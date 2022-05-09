@@ -1,7 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:yobit/profile/api/getUpcomingTasks.dart';
+import 'package:yobit/userTask/api/user.task.repo.dart';
 
-class Stats extends StatelessWidget {
+class Stats extends StatefulWidget {
+  final UserTaskRepository userTaskRepository;
+
+  const Stats({Key? key, required this.userTaskRepository}) : super(key: key);
+  @override
+  State<Stats> createState() => _StatsState();
+}
+
+class _StatsState extends State<Stats> {
+  int totalTasks = 1;
+  int completedTasks = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    getUpcomingTasks().then((value) {
+      if (value.isNotEmpty) {
+        setState(() {
+          totalTasks = value.length;
+        });
+      }
+    });
+    this.widget.userTaskRepository.getUserTasks().then((value) {
+      setState(() {
+        completedTasks = value.length;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return VStack(
@@ -11,6 +41,7 @@ class Stats extends StatelessWidget {
             '7 хоног'
                 .text
                 .bold
+                .color(Color(0xff0C092A))
                 .make()
                 .box
                 .roundedSM
@@ -24,7 +55,7 @@ class Stats extends StatelessWidget {
         SizedBox(height: 24),
         HStack(
           [
-            'Энэ долоо хоногт та  10 даалгаварт оролцов.'
+            'Энэ долоо хоногт та  $totalTasks даалгаварт оролцов.'
                 .text
                 .lineHeight(1.5)
                 .size(20)
@@ -49,15 +80,21 @@ class Stats extends StatelessWidget {
                 color: Colors.white,
               ).box.size(148, 148).make(),
               CircularProgressIndicator(
-                value: 0.7,
+                value: completedTasks / totalTasks,
                 strokeWidth: 10,
               ).box.size(148, 148).make(),
               VStack(
                 [
                   HStack(
                     [
-                      '7'.text.headline5(context).white.bold.make(),
-                      '/10'.text.medium.white.bold.make()
+                      completedTasks
+                          .toString()
+                          .text
+                          .headline5(context)
+                          .white
+                          .bold
+                          .make(),
+                      '/$totalTasks'.text.medium.white.bold.make()
                     ],
                     alignment: MainAxisAlignment.end,
                   ),
@@ -75,8 +112,21 @@ class Stats extends StatelessWidget {
         SizedBox(height: 24),
         HStack([
           VStack([
-            '5'.text.extraBold.headline5(context).make(),
-            'Уралдаанд оролцсон'.text.bold.size(10).make().box.width(119).make()
+            '$totalTasks'
+                .text
+                .extraBold
+                .color(Color(0xff0C092A))
+                .headline5(context)
+                .make(),
+            'Уралдаанд оролцсон'
+                .text
+                .color(Color(0xff0C092A))
+                .bold
+                .size(10)
+                .make()
+                .box
+                .width(119)
+                .make()
           ])
               .box
               .width(140)
@@ -86,7 +136,7 @@ class Stats extends StatelessWidget {
               .make(),
           SizedBox(width: 15),
           VStack([
-            '41'.text.white.extraBold.headline5(context).make(),
+            '$completedTasks'.text.white.extraBold.headline5(context).make(),
             'Амжилттай биелүүлсэн'
                 .text
                 .white

@@ -4,6 +4,7 @@ import 'package:yobit/badge/api/badgeRepository.dart';
 import 'package:yobit/profile/ui/badges.dart';
 import 'package:yobit/profile/ui/stats.dart';
 import 'package:yobit/profile/ui/upcomings.dart';
+import 'package:yobit/userTask/api/user.task.repo.dart';
 
 class ProfileTabs extends StatefulWidget {
   const ProfileTabs({
@@ -42,7 +43,10 @@ class _ProfileTabsState extends State<ProfileTabs>
       ),
       VxBox().p12.make(),
       VStack([
-        if (_index == 0) Stats(),
+        if (_index == 0)
+          Stats(
+            userTaskRepository: UserTaskRepository(),
+          ),
         if (_index == 1) UpcomingTasks().box.width(345).make(),
         if (_index == 2)
           Badges(

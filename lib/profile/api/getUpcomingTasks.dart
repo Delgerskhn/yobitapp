@@ -5,7 +5,6 @@ import 'package:yobit/utils/collectionParser.dart';
 
 Future<List<Task>> getUpcomingTasks() async {
   var userId = FirebaseAuth.instance.currentUser!.uid;
-  print(userId);
   var instance = FirebaseFirestore.instance;
   Iterable<String> userChallenges = (await instance
           .collection('UserChallenge')
