@@ -1,12 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/auth/ui/widget/advantage.slider.dart';
-import 'package:yobit/challenge/data/challenge.dart';
 import 'package:yobit/core/ui/text.dart';
-import 'package:yobit/router/navigation.model.dart';
 import 'package:yobit/challenge/api/challenge.repository.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:yobit/userTask/api/user.task.repo.dart';
@@ -27,7 +24,6 @@ class _SliderTaskFile extends State<SliderTaskFile> {
   final instance = firebase_storage.FirebaseStorage.instance;
   @override
   Widget build(BuildContext context) {
-    var navmodel = Provider.of<NavigationModel>(context);
     return FutureBuilder(
         future: this.widget.userTaskRepo.getRecents(),
         builder: (ctx, snapshot) {

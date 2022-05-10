@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/core/ui/text.dart';
@@ -19,7 +18,6 @@ class FileSelector extends StatefulWidget {
 }
 
 class _FileSelectorState extends State<FileSelector> {
-  final ImagePicker _picker = ImagePicker();
   Uint8List? image;
 
   @override

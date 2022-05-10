@@ -1,12 +1,9 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as p;
-import 'package:yobit/utils/collectionParser.dart';
-import 'package:yobit/task/data/task.dart' as AppTask;
 
 class UploadRepository {
   FirebaseStorage storage = FirebaseStorage.instance;

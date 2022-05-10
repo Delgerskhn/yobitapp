@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 
 Future<List<T>> parseCollection<T>(QuerySnapshot<Map<String, dynamic>> snapshot,
     Future<T> Function(Map<String, dynamic> json) parser) async {

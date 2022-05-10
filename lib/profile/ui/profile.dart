@@ -6,12 +6,8 @@ import 'package:yobit/auth/data/auth.view.model.dart';
 import 'package:yobit/badge/api/badgeRepository.dart';
 import 'package:yobit/core/ui/background/star.background.dart';
 import 'package:yobit/core/ui/elements/floating.back.button.dart';
-import 'package:yobit/image/data/image.adapter.dart';
 import 'package:yobit/profile/ui/profile.tabs.dart';
 import 'package:yobit/profile/ui/summary.dart';
-import 'package:yobit/profile/ui/upcomings.dart';
-import 'package:yobit/user/api/user.repository.dart';
-import 'package:yobit/utils/imgProvider.dart';
 
 class ProfileScreen extends StatelessWidget {
   FirebaseAuth auth = FirebaseAuth.instance;

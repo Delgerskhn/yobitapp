@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yobit/core/ui/elements/text.input.dart';
 
 import 'icon.box.dart';
 

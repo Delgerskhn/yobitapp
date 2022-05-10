@@ -1,10 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:yobit/auth/data/auth.view.model.dart';
 import 'package:yobit/challenge/api/challenge.repository.dart';
-import 'package:yobit/challenge/ui/widget/slider%20copy.dart';
 import 'package:yobit/core/ui/background/star.background.dart';
 import 'package:yobit/challenge/ui/widget/challenge.container.dart';
 import 'package:yobit/challenge/ui/widget/slider.dart' as SpecialChallenge;
@@ -16,7 +13,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var authModel = Provider.of<AuthViewModel>(context);
     FirebaseAuth auth = FirebaseAuth.instance;
 
     return StarBackground(child: () {

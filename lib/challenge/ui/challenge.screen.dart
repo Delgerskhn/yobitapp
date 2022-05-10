@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -9,7 +8,6 @@ import 'package:yobit/challenge/ui/widget/info/challenge.info.dart';
 import 'package:yobit/core/ui/background/star.background.dart';
 import 'package:yobit/core/ui/elements/floating.back.button.dart';
 import 'package:yobit/core/ui/elements/user.gadget.dart';
-import 'package:yobit/router/navigation.model.dart';
 import 'package:yobit/challenge/api/challenge.repository.dart';
 
 class ChallengeScreen extends StatefulWidget {

@@ -1,10 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:yobit/challenge/data/challenge.dart';
-import 'package:yobit/task/data/task.dart';
 import 'package:yobit/utils/collectionParser.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ChallengeRepository {
+abstract class IChallengeRepository {
+  Future<List<Challenge>> getFeaturedChallenges();
+  Future<List<Challenge>> getRegularChallenges();
+  Stream<QuerySnapshot<Map<String, dynamic>>> getIfUserJoinedChallenge(
+      String challengeId);
+  Future<bool> joinChallenge(String challengeId);
+  Future<Challenge> getChallenge(String challengeID);
+}
+
+class ChallengeRepository extends IChallengeRepository {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   Future<List<Challenge>> getFeaturedChallenges() async {
@@ -49,16 +57,6 @@ class ChallengeRepository {
       'challengeId': challengeId,
     });
     return true;
-  }
-
-  Future<List<Task>> getChallengeTasks(String challengeId) async {
-    // throw Exception('Failed');
-    final result = await firestore
-        .collection("tasks")
-        .where("challengeId", isEqualTo: challengeId)
-        .get();
-    List<Task> res = await parseCollectionFromDoc(result, Task.fromStore);
-    return res;
   }
 
   Future<Challenge> getChallenge(String challengeID) async {

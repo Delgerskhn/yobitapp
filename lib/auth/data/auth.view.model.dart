@@ -85,15 +85,10 @@ class AuthViewModel extends ChangeNotifier {
           idToken: googleSignInAuthentication.idToken,
           accessToken: googleSignInAuthentication.accessToken);
 
-      // Getting users credential
-      UserCredential result = await auth.signInWithCredential(authCredential);
-      User? user = result.user;
+      await auth.signInWithCredential(authCredential);
       loggedIn = true;
 
-      if (result != null) {
-        notifyListeners();
-      } // if result not null we simply call the MaterialpageRoute,
-      // for go to the HomePage screen
+      notifyListeners();
     }
   }
 

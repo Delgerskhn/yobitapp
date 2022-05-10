@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:yobit/profile/api/getUpcomingTasks.dart';
 import 'package:yobit/userTask/api/user.task.repo.dart';
 
 class Stats extends StatefulWidget {

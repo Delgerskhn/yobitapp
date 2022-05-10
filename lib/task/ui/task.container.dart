@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/challenge/api/challenge.repository.dart';
-import 'package:yobit/challenge/data/challenge.dart';
 import 'package:yobit/challenge/ui/widget/detail/challenge.tasks.dart';
 import 'package:yobit/router/navigation.model.dart';
+import 'package:yobit/task/api/task.repo.dart';
 import 'package:yobit/task/data/task.dart';
 
 class TaskContainer extends StatefulWidget {
   final ChallengeRepository challengeRepo;
+  final ITaskRepository taskRepo;
 
-  const TaskContainer({Key? key, required this.challengeRepo})
+  const TaskContainer(
+      {Key? key, required this.challengeRepo, required this.taskRepo})
       : super(key: key);
   @override
   State<StatefulWidget> createState() {
@@ -22,10 +24,8 @@ class _TaskContainer extends State<TaskContainer> {
   @override
   Widget build(BuildContext context) {
     var navmodel = Provider.of<NavigationModel>(context);
-    var challenge = context.watch<Challenge?>();
     return FutureBuilder(
-        future:
-            this.widget.challengeRepo.getChallengeTasks(navmodel.challengeId!),
+        future: this.widget.taskRepo.getChallengeTasks(navmodel.challengeId!),
         builder: (ctx, scaffold) {
           if (scaffold.connectionState == ConnectionState.done) {
             if (scaffold.hasData) {

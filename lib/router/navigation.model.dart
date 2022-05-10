@@ -1,9 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:yobit/core/data/preferences.dart';
 import 'package:yobit/router/pages/advantage.page.dart';
 import 'package:yobit/router/pages/challenge.page.dart';
@@ -80,11 +78,7 @@ class NavigationModel extends ChangeNotifier {
 
   void onLogout() {
     loggedIn = false;
-    stack = [
-      LoginPage(),
-      // if (_firstTime)
-      AdvantagePage()
-    ];
+    stack = [LoginPage(), if (_firstTime) AdvantagePage()];
     notifyListeners();
   }
 
