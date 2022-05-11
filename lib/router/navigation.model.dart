@@ -1,12 +1,8 @@
 import 'dart:typed_data';
 
-<<<<<<< Updated upstream
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yobit/core/data/preferences.dart';
-=======
-import 'package:flutter/material.dart';
->>>>>>> Stashed changes
 import 'package:yobit/router/pages/advantage.page.dart';
 import 'package:yobit/router/pages/challenge.page.dart';
 import 'package:yobit/router/pages/confirm.pass.page.dart';
