@@ -11,10 +11,12 @@ class AuthViewModel extends ChangeNotifier {
   FirebaseAuth auth = FirebaseAuth.instance;
   bool loading = false;
   bool loggedIn = false;
+  User? user;
 
   AuthViewModel(this.context) {
     auth.authStateChanges().listen((user) {
       loggedIn = user != null;
+      user = user;
       notifyListeners();
     });
   }

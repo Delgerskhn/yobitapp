@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yobit/core/data/globals.dart';
@@ -12,10 +13,22 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  bool loggedIn = false;
+  var navModel = NavigationModel(false);
+  @override
+  void initState() {
+    super.initState();
+    FirebaseAuth.instance.authStateChanges().listen((user) => setState(() {
+          loggedIn = user != null;
+          print(user);
+          navModel.loggedIn = loggedIn;
+        }));
+  }
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => NavigationModel(),
+      create: (_) => navModel,
       child: MaterialApp(
         scaffoldMessengerKey: snackbarKey,
         title: 'Yobit',

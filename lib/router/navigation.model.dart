@@ -1,8 +1,12 @@
 import 'dart:typed_data';
 
+<<<<<<< Updated upstream
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yobit/core/data/preferences.dart';
+=======
+import 'package:flutter/material.dart';
+>>>>>>> Stashed changes
 import 'package:yobit/router/pages/advantage.page.dart';
 import 'package:yobit/router/pages/challenge.page.dart';
 import 'package:yobit/router/pages/confirm.pass.page.dart';
@@ -18,7 +22,7 @@ import 'package:yobit/router/pages/upload.page.dart';
 import 'package:yobit/task/data/task.dart';
 
 class NavigationModel extends ChangeNotifier {
-  bool? _loggedIn;
+  final bool _loggedIn;
   bool _firstTime = false;
   String? challengeId;
   String? taskId;
@@ -32,26 +36,11 @@ class NavigationModel extends ChangeNotifier {
   }
 
   set loggedIn(value) {
-    _loggedIn = value;
     notifyListeners();
   }
 
-  NavigationModel() {
-    _init();
-  }
-  FirebaseAuth auth = FirebaseAuth.instance;
-
-  _init() async {
-    getIfAppInitializedFirstTime().then((value) {
-      _firstTime = value;
-      FirebaseAuth.instance.authStateChanges().listen((user) {
-        loggedIn = user != null;
-        if (loggedIn!)
-          onLogin();
-        else
-          onLogout();
-      });
-    });
+  NavigationModel(this._loggedIn) {
+    _loggedIn ? onLogin() : onLogout();
   }
 
   List<Page> stack = [
@@ -59,6 +48,7 @@ class NavigationModel extends ChangeNotifier {
   ];
 
   void onLogin() {
+    print('login');
     loggedIn = true;
     stack = [
       HomePage(),
