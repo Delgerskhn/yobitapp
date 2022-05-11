@@ -27,15 +27,15 @@ class Challenge {
 
   static Future<Challenge> fromStore(DocumentSnapshot doc) async {
     return Challenge(
-        id: doc.id,
-        title: doc['title'] ?? "",
-        content: doc['content'] ?? "",
-        endDate: doc['endDate'] ?? Timestamp.fromDate(DateTime.now()),
-        imgUrl: await getImgUrl(doc['imgUrl'] ?? ""),
-        startDate: doc['startDate'] ?? Timestamp.fromDate(DateTime.now()),
-        featureImg: await getImgUrl(doc['featureImg'] ?? ""),
-        reward: doc['reward'] ?? "",
-        planet: await getImgUrl(doc['planet'] ?? ""),
-        color: doc['color'] ?? "");
+        id: doc.get('id'),
+        title: doc.get('title') ?? "",
+        content: doc.get('content') ?? "",
+        endDate: doc.get('endDate') ?? Timestamp.fromDate(DateTime.now()),
+        imgUrl: await getImgUrl(doc.get('imgUrl') ?? ""),
+        startDate: doc.get('startDate') ?? Timestamp.fromDate(DateTime.now()),
+        featureImg: await getImgUrl(doc.get('featureImg') ?? ""),
+        reward: doc.get('reward') ?? "",
+        planet: await getImgUrl(doc.get('planet') ?? ""),
+        color: doc.get('color') ?? "");
   }
 }

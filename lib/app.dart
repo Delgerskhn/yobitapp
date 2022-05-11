@@ -14,21 +14,28 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   bool loggedIn = false;
-  var navModel = NavigationModel(false);
+  static AuthViewModel authModel = AuthViewModel();
+  NavigationModel navModel = NavigationModel(authModel);
   @override
   void initState() {
     super.initState();
-    FirebaseAuth.instance.authStateChanges().listen((user) => setState(() {
-          loggedIn = user != null;
-          print(user);
-          navModel.loggedIn = loggedIn;
-        }));
+    FirebaseAuth.instance.authStateChanges().listen((user) {
+      setState(() {
+        loggedIn = user != null;
+        navModel.loggedIn = loggedIn;
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => navModel,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<NavigationModel>(
+          create: (_) => navModel,
+        ),
+        ChangeNotifierProvider<AuthViewModel>(create: (_) => authModel),
+      ],
       child: MaterialApp(
         scaffoldMessengerKey: snackbarKey,
         title: 'Yobit',
@@ -57,14 +64,8 @@ class ProviderWrapper extends StatelessWidget {
   final AppRouterDelegate delegate = AppRouterDelegate();
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<AuthViewModel>(
-            create: (_) => AuthViewModel(context)),
-      ],
-      child: Router(
-          routerDelegate: delegate,
-          backButtonDispatcher: RootBackButtonDispatcher()),
-    );
+    return Router(
+        routerDelegate: delegate,
+        backButtonDispatcher: RootBackButtonDispatcher());
   }
 }

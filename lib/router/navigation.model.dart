@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:yobit/auth/data/auth.view.model.dart';
 import 'package:yobit/core/data/preferences.dart';
 import 'package:yobit/router/pages/advantage.page.dart';
 import 'package:yobit/router/pages/challenge.page.dart';
@@ -18,12 +19,17 @@ import 'package:yobit/router/pages/upload.page.dart';
 import 'package:yobit/task/data/task.dart';
 
 class NavigationModel extends ChangeNotifier {
-  final bool _loggedIn;
+  final AuthViewModel authViewModel;
+
   bool _firstTime = false;
   String? challengeId;
   String? taskId;
 
-  bool? get loggedIn => _loggedIn;
+  NavigationModel(this.authViewModel) {
+    authViewModel.addListener(() {
+      authViewModel.loggedIn ? onLogin() : onLogout();
+    });
+  }
 
   bool onPopPage(Route<dynamic> route, result) {
     if (!route.didPop(result)) return false;
@@ -35,16 +41,11 @@ class NavigationModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  NavigationModel(this._loggedIn) {
-    _loggedIn ? onLogin() : onLogout();
-  }
-
   List<Page> stack = [
     SplashPage(process: 'Splash Screen:\n\nChecking auth state')
   ];
 
   void onLogin() {
-    print('login');
     loggedIn = true;
     stack = [
       HomePage(),

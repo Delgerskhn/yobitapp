@@ -7,13 +7,12 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class AuthViewModel extends ChangeNotifier {
-  final BuildContext context;
   FirebaseAuth auth = FirebaseAuth.instance;
   bool loading = false;
   bool loggedIn = false;
   User? user;
 
-  AuthViewModel(this.context) {
+  AuthViewModel() {
     auth.authStateChanges().listen((user) {
       loggedIn = user != null;
       user = user;
@@ -27,8 +26,6 @@ class AuthViewModel extends ChangeNotifier {
     auth
         .signInWithEmailAndPassword(email: email, password: password)
         .then((value) {
-      var navmodel = Provider.of<NavigationModel>(context, listen: false);
-      print(navmodel.loggedIn);
       loggedIn = true;
     }).catchError((err) {
       handleAuthError(err);
