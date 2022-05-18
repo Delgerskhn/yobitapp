@@ -24,8 +24,8 @@ void main() {
   });
   testWidgets('Slider should display given featured challenge collection',
       (WidgetTester tester) async {
-    await tester.pumpWidget(ChangeNotifierProvider(
-        create: (_) => NavigationModel(true),
+    await tester.pumpWidget(ChangeNotifierProvider<NavigationModel>(
+        create: (_) => MockNavigationModel(),
         child: MaterialApp(
           home: Scaffold(
             body: VStack([

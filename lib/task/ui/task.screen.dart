@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/challenge/ui/widget/detail/challenge.details.time.dart';
+import 'package:yobit/core/api/TimerNotifier.dart';
+import 'package:yobit/core/api/counter.dart';
 import 'package:yobit/core/styles/button.style.dart';
 import 'package:yobit/core/ui/background/star.background.dart';
 import 'package:yobit/core/ui/elements/btn.icon.dart';
@@ -79,7 +81,8 @@ class _TaskScreen extends State<TaskScreen> {
                 ).px32().wFull(context).pOnly(top: 56, bottom: 46),
                 if (task != null)
                   ChallengeDetailsTime(
-                    endDate: task!.endDate,
+                    counter:
+                        SecondCounter(task!.endDate, ElapsedSecondNotifier()),
                     type: TimerType.inSeconds,
                   ).box.px32.make(),
                 VxBox().height(48).make(),

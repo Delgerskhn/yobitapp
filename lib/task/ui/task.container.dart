@@ -31,7 +31,11 @@ class _TaskContainer extends State<TaskContainer> {
             if (scaffold.hasData) {
               var tasks = scaffold.data as List<Task>;
               return Column(
-                children: tasks.map((e) => ChallengeTask(task: e)).toList(),
+                children: tasks
+                    .map((e) => Padding(
+                        padding: EdgeInsets.only(bottom: 16),
+                        child: ChallengeTask(task: e)))
+                    .toList(),
               );
             }
             if (scaffold.hasError) {

@@ -26,16 +26,17 @@ class Challenge {
       required this.planet});
 
   static Future<Challenge> fromStore(DocumentSnapshot doc) async {
+    var data = doc.data() as dynamic;
     return Challenge(
-        id: doc.get('id'),
-        title: doc.get('title') ?? "",
-        content: doc.get('content') ?? "",
-        endDate: doc.get('endDate') ?? Timestamp.fromDate(DateTime.now()),
-        imgUrl: await getImgUrl(doc.get('imgUrl') ?? ""),
-        startDate: doc.get('startDate') ?? Timestamp.fromDate(DateTime.now()),
-        featureImg: await getImgUrl(doc.get('featureImg') ?? ""),
-        reward: doc.get('reward') ?? "",
-        planet: await getImgUrl(doc.get('planet') ?? ""),
-        color: doc.get('color') ?? "");
+        id: doc.id,
+        title: data['title'] ?? "",
+        content: data['content'] ?? "",
+        endDate: data['endDate'] ?? Timestamp.fromDate(DateTime.now()),
+        imgUrl: await getImgUrl(data['imgUrl'] ?? ""),
+        startDate: data['startDate'] ?? Timestamp.fromDate(DateTime.now()),
+        featureImg: await getImgUrl(data['featureImg'] ?? ""),
+        reward: data['reward'] ?? "",
+        planet: await getImgUrl(data['planet'] ?? ""),
+        color: data['color'] ?? "");
   }
 }

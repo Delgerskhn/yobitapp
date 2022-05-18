@@ -4,6 +4,8 @@ import 'package:velocity_x/velocity_x.dart';
 import 'package:yobit/challenge/api/challenge.repository.dart';
 import 'package:yobit/challenge/data/challenge.dart';
 import 'package:yobit/challenge/ui/widget/info/hchallenge.card.dart';
+import 'package:yobit/core/api/TimerNotifier.dart';
+import 'package:yobit/core/api/counter.dart';
 import 'package:yobit/task/api/task.repo.dart';
 import 'package:yobit/task/ui/task.container.dart';
 
@@ -19,7 +21,7 @@ class ChallengeDetails extends StatelessWidget {
       [
         if (challenge != null)
           ChallengeDetailsTime(
-            endDate: challenge.endDate,
+            counter: MinuteCounter(challenge.endDate, ElapsedSecondNotifier()),
             type: TimerType.inMinutes,
           ),
         HChallengeCard().box.py24.make(),

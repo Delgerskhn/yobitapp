@@ -3,54 +3,35 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:yobit/core/api/counter.dart';
 
 enum TimerType { inSeconds, inMinutes }
 
 class ChallengeDetailsTime extends StatefulWidget {
-  final Timestamp endDate;
+  final Counter counter;
   final TimerType type;
   const ChallengeDetailsTime({
     Key? key,
-    required this.endDate,
     required this.type,
+    required this.counter,
   }) : super(key: key);
 
   @override
-  State<ChallengeDetailsTime> createState() => _ChallengeDetailsTimeState();
+  State<ChallengeDetailsTime> createState() =>
+      _ChallengeDetailsTimeState(counter);
 }
 
 class _ChallengeDetailsTimeState extends State<ChallengeDetailsTime> {
-  late Timestamp endDate;
-  late Timer timer;
-  int? days;
-  int? hours;
-  int? minutes;
-  int? seconds;
+  final Counter counter;
+
+  _ChallengeDetailsTimeState(this.counter);
   @override
   void initState() {
     super.initState();
-    endDate = this.widget.endDate;
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      var d = DateTime.now();
-      var e = endDate.toDate();
-      var diff = e.difference(d);
-      if (this.mounted)
-        setState(() {
-          days = diff.inDays;
-          if (this.widget.type == TimerType.inSeconds)
-            hours = diff.inHours;
-          else
-            hours = diff.inHours - diff.inDays * 24;
-          minutes = diff.inMinutes - diff.inHours * 60;
-          seconds = diff.inSeconds - diff.inMinutes * 60;
-        });
+    this.widget.counter.addListener(() {
+      print(this.widget.counter.seconds);
+      this.setState(() {});
     });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    timer.cancel();
   }
 
   @override
@@ -61,10 +42,11 @@ class _ChallengeDetailsTimeState extends State<ChallengeDetailsTime> {
         [
           [
             if (this.widget.type == TimerType.inMinutes)
-              "${this.days ?? '0'} өдөр",
-            "${this.hours} цаг",
-            "${this.minutes} мин",
-            if (this.widget.type == TimerType.inSeconds) "${this.seconds} сек"
+              "${this.counter.days} өдөр",
+            "${this.counter.hours} цаг",
+            "${this.counter.minutes} мин",
+            if (this.widget.type == TimerType.inSeconds)
+              "${this.counter.seconds} сек"
           ].join(' : ').text.white.bold.headline6(context).make(),
           SizedBox(
             height: 10,
