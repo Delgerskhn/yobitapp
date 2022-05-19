@@ -64,92 +64,91 @@ class _TaskScreen extends State<TaskScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return StarBackground(
-        child: () => Provider.value(
-              value: task,
-              child: VStack([
-                HStack(
-                  [
-                    'Даалгавар ${task?.num ?? ""}'
-                        .text
-                        .headline5(context)
-                        .white
-                        .make(),
-                    UserGadget()
-                  ],
-                  alignment: MainAxisAlignment.spaceBetween,
-                ).px32().wFull(context).pOnly(top: 56, bottom: 46),
-                if (task != null)
-                  ChallengeDetailsTime(
-                    counter:
-                        SecondCounter(task!.endDate, ElapsedSecondNotifier()),
-                    type: TimerType.inSeconds,
-                  ).box.px32.make(),
-                VxBox().height(48).make(),
-                FutureBuilder(
-                    future: this.widget.taskRepository.getAds(),
-                    builder: (ctx, snapshot) {
-                      if (snapshot.hasError) print(snapshot.error);
-                      if (snapshot.hasData)
-                        return AdsSlider(items: snapshot.data as List<String>);
-                      return AdsSliderLoader();
-                    }),
-                VxBox().height(48).make(),
-                TaskDescription(),
-                VxBox().height(27).make(),
-                if (userTask != null)
-                  VStack(
-                    [
-                      Text('Илгээсэн даалгавар'),
-                      VxBox().height(12).make(),
-                      CachedNetworkImage(
-                        imageUrl: userTask!.file,
-                        width: 250,
-                      )
-                    ],
-                    alignment: MainAxisAlignment.center,
-                    crossAlignment: CrossAxisAlignment.center,
-                  ).wFull(context),
-                VxBox().height(27).make(),
-                HStack(
-                  [
-                    BtnIcon(
-                      iconBgColor: Theme.of(context).primaryColor,
-                      suffixImg: 'assets/icons/Back Icon.png',
-                      onPress: () {
-                        Navigator.pop(context);
-                      },
-                    ).box.width(59).height(59).make(),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    ElevatedButton(
-                            style: primaryButtonStyle(context),
-                            onPressed: () {
-                              // Navigator.pop(context);
-                              if (userTask != null) return;
-                              var navmodel = Provider.of<NavigationModel>(
-                                  context,
-                                  listen: false);
-                              navmodel.pushUpload(task!);
-                            },
-                            child: isLoading
-                                ? CircularProgressIndicator()
-                                : userTask == null
-                                    ? Text('Биелүүлэх')
-                                    : Text('Даалгавар илгээсэн байна'))
-                        .box
-                        .width(250)
-                        .height(59)
-                        .make()
-                  ],
-                  alignment: MainAxisAlignment.center,
-                  axisSize: MainAxisSize.max,
-                ),
-                SizedBox(
-                  height: 91,
+    return StarBackground(child: () {
+      return Provider.value(
+        value: task,
+        child: VStack([
+          HStack(
+            [
+              'Даалгавар ${task?.num ?? ""}'
+                  .text
+                  .headline5(context)
+                  .white
+                  .make(),
+              UserGadget()
+            ],
+            alignment: MainAxisAlignment.spaceBetween,
+          ).px32().wFull(context).pOnly(top: 56, bottom: 46),
+          if (task != null)
+            ChallengeDetailsTime(
+              counter: SecondCounter(task!.endDate, ElapsedSecondNotifier()),
+              type: TimerType.inSeconds,
+            ).box.px32.make(),
+          VxBox().height(48).make(),
+          FutureBuilder(
+              future: this.widget.taskRepository.getAds(),
+              builder: (ctx, snapshot) {
+                if (snapshot.hasError) print(snapshot.error);
+                if (snapshot.hasData)
+                  return AdsSlider(items: snapshot.data as List<String>);
+                return AdsSliderLoader();
+              }),
+          VxBox().height(48).make(),
+          TaskDescription(),
+          VxBox().height(27).make(),
+          if (userTask != null)
+            VStack(
+              [
+                Text('Илгээсэн даалгавар'),
+                VxBox().height(12).make(),
+                CachedNetworkImage(
+                  imageUrl: userTask!.file,
+                  width: 250,
                 )
-              ]).scrollVertical(),
-            ));
+              ],
+              alignment: MainAxisAlignment.center,
+              crossAlignment: CrossAxisAlignment.center,
+            ).wFull(context),
+          VxBox().height(27).make(),
+          HStack(
+            [
+              BtnIcon(
+                iconBgColor: Theme.of(context).primaryColor,
+                suffixImg: 'assets/icons/Back Icon.png',
+                onPress: () {
+                  Navigator.pop(context);
+                },
+              ).box.width(59).height(59).make(),
+              SizedBox(
+                width: 20,
+              ),
+              ElevatedButton(
+                      style: primaryButtonStyle(context),
+                      onPressed: () {
+                        // Navigator.pop(context);
+                        if (userTask != null) return;
+                        var navmodel = Provider.of<NavigationModel>(context,
+                            listen: false);
+                        navmodel.pushUpload(task!);
+                      },
+                      child: isLoading
+                          ? CircularProgressIndicator()
+                          : userTask == null
+                              ? Text('Биелүүлэх')
+                              : Text('Даалгавар илгээсэн байна'))
+                  .box
+                  .width(250)
+                  .height(59)
+                  .make()
+            ],
+            alignment: MainAxisAlignment.center,
+            axisSize: MainAxisSize.max,
+          ),
+          SizedBox(
+            height: 91,
+          )
+        ]).scrollVertical(),
+      );
+    });
   }
 }

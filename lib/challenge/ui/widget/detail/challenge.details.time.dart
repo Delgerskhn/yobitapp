@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:yobit/core/api/TimerNotifier.dart';
 import 'package:yobit/core/api/counter.dart';
 
 enum TimerType { inSeconds, inMinutes }
@@ -24,13 +25,19 @@ class ChallengeDetailsTime extends StatefulWidget {
 class _ChallengeDetailsTimeState extends State<ChallengeDetailsTime> {
   final Counter counter;
 
+  @override
+  void dispose() {
+    this.widget.counter.dispose();
+    super.dispose();
+  }
+
   _ChallengeDetailsTimeState(this.counter);
   @override
   void initState() {
     super.initState();
     this.widget.counter.addListener(() {
-      print(this.widget.counter.seconds);
-      this.setState(() {});
+      print('elapsed seconds: ${this.widget.counter.seconds}');
+      if (this.mounted) this.setState(() {});
     });
   }
 

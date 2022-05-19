@@ -13,6 +13,12 @@ class Counter extends ChangeNotifier {
   int seconds = 0;
 
   Counter(this.endDate, this.secondNotifier);
+
+  @override
+  void dispose() {
+    super.dispose();
+    secondNotifier.dispose();
+  }
 }
 
 class SecondCounter extends Counter {
@@ -26,7 +32,6 @@ class SecondCounter extends Counter {
       hours = diff.inHours;
       minutes = diff.inMinutes - diff.inHours * 60;
       seconds = diff.inSeconds - diff.inMinutes * 60;
-      print('changed time');
       notifyListeners();
     });
   }

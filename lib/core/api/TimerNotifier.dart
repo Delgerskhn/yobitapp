@@ -7,16 +7,16 @@ class ElapsedSecondNotifier extends ChangeNotifier {
 
   get dateAfterSecond => DateTime.now();
 
-  TimerNotifier() {
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      print('time added by 1');
+  ElapsedSecondNotifier() {
+    this.timer = Timer.periodic(Duration(seconds: 1), (timer) {
       notifyListeners();
     });
   }
 
   @mustCallSuper
   void dispose() {
-    super.dispose();
+    print('timer disposed');
     timer.cancel();
+    super.dispose();
   }
 }
